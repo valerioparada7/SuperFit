@@ -5,7 +5,7 @@ public class EstatusModel {
     public int Id_estatus ;
 
     public int getId_estatus() {
-        return Id_estatus;
+        return Id_estatus;//
     }
 
     public void setId_estatus(int id_estatus) {
