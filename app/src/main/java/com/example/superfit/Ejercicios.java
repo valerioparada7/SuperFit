@@ -2,25 +2,17 @@ package com.example.superfit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.app.VoiceInteractor;
-import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.interfaces.DiasApi;
-import com.example.superfit.models.Clientes;
 import com.example.superfit.models.DiasModel;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 

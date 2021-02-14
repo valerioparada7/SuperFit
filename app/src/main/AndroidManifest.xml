@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.superfit">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/fly"
@@ -12,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Ejercicios"></activity>
+        <activity android:name=".Sets"></activity>
+        <activity android:name=".Ejercicios" />
         <activity android:name=".Rutinas" />
         <activity android:name=".Perfil" />
         <activity android:name=".MainActivity">
@@ -23,5 +22,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

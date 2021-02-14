@@ -1,8 +1,13 @@
 package com.example.superfit.models;
 
-public class Usuarios {
-    public int Id_Usuario  			;
-    public String Clave_Usuario  	;
+public class UsuariosModel {
+    public int Id_Usuario ;
+    public String Clave_Usuario ;
+    public String Contraseña ;
+    public String Nombres ;
+    public String Apellido_Paterno ;
+    public String Apellido_Materno ;
+    public Boolean Estado ;
 
     public int getId_Usuario() {
         return Id_Usuario;
@@ -52,9 +57,11 @@ public class Usuarios {
         Apellido_Materno = apellido_Materno;
     }
 
-    public String Contraseña  		;
-    public String Nombres  			;
-    public String Apellido_Paterno  ;
-    public String Apellido_Materno  ;
+    public Boolean getEstado() {
+        return Estado;
+    }
 
+    public void setEstado(Boolean estado) {
+        Estado = estado;
+    }
 }

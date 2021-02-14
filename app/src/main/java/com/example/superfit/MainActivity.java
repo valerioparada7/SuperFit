@@ -10,9 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
-import com.example.superfit.interfaces.UsuarioApi;
-import com.example.superfit.models.Clientes;
-import com.example.superfit.models.Usuarios;
+import com.example.superfit.models.ClientesModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,16 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void Iniciar(String Usuario,String Contraseña){
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<Clientes> call = clienteApi.Login(Usuario,Contraseña);
-        call.enqueue(new Callback<Clientes>() {
+        Call<ClientesModel> call = clienteApi.Login(Usuario,Contraseña);
+        call.enqueue(new Callback<ClientesModel>() {
             @Override
-            public void onResponse(Call<Clientes> call, Response<Clientes> response) {
+            public void onResponse(Call<ClientesModel> call, Response<ClientesModel> response) {
                 try {
                     if(response.isSuccessful()){
-                        Clientes c = response.body();
+                        ClientesModel c = response.body();
                         if(c.Validar==true){
                             Toast.makeText(MainActivity.this,"Bienvenido "+c.Nombres,Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this,Perfil.class);
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Clientes> call, Throwable t) {
+            public void onFailure(Call<ClientesModel> call, Throwable t) {
                 Toast.makeText(MainActivity.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde",Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,18 +1,17 @@
 package com.example.superfit.models;
 
-public class Clientes {
-    public int Id_Cliente;
+public class ClientesModel {
+    public int Id_Cliente ;
     public String Clave_Cliente ;
     public String Nombres ;
-    public String Apellido_Paterno;
+    public String Apellido_Paterno ;
     public String Apellido_Materno ;
     public int Edad ;
-    public Double Telefono ;
-    public String Correo_electronico;
+    public double Telefono ;
+    public String Correo_electronico ;
     public String Apodo ;
-    public String Contraseña;
-    public Boolean Validar;
-
+    public String Contraseña ;
+    public Boolean Validar ;
 
     public int getId_Cliente() {
         return Id_Cliente;
@@ -62,11 +61,11 @@ public class Clientes {
         Edad = edad;
     }
 
-    public Double getTelefono() {
+    public double getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(Double telefono) {
+    public void setTelefono(double telefono) {
         Telefono = telefono;
     }
 
@@ -93,6 +92,7 @@ public class Clientes {
     public void setContraseña(String contraseña) {
         Contraseña = contraseña;
     }
+
     public Boolean getValidar() {
         return Validar;
     }
