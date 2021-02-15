@@ -1,17 +1,18 @@
 package com.example.superfit.models;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class MensualidadModel {
-    public int Id_mensualidad ;
-    public ClientesModel Cliente ;
-    public TiporutinaModel Tiporutina ;
-    public MesesModel Mes ;
-    public EstatusModel Estatus ;
-    public TipoentrenamientoModel TipoEntrenamiento ;
-    public Date Fecha_inicio ;
-    public Date Fecha_fin ;
+    public int Id_mensualidad;
+    public ClientesModel Cliente;
+    public TiporutinaModel Tiporutina;
+    public MesesModel Mes;
+    public EstatusModel Estatus;
+    public TipoentrenamientoModel TipoEntrenamiento;
+    public String Fecha_inicio;
+    public String  Fecha_fin;
 
     public int getId_mensualidad() {
         return Id_mensualidad;
@@ -61,19 +62,20 @@ public class MensualidadModel {
         TipoEntrenamiento = tipoEntrenamiento;
     }
 
-    public Date getFecha_inicio() {
+    public String getFecha_inicio() {
         return Fecha_inicio;
     }
 
-    public void setFecha_inicio(Date fecha_inicio) {
+    public void setFecha_inicio(String fecha_inicio) {
         Fecha_inicio = fecha_inicio;
     }
 
-    public Date getFecha_fin() {
+    public String getFecha_fin() {
         return Fecha_fin;
     }
 
-    public void setFecha_fin(Date fecha_fin) {
+    public void setFecha_fin(String fecha_fin) {
         Fecha_fin = fecha_fin;
     }
+
 }

@@ -34,7 +34,9 @@ public class Sets extends AppCompatActivity {
         GetSets();
     }
     public void GetSets(){
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
+        // Job http://192.168.56.1:8081/
+        // Home http://192.168.100.11:8081/
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DetallerutinaApi detallerutinaApi = retrofit.create(DetallerutinaApi.class);
         Call<List<DetallerutinaModel>> call = detallerutinaApi.GetDetalleRutinaSets(1,3,2);

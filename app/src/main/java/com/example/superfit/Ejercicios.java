@@ -39,7 +39,8 @@ public class Ejercicios extends AppCompatActivity {
         // GetDays();
         GetImagen();
     }
-
+    // Job http://192.168.56.1:8081/
+    // Home http://192.168.100.11:8081/
     public void GetImagen(){
         String Url_Imagen="http://192.168.56.1:8081/Imagenes/curlsfemoral.gif";
         Glide.with(getApplication()).load(Url_Imagen).into(imagen);

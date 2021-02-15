@@ -10,22 +10,99 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Nombrelabel"
+            android:id="@+id/Nombrecliente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre"
             android:textColor="@color/black"
             android:textSize="30dp" />
 
-        <ImageView
-            android:id="@+id/ImagenPerfil"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@drawable/fly" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ImagenPerfil"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/fly" />
+
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/label1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fecha Inicio " />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fecha Fin" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tipo Rutina" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tipo Entrenamiento" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fechai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" " />
+
+                <TextView
+                    android:id="@+id/fechaf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tiporutina"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tipoentrenamiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/EditarPerfil"
@@ -40,58 +117,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/Rutinasbtn"
-            style="@style/Widget.AppCompat.Button"
+        <ListView
+            android:id="@+id/ListMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="Mis rutinas"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/Mensualidadbtn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:text="Mensualidad"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/Medidasbtn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:text="Medidas "
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/Cuestionariobtn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:text="Cuestionario"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/Alimentacionbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:text="Alimentacion"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
-            android:textColorLink="@color/black" />
+            android:gravity="center"
+            android:textSize="50dp" />
     </LinearLayout>
+
 </LinearLayout>
