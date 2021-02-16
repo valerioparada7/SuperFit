@@ -30,57 +30,9 @@
         android:layout_marginTop="30dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/Lunesbtn"
+        <ListView
+            android:id="@+id/ListDias"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lunes" />
-
-        <Button
-            android:id="@+id/Martesbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Martes" />
-
-        <Button
-            android:id="@+id/Miercolesbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Miercoles" />
-
-        <Button
-            android:id="@+id/Juevesbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Jueves"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
-            android:textColorLink="@color/black" />
-
-        <Button
-            android:id="@+id/Viernesbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Viernes"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
-            android:textColorLink="@color/black" />
-
-        <Button
-            android:id="@+id/Sabadobtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Sabado"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/black"
-            android:textColorLink="@color/black" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

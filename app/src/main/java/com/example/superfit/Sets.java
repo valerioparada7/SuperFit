@@ -7,6 +7,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -36,20 +38,33 @@ public class Sets extends AppCompatActivity {
     public void GetSets(){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
+        int dia = getIntent().getExtras().getInt("IdDia");
+
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        int mensualidad=preferences.getInt("Id_mensualidad",0);
+        int estatus=preferences.getInt("Id_estatus",0);
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DetallerutinaApi detallerutinaApi = retrofit.create(DetallerutinaApi.class);
-        Call<List<DetallerutinaModel>> call = detallerutinaApi.GetDetalleRutinaSets(1,3,2);
+        Call<List<DetallerutinaModel>> call = detallerutinaApi.GetDetalleRutinaSets(mensualidad,estatus,dia);
         call.enqueue(new Callback<List<DetallerutinaModel>>() {
             @Override
             public void onResponse(Call<List<DetallerutinaModel>> call, Response<List<DetallerutinaModel>> response) {
                 try {
                     if(response.isSuccessful()){
                         List<DetallerutinaModel> diaslist = response.body();
-                        for (int i=0;i<diaslist.size();i++){
-                            setsapis.add(diaslist.get(i).TipoSet);
+                        if(diaslist.size()>0){
+                            for (int i=0;i<diaslist.size();i++){
+                                setsapis.add(diaslist.get(i).TipoSet);
+                            }
+
+                            Sets(setsapis);
+
                         }
-                        Sets(setsapis);
+                        else{
+                            setsapis.add("No hay rutina asignada");
+                            Sets(setsapis);
+                        }
                     }
                 }
                 catch (Exception ex){

@@ -49,13 +49,13 @@ public class Perfil extends AppCompatActivity {
 
     public void GetCliente(){
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-        String mensualidad=preferences.getString("mensualidad","0");
-        String cliente=preferences.getString("Nombrescliente","0");
-        String tiporutina=preferences.getString("tiporutina","0");
-        String estatus=preferences.getString("estatusDescripcion","0");
-        String tipoentreno=preferences.getString("Tipo_entrenamiento","0");
-        String fechai=preferences.getString("fechai","0");
-        String fechaf=preferences.getString("fechaf","0");
+        String mensualidad=preferences.getString("mensualidad","No asignado");
+        String cliente=preferences.getString("Nombrescliente","");
+        String tiporutina=preferences.getString("tiporutina","No asignado");
+        String estatus=preferences.getString("estatusDescripcion","No asignado");
+        String tipoentreno=preferences.getString("Tipo_entrenamiento","No asignado");
+        String fechai=preferences.getString("fechai","No hay fecha asiganda");
+        String fechaf=preferences.getString("fechaf","No hay fecha asiganda");
         Nombresclientet.setText(cliente);
         tiporutinat.setText(tiporutina);
         Tipo_entrenamientot.setText(tipoentreno);

@@ -102,25 +102,45 @@ public class MainActivity extends AppCompatActivity {
         GetDates(mensualidadModel);
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
 
-        editor.putInt("Id_tiporutina",mensualidadModel.Tiporutina.Id_tiporutina);
-        editor.putString("tiporutina",mensualidadModel.Tiporutina.Tipo);
+        if(mensualidadModel.Id_mensualidad!=0){
+            editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 
-        editor.putInt("Id_estatus",mensualidadModel.Estatus.Id_estatus);
-        editor.putString("estatusDescripcion",mensualidadModel.Estatus.Descripcion);
+            editor.putInt("Id_tiporutina",mensualidadModel.Tiporutina.Id_tiporutina);
+            editor.putString("tiporutina",mensualidadModel.Tiporutina.Tipo);
 
-        editor.putInt("Id_TipoEntrenamiento",mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento);
-        editor.putString("Tipo_entrenamiento",mensualidadModel.TipoEntrenamiento.Tipo_entrenamiento);
+            editor.putInt("Id_estatus",mensualidadModel.Estatus.Id_estatus);
+            editor.putString("estatusDescripcion",mensualidadModel.Estatus.Descripcion);
 
-        editor.putString("fechai",mensualidadModel.Fecha_inicio);
-        editor.putString("fechaf",mensualidadModel.Fecha_fin);
+            editor.putInt("Id_TipoEntrenamiento",mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento);
+            editor.putString("Tipo_entrenamiento",mensualidadModel.TipoEntrenamiento.Tipo_entrenamiento);
+
+            editor.putString("fechai",mensualidadModel.Fecha_inicio);
+            editor.putString("fechaf",mensualidadModel.Fecha_fin);
+        }
+        else{
+            editor.putInt("Id_mensualidad",0);
+
+            editor.putInt("Id_tiporutina",0);
+            editor.putString("tiporutina","No asigando");
+
+            editor.putInt("Id_estatus",0);
+            editor.putString("estatusDescripcion","No asigando");
+
+            editor.putInt("Id_TipoEntrenamiento",0);
+            editor.putString("Tipo_entrenamiento","No asigando");
+
+            editor.putString("fechai","No hay fecha asiganda");
+            editor.putString("fechaf","No hay fecha asiganda");
+        }
+
 
         editor.commit();
     }
+
     public void GetDates(MensualidadModel model)  {
         model.Fecha_inicio=model.Fecha_inicio.substring(0,10);
         model.Fecha_fin=model.Fecha_fin.substring(0,10);
