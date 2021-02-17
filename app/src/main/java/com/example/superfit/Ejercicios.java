@@ -36,8 +36,7 @@ public class Ejercicios extends AppCompatActivity {
         setContentView(R.layout.activity_ejercicios);
         Dias = (ListView) findViewById(R.id.DiasList);
         imagen =(ImageView) findViewById(R.id.Imagenlist);
-        // GetDays();
-        GetImagen();
+        GetDetalleRutinaEjercicios();
     }
     // Job http://192.168.56.1:8081/
     // Home http://192.168.100.11:8081/
@@ -46,7 +45,7 @@ public class Ejercicios extends AppCompatActivity {
         Glide.with(getApplication()).load(Url_Imagen).into(imagen);
     }
 
-    public void GetDays(){
+    public void GetDetalleRutinaEjercicios(){
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DiasApi diasApi = retrofit.create(DiasApi.class);
