@@ -19,10 +19,15 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:text="Superfit"
             android:textColor="@color/black"
-            android:textSize="50sp" />
+            android:textSize="50sp"
+            app:autoSizeMaxTextSize="100sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 
     <LinearLayout
@@ -36,6 +41,7 @@
             android:id="@+id/Usuariotxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Usuario "
@@ -49,7 +55,8 @@
             android:id="@+id/Contraseñatxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Contraseña"
@@ -61,9 +68,10 @@
 
         <Button
             android:id="@+id/Loginbtn"
-            android:layout_width="wrap_content"
+            android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
             android:layout_weight="1"
             android:background="@android:color/darker_gray"
             android:text="Iniciar sesion"
@@ -73,7 +81,8 @@
             android:id="@+id/Registrarsebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
             android:layout_weight="1"
             android:background="@color/white"
             android:text="Registrarse" />

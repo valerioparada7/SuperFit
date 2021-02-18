@@ -3,30 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     tools:context=".Ejercicios">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/DiasList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/Imgfoto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/Imagenlist"
+        <TextView
+            android:id="@+id/Ejerciciolabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:text="Ejercicio"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal"></TextView>
+
+        <TextView
+            android:id="@+id/Descripcionejercicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:text="Descripcion del ejercicio"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="normal"></TextView>
+
+        <TextView
+            android:id="@+id/Repeticioneslb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:text="Repeticiones"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/Serieslb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
+            android:text="Sereies"
+            android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

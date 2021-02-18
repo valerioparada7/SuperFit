@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Usuario =findViewById(R.id.Usuariotxt);
         Contraseña=findViewById(R.id.Contraseñatxt);
         Aceptar =findViewById(R.id.Loginbtn);
-
+        Getsesion();
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     if(response.isSuccessful()){
                         MensualidadModel c = response.body();
                         if(c.Cliente.Validar==true){
-                            GuardarSesion(c);
+                            GuardarSesion(c,Usuario,Contraseña);
                             Toast.makeText(MainActivity.this,"Bienvenido "+c.Cliente.Nombres,Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this,Perfil.class);
                             startActivity(intent);
@@ -97,15 +97,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void GuardarSesion(MensualidadModel mensualidadModel)
+    public void GuardarSesion(MensualidadModel mensualidadModel,String User,String Pass)
     {
         GetDates(mensualidadModel);
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
 
+        editor.putString("UsuarioCliente",User);
+        editor.putString("ContraseñaCliente",Pass);
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
-
         if(mensualidadModel.Id_mensualidad!=0){
             editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 
@@ -136,9 +137,17 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("fechai","No hay fecha asiganda");
             editor.putString("fechaf","No hay fecha asiganda");
         }
-
-
         editor.commit();
+    }
+
+    public void Getsesion(){
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        String usuario=preferences.getString("UsuarioCliente","");
+        String contraseña=preferences.getString("ContraseñaCliente","");
+        if(!usuario.isEmpty()&&!contraseña.isEmpty()){
+            Intent intent = new Intent(MainActivity.this,Perfil.class);
+            startActivity(intent);
+        }
     }
 
     public void GetDates(MensualidadModel model)  {

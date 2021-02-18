@@ -8,9 +8,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,15 +38,37 @@ public class Sets extends AppCompatActivity {
         setContentView(R.layout.activity_sets);
         listsets = (ListView) findViewById(R.id.SetsListview);
         GetSets();
+
+        listsets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int dia = getIntent().getExtras().getInt("IdDia");
+                position=position+1;
+                Bundle extras = new Bundle();
+                extras.putInt("IdSet",position);
+                extras.putInt("IdDia",dia);
+                Intent intent = new Intent(Sets.this,Detallejercicio.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
     public void GetSets(){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
+
+        //put extras para obtener el dia que selecciona
         int dia = getIntent().getExtras().getInt("IdDia");
 
+        //variables guardadas en la aplicacion para saber que tipo de mensualidads tienes y estatus
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         int mensualidad=preferences.getInt("Id_mensualidad",0);
         int estatus=preferences.getInt("Id_estatus",0);
+
+
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DetallerutinaApi detallerutinaApi = retrofit.create(DetallerutinaApi.class);
@@ -55,11 +81,9 @@ public class Sets extends AppCompatActivity {
                         List<DetallerutinaModel> diaslist = response.body();
                         if(diaslist.size()>0){
                             for (int i=0;i<diaslist.size();i++){
-                                setsapis.add(diaslist.get(i).TipoSet);
+                                setsapis.add( diaslist.get(i).TipoSet);
                             }
-
                             Sets(setsapis);
-
                         }
                         else{
                             setsapis.add("No hay rutina asignada");
@@ -83,5 +107,14 @@ public class Sets extends AppCompatActivity {
     public void Sets(ArrayList<String> Lista){
         ArrayAdapter adapter = new ArrayAdapter(this, simple_list_item_1,Lista);
         listsets.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            Intent intent = new Intent(Sets.this,Rutinas.class);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

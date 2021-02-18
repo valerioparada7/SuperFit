@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -43,5 +44,12 @@ public class Rutinas extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            Intent intent = new Intent(Rutinas.this,Perfil.class);
+            startActivity(intent);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }

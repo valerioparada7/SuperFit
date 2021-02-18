@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Detallejercicio">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+      <TextView
+          android:id="@+id/Rutinalb"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:textColor="@color/black"
+          android:textSize="20sp" />
+
+      <TextView
+          android:id="@+id/Titulodetallejercicio"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:text="Harás los ejercicios seguidos, al final de cada serie descansas"
+          android:textColor="@color/black"
+          android:textSize="20sp" />
+
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginTop="20sp"
+       android:orientation="vertical">
+
+      <ListView
+          android:id="@+id/lisviewejercicios"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+   </LinearLayout>
+</LinearLayout>

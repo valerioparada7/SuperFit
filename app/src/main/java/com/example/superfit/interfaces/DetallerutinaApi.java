@@ -17,7 +17,7 @@ public interface DetallerutinaApi {
                                                                @Query("IdDIa") int IdDIa);
 
     //Regresar nuemero de ejercicios por sets correspondientes al dia
-    @GET("api/Calendario")
+    @GET("api/Clientes")
     public Call<List<DetallerutinaModel>> GetDetalleRutinaEjercicios(@Query("IdMensualidad") int IdMensualidad,
                                                                      @Query("IdEstatusMes") int IdEstatusMes,
                                                                      @Query("IdDIa") int IdDIa,

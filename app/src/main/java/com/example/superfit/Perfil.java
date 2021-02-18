@@ -1,11 +1,14 @@
 package com.example.superfit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +19,7 @@ import android.widget.Toast;
 
 public class Perfil extends AppCompatActivity {
     TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft;
-    Button Rutinasb;
+    Button salirtbtn;
     String arraymenu[]= {"Mis rutinas","Mensualidad","Medidas","Cuestionario","Alimentacion"};
     ListView menulist;
     @Override
@@ -29,9 +32,11 @@ public class Perfil extends AppCompatActivity {
         fechait=(TextView)findViewById(R.id.fechai);
         fechaft=(TextView)findViewById(R.id.fechaf);
         menulist =(ListView)findViewById(R.id.ListMenu);
+        salirtbtn =(Button)findViewById(R.id.CerrarSesion);
+        GetCliente();
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraymenu);
         menulist.setAdapter(adapter);
-
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -44,7 +49,34 @@ public class Perfil extends AppCompatActivity {
                 }
             }
         });
-        GetCliente();
+
+        salirtbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(Perfil.this);
+                builder.setMessage("¿Desea cerrar sesión?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=preferences.edit();
+
+                                editor.putString("UsuarioCliente","");
+                                editor.putString("ContraseñaCliente","");
+                                editor.commit();
+                                Intent intent = new Intent(Perfil.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+            }
+        });
     }
 
     public void GetCliente(){
@@ -62,5 +94,30 @@ public class Perfil extends AppCompatActivity {
         fechait.setText(fechai);
         fechaft.setText(fechaf);
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder= new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea salir?")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Intent.ACTION_MAIN);
+                            intent.addCategory(Intent.CATEGORY_HOME);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+            });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
