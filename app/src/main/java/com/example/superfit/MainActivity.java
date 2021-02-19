@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
@@ -29,16 +30,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     EditText Usuario,Contraseña;
-    Button Aceptar;
+    Button Aceptar,registrarse;
     //subircambios
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Usuario =findViewById(R.id.Usuariotxt);
-        Contraseña=findViewById(R.id.Contraseñatxt);
-        Aceptar =findViewById(R.id.Loginbtn);
+        Usuario =(EditText) findViewById(R.id.Usuariotxt);
+        Contraseña=(EditText) findViewById(R.id.Contraseñatxt);
+        Aceptar =(Button) findViewById(R.id.Loginbtn);
+        registrarse=(Button)findViewById(R.id.Registrarsebtn);
+
         Getsesion();
+
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(MainActivity.this,"Ingrese los datos",Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Registro.class);
+                startActivity(intent);
             }
         });
     }

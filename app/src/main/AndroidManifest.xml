@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditarPerfil"></activity>
+        <activity android:name=".Registro"></activity>
+        <activity android:name=".EditarPerfil" />
         <activity android:name=".Detallejercicio" />
         <activity android:name=".Sets" />
         <activity android:name=".Ejercicios" />
