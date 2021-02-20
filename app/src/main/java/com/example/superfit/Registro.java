@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
+import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.MensualidadModel;
 
@@ -73,38 +74,39 @@ public class Registro extends AppCompatActivity {
     }
 
     public void Registrar(ClientesModel newcliente){
-        // Job http://192.168.56.1:8081/
+        // Job http://192.168.56.1:8081/    http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<Boolean> call = clienteApi.RegistrarCliente(newcliente);
-        call.enqueue(new Callback<Boolean>() {
+        Call<AlertasModel> call = clienteApi.RegistrarCliente(newcliente);
+        call.enqueue(new Callback<AlertasModel>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
                 try {
-                        if(response.isSuccessful()){
-                            Boolean result = response.body();
-                            if(result==true){
-                                Toast.makeText(Registro.this,"Registro Correcto",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(Registro.this,"Ocurrio un error,intente de nuevo ",Toast.LENGTH_SHORT).show();
-                            }
+                    if(response.isSuccessful()){
+                        AlertasModel result = response.body();
+                        if(result.Result==true){
+                            Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                         }
-                        else{
-                            Toast.makeText(Registro.this," "+response.errorBody(),Toast.LENGTH_SHORT).show();
+                        else {
+                            Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                         }
-
+                    }
+                    else{
+                        Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
+                    }
                 }
                 catch (Exception ex){
-
+                    Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<AlertasModel> call, Throwable t) {
                 Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
+
 
         });
     }
