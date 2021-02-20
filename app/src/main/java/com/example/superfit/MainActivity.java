@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public void Iniciar(String Usuario,String Contraseña){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
         Call<MensualidadModel> call = clienteApi.Login(Usuario,Contraseña);
@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MensualidadModel> call, Throwable t) {
-                Log.w("",t.getCause().toString());
                 Toast.makeText(MainActivity.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
             }
 

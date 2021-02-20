@@ -191,7 +191,7 @@
                 android:textColorLink="@color/black" />
 
             <EditText
-                android:id="@+id/editTextTextPassword"
+                android:id="@+id/Contratxt"
                 android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

@@ -60,7 +60,7 @@ public class Detallejercicio extends AppCompatActivity {
         int mensualidad=preferences.getInt("Id_mensualidad",0);
         int estatus=preferences.getInt("Id_estatus",0);
 
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DetallerutinaApi rutinaapi = retrofit.create(DetallerutinaApi.class);
         Call<List<DetallerutinaModel>> call = rutinaapi.GetDetalleRutinaEjercicios(mensualidad,estatus,dia,set);
@@ -73,7 +73,7 @@ public class Detallejercicio extends AppCompatActivity {
                         rutina.setText(rutinalist.get(0).Rutinas.Descripcion);
                         ArrayList<com.example.superfit.Clases.Ejercicios> ejerciciosArrayList = new ArrayList<>();
                         for (int i=0;i<rutinalist.size();i++){
-                            String Url_Imagen="http://192.168.56.1:8081/"+rutinalist.get(i).Ejercicios.ubicacion_imagen+".gif";
+                            String Url_Imagen="http://192.168.100.11:8081/"+rutinalist.get(i).Ejercicios.ubicacion_imagen+".gif";
                             ejerciciosArrayList.add(new com.example.superfit.Clases.Ejercicios(
                                     Url_Imagen,
                                     rutinalist.get(i).Ejercicios.Ejercicio,

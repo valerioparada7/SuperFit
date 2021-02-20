@@ -58,7 +58,7 @@ public class Sets extends AppCompatActivity {
 
     public void GetSets(){
         // Job http://192.168.56.1:8081/
-        // Home http://192.168.100.11:8081/
+        // Home http://:192.168.100.118081/
 
         //put extras para obtener el dia que selecciona
         int dia = getIntent().getExtras().getInt("IdDia");
@@ -69,7 +69,7 @@ public class Sets extends AppCompatActivity {
         int estatus=preferences.getInt("Id_estatus",0);
 
 
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         DetallerutinaApi detallerutinaApi = retrofit.create(DetallerutinaApi.class);
         Call<List<DetallerutinaModel>> call = detallerutinaApi.GetDetalleRutinaSets(mensualidad,estatus,dia);

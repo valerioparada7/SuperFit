@@ -37,14 +37,21 @@ public class Registro extends AppCompatActivity {
         Telefono=(EditText)findViewById(R.id.TelefonoTxt);
         Edad=(EditText)findViewById(R.id.EdadTxt);
         Email=(EditText)findViewById(R.id.EmailTxt);
-        Contraseña=(EditText)findViewById(R.id.Contraseñatxt);
+        Contraseña=(EditText)findViewById(R.id.Contratxt);
         Aceptar=(Button)findViewById(R.id.RegistrerseBtn2);
 
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String n=Nombre.getText().toString(),ap=Ap.getText().toString(),am=Am.getText().toString(),apo=Apodo.getText().toString(),
-                        tel=Telefono.getText().toString(),ed=Edad.getText().toString(),em=Email.getText().toString(),pass=Contraseña.getText().toString();
+                String n=Nombre.getText().toString();
+                String  ap=Ap.getText().toString();
+                String  am=Am.getText().toString();
+                String  apo=Apodo.getText().toString();
+                String  tel=Telefono.getText().toString();
+                String  ed=Edad.getText().toString();
+                String  em=Email.getText().toString();
+                String  pass=Contraseña.getText().toString();
+
                 if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
                     ClientesModel cliente = new ClientesModel();
                     cliente.Nombres =n;
@@ -68,19 +75,25 @@ public class Registro extends AppCompatActivity {
     public void Registrar(ClientesModel newcliente){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.100.11:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<ClientesModel> call = clienteApi.RegistrarCliente(newcliente);
-        call.enqueue(new Callback<ClientesModel>() {
+        Call<Boolean> call = clienteApi.RegistrarCliente(newcliente);
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<ClientesModel> call, Response<ClientesModel> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 try {
                         if(response.isSuccessful()){
-                            Toast.makeText(Registro.this,"Registro Correcto",Toast.LENGTH_SHORT).show();
+                            Boolean result = response.body();
+                            if(result==true){
+                                Toast.makeText(Registro.this,"Registro Correcto",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(Registro.this,"Ocurrio un error,intente de nuevo ",Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else{
-                            Toast.makeText(Registro.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registro.this," "+response.errorBody(),Toast.LENGTH_SHORT).show();
                         }
 
                 }
@@ -89,8 +102,8 @@ public class Registro extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<ClientesModel> call, Throwable t) {
-                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
 
         });
