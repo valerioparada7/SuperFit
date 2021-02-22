@@ -3,6 +3,7 @@ package com.example.superfit.models;
 public class AlertasModel {
     public String Mensaje ;
     public Boolean Result ;
+    public int Id;
 
     public String getMensaje() {
         return Mensaje;
@@ -18,5 +19,13 @@ public class AlertasModel {
 
     public void setResult(Boolean result) {
         Result = result;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 }

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Antropometria">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Medidas Antropometria"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Con la ayuda de una sinta metrica mediras lo siguiente"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30sp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/PesoTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Peso (Kg)"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/darker_gray" />
+
+                    <EditText
+                        android:id="@+id/AlturaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:text="Altura (Cm)"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/darker_gray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/labelimc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20sp"
+                            android:text="IMC}"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/imcTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20sp"
+                            android:layout_weight="1"
+                            android:text="IMC"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/BrazoderechorelajadoTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Brazo derecho relajado (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/BrazoderechofuerzaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Brazo derecho haciendo fuerza (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/BrazoizquierdorelajadoTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Brazo izquierdo relajado (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/BrazoizquierdofuerzaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Brazo izquierdo  haciendo fuerza (Cm)"
+                        android:textColor="@color/black" />
+
+
+                    <EditText
+                        android:id="@+id/CinturaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Cintura (cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/CaderaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Cadera (cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/PiernaizquierdaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Pierna izquierda (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/PiernaderechoTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Pierna derecha (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/PantorrilladerechaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Pantorrilla derecha (Cm)"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/PantorrillaizquierdaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:inputType="numberDecimal"
+                        android:text="Pantorrilla izquierda (Cm)"
+                        android:textColor="@color/black" />
+
+                    <Button
+                        android:id="@+id/MedidasaceptarBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30sp"
+                        android:text="Aceptar" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

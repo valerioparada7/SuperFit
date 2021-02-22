@@ -2,7 +2,9 @@ package com.example.superfit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -44,6 +46,7 @@ public class Registro extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String n=Nombre.getText().toString();
                 String  ap=Ap.getText().toString();
                 String  am=Am.getText().toString();
@@ -68,6 +71,7 @@ public class Registro extends AppCompatActivity {
                 else{
                     Toast.makeText(Registro.this, "Llene todos los campos requeridos", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -87,7 +91,17 @@ public class Registro extends AppCompatActivity {
                     if(response.isSuccessful()){
                         AlertasModel result = response.body();
                         if(result.Result==true){
+                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("UsuarioCliente",newcliente.Correo_electronico);
+                            editor.putString("ContraseñaCliente",newcliente.Contraseña);
+                            editor.commit();
                             Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
+                            Bundle extras = new Bundle();
+                            extras.putInt("IdCliente",result.Id);
+                            Intent intent = new Intent(Registro.this,Cuestionario.class);
+                            intent.putExtras(extras);
+                            startActivity(intent);
                         }
                         else {
                             Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
