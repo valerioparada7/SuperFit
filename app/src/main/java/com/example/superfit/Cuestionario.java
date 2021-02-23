@@ -1,9 +1,15 @@
 package com.example.superfit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
+import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.CuestionarioModel;
 
 import retrofit2.Call;
@@ -55,18 +62,25 @@ public class Cuestionario extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
-                startActivity(intent);
-                /*
+              //  Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
+              //  startActivity(intent);
+               int IdCliente = getIntent().getExtras().getInt("IdCliente");
                 String fuma = Veces_semana_fuma.getText().toString();
                 String alcohol = Veces_semana_alcohol.getText().toString();
+                if(fuma.isEmpty()){
+                    fuma="0";
+                }
+                if(alcohol.isEmpty()){
+                    alcohol="0";
+                }
                 CuestionarioModel cuestionario = new CuestionarioModel();
+                cuestionario.Cliente=new ClientesModel();
+                cuestionario.Cliente.Id_Cliente=IdCliente;
                 cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
                 cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
-                cuestionario.lesiones = lesiones.isChecked();;
+                cuestionario.lesiones = lesiones.isChecked();
                 cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
-                cuestionario.Fuma = Fuma.isChecked();;
+                cuestionario.Fuma = Fuma.isChecked();
                 cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
                 cuestionario.Alcohol = Alcohol.isChecked();
                 cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
@@ -77,7 +91,7 @@ public class Cuestionario extends AppCompatActivity {
                 cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
                 cuestionario.Compromisos = Compromisos.getText().toString();
                 cuestionario.Comentarios = Comentarios.getText().toString();
-                RegistroCuestionario(cuestionario);*/
+                RegistroCuestionario(cuestionario);
             }
         });
 
@@ -85,9 +99,8 @@ public class Cuestionario extends AppCompatActivity {
     }
 
     public void RegistroCuestionario(CuestionarioModel newcuestionario){
-        // Job http://192.168.56.1:8081/    http://192.168.56.1:8081/
+        // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
-        int IdCliente = getIntent().getExtras().getInt("IdCliente");
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
@@ -101,8 +114,8 @@ public class Cuestionario extends AppCompatActivity {
                         if(result.Result==true){
                             Toast.makeText(Cuestionario.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                             Bundle extras = new Bundle();
-                            extras.putInt("IdCliente",IdCliente);
-                            Intent intent = new Intent(Cuestionario.this,Cuestionario.class);
+                            extras.putInt("IdCliente",newcuestionario.Cliente.Id_Cliente);
+                            Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
                             intent.putExtras(extras);
                             startActivity(intent);
                         }
@@ -124,5 +137,34 @@ public class Cuestionario extends AppCompatActivity {
                 Toast.makeText(Cuestionario.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder= new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea salir? se perdera el progreso")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("UsuarioCliente","");
+                            editor.putString("ContraseñaCliente","");
+                            editor.putInt("EdadCliente",0);
+                            editor.commit();
+                            Intent intent = new Intent(Cuestionario.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

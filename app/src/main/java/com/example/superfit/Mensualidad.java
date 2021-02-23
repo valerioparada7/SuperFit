@@ -1,10 +1,15 @@
 package com.example.superfit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +19,7 @@ import android.widget.Toast;
 import com.example.superfit.interfaces.CatalogoApi;
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
+import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.MensualidadModel;
 import com.example.superfit.models.TipoentrenamientoModel;
 import com.example.superfit.models.TiporutinaModel;
@@ -47,13 +53,16 @@ public class Mensualidad extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+              //  Intent intent = new Intent(Mensualidad.this,Antropometria.class);
+               // startActivity(intent);
+
                 int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
                 int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();
-
-                Toast.makeText(Mensualidad.this,IdTipoRutina+" "+IdTipoEntrenamiento,Toast.LENGTH_LONG).show();
-
-                MensualidadModel mensualidadModel= new MensualidadModel();
                 int IdCliente = getIntent().getExtras().getInt("IdCliente");
+                MensualidadModel mensualidadModel= new MensualidadModel();
+                mensualidadModel.Cliente=new ClientesModel();
+                mensualidadModel.TipoEntrenamiento=new TipoentrenamientoModel();
+                mensualidadModel.Tiporutina=new TiporutinaModel();
                 mensualidadModel.Cliente.Id_Cliente=IdCliente;
                 mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento=IdTipoEntrenamiento+1;
                 mensualidadModel.Tiporutina.Id_tiporutina=IdTipoRutina+1;
@@ -63,6 +72,8 @@ public class Mensualidad extends AppCompatActivity {
     }
 
     public void RegistrarMensualidad(MensualidadModel newmensualidad){
+        // Job http://192.168.56.1:8081/
+        // Home http://192.168.100.11:8081/
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
@@ -77,7 +88,7 @@ public class Mensualidad extends AppCompatActivity {
                             Toast.makeText(Mensualidad.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                             Bundle extras = new Bundle();
                             extras.putInt("Idmensualidad",result.Id);
-                            Intent intent = new Intent(Mensualidad.this,Cuestionario.class);
+                            Intent intent = new Intent(Mensualidad.this,Antropometria.class);
                             intent.putExtras(extras);
                             startActivity(intent);
                         }
@@ -186,6 +197,35 @@ public class Mensualidad extends AppCompatActivity {
     public void TipoEntrenamientos(ArrayList<String> Lista){
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,Lista);
         listtipoentrenamiento.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder= new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea salir? se perdera el progreso")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("UsuarioCliente","");
+                            editor.putString("ContraseñaCliente","");
+                            editor.putInt("EdadCliente",0);
+                            editor.commit();
+                            Intent intent = new Intent(Mensualidad.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 }

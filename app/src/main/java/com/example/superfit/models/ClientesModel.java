@@ -10,7 +10,9 @@ public class ClientesModel {
     public double Telefono ;
     public String Correo_electronico ;
     public String Apodo ;
-    public String Contraseña ;
+    public String Contraseña;
+    public String Sexo;
+    public String Fotoperfil;
     public Boolean Validar ;
 
     public int getId_Cliente() {
@@ -99,5 +101,22 @@ public class ClientesModel {
 
     public void setValidar(Boolean validar) {
         Validar = validar;
+    }
+
+    public String getFotoperfil() {
+        return Fotoperfil;
+    }
+
+    public void setFotoperfil(String fotoperfil) {
+        Fotoperfil = fotoperfil;
+    }
+
+
+    public String getSexo() {
+        return Sexo;
+    }
+
+    public void setSexo(String sexo) {
+        Sexo = sexo;
     }
 }

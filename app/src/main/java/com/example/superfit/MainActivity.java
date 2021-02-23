@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("ContraseñaCliente",Pass);
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
+        editor.putString("FotoCliente",mensualidadModel.Cliente.Fotoperfil);
         if(mensualidadModel.Id_mensualidad!=0){
             editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 

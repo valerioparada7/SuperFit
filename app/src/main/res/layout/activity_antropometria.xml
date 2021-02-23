@@ -50,8 +50,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
                         android:ems="10"
+                        android:hint="Peso (Kg)"
                         android:inputType="numberDecimal"
-                        android:text="Peso (Kg)"
+                        android:maxLength="5"
                         android:textColor="@color/black"
                         android:textColorHint="@android:color/darker_gray" />
 
@@ -61,8 +62,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
                         android:ems="10"
+                        android:hint="Altura (Cm)"
                         android:inputType="number"
-                        android:text="Altura (Cm)"
+                        android:maxLength="3"
                         android:textColor="@color/black"
                         android:textColorHint="@android:color/darker_gray" />
 
@@ -73,22 +75,23 @@
 
                         <TextView
                             android:id="@+id/labelimc"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20sp"
-                            android:text="IMC}"
+                            android:hint="IMC"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/imcTxt"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20sp"
                             android:layout_weight="1"
-                            android:text="IMC"
+                            android:hint="IMC"
                             android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:visibility="invisible" />
                     </LinearLayout>
 
                     <EditText
@@ -97,9 +100,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
                         android:ems="10"
+                        android:hint="Brazo derecho relajado (Cm)"
                         android:inputType="numberDecimal"
-                        android:text="Brazo derecho relajado (Cm)"
-                        android:textColor="@color/black" />
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/BrazoderechofuerzaTxt"
@@ -108,8 +112,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Brazo derecho haciendo fuerza (Cm)"
-                        android:textColor="@color/black" />
+                        android:maxLength="5"
+                        android:hint="Brazo derecho haciendo fuerza (Cm)"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/BrazoizquierdorelajadoTxt"
@@ -118,8 +123,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Brazo izquierdo relajado (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Brazo izquierdo relajado (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/BrazoizquierdofuerzaTxt"
@@ -128,8 +134,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Brazo izquierdo  haciendo fuerza (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Brazo izquierdo  haciendo fuerza (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
 
                     <EditText
@@ -139,8 +146,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Cintura (cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Cintura (cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/CaderaTxt"
@@ -149,8 +157,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Cadera (cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Cadera (cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/PiernaizquierdaTxt"
@@ -159,8 +168,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Pierna izquierda (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Pierna izquierda (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/PiernaderechoTxt"
@@ -169,8 +179,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Pierna derecha (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Pierna derecha (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/PantorrilladerechaTxt"
@@ -179,8 +190,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Pantorrilla derecha (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Pantorrilla derecha (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <EditText
                         android:id="@+id/PantorrillaizquierdaTxt"
@@ -189,8 +201,9 @@
                         android:layout_marginTop="20sp"
                         android:ems="10"
                         android:inputType="numberDecimal"
-                        android:text="Pantorrilla izquierda (Cm)"
-                        android:textColor="@color/black" />
+                        android:hint="Pantorrilla izquierda (Cm)"
+                        android:maxLength="5"
+                        android:textColor="@android:color/darker_gray" />
 
                     <Button
                         android:id="@+id/MedidasaceptarBtn"

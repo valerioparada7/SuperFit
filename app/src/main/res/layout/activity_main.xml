@@ -39,12 +39,12 @@
 
         <EditText
             android:id="@+id/Usuariotxt"
-            android:layout_width="wrap_content"
+            android:layout_width="300sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Usuario "
+            android:hint="Correo electronico o numero celular"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
@@ -53,7 +53,7 @@
 
         <EditText
             android:id="@+id/Contraseñatxt"
-            android:layout_width="wrap_content"
+            android:layout_width="300sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20sp"

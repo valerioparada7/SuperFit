@@ -13,20 +13,25 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 public class Perfil extends AppCompatActivity {
     TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft;
     Button salirtbtn;
     String arraymenu[]= {"Mis rutinas","Mensualidad","Medidas","Cuestionario","Alimentacion"};
     ListView menulist;
+    ImageView FotoPerfil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         Nombresclientet=(TextView)findViewById(R.id.Nombrecliente);
+        FotoPerfil =(ImageView)findViewById(R.id.ImagenPerfil);
         tiporutinat=(TextView)findViewById(R.id.tiporutina);
         Tipo_entrenamientot=(TextView)findViewById(R.id.tipoentrenamiento);
         fechait=(TextView)findViewById(R.id.fechai);
@@ -83,6 +88,7 @@ public class Perfil extends AppCompatActivity {
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         String mensualidad=preferences.getString("mensualidad","No asignado");
         String cliente=preferences.getString("Nombrescliente","");
+        String fotoperfil=preferences.getString("FotoCliente","");
         String tiporutina=preferences.getString("tiporutina","No asignado");
         String estatus=preferences.getString("estatusDescripcion","No asignado");
         String tipoentreno=preferences.getString("Tipo_entrenamiento","No asignado");
@@ -93,7 +99,8 @@ public class Perfil extends AppCompatActivity {
         Tipo_entrenamientot.setText(tipoentreno);
         fechait.setText(fechai);
         fechaft.setText(fechaf);
-
+        String Url_Imagen="http://192.168.56.1:8081/"+fotoperfil;
+        Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
     }
 
     @Override
@@ -104,6 +111,11 @@ public class Perfil extends AppCompatActivity {
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putString("UsuarioCliente","");
+                            editor.putString("ContraseñaCliente","");
+                            editor.commit();
                             Intent intent = new Intent(Intent.ACTION_MAIN);
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
