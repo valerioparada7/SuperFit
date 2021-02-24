@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,12 @@ import android.widget.Toast;
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.AntropometriaModel;
+import com.example.superfit.models.ClientesModel;
+import com.example.superfit.models.EstatusModel;
 import com.example.superfit.models.MensualidadModel;
+import com.example.superfit.models.MesesModel;
+import com.example.superfit.models.TipoentrenamientoModel;
+import com.example.superfit.models.TiporutinaModel;
 
 import java.text.DecimalFormat;
 
@@ -78,7 +84,6 @@ public class Antropometria extends AppCompatActivity {
                 String pantorrilladerecha		=Pantorrilladerecha.getText().toString();
                 String pantorrillaizquierda		=Pantorrillaizquierda.getText().toString();
 
-
                 if(!peso.isEmpty()&&!altura.isEmpty()&&!brazoderechorelajado.isEmpty()&&!brazoderechofuerza.isEmpty()&&
                     !brazoizquierdorelajado.isEmpty()&&!brazoizquierdofuerza.isEmpty()&&!cintura.isEmpty()&&!cadera.isEmpty()&&
                     !piernaderecho.isEmpty()&&!piernaizquierda.isEmpty()&&!pantorrilladerecha.isEmpty()&&!pantorrillaizquierda.isEmpty()){
@@ -86,25 +91,24 @@ public class Antropometria extends AppCompatActivity {
                     AntropometriaModel antropometriaModel= new AntropometriaModel();
                     antropometriaModel.Mensualidad=new MensualidadModel();
                     antropometriaModel.Mensualidad.Id_mensualidad=Idmensualidad;
-                    antropometriaModel.Peso=Float.parseFloat(peso);
+                    antropometriaModel.Peso=Double.parseDouble(peso);
                     antropometriaModel.Altura=Integer.parseInt(altura);
-                    antropometriaModel.IMC=Float.parseFloat(iMC);
-                    antropometriaModel.Brazoderechorelajado=Float.parseFloat(brazoderechorelajado);
-                    antropometriaModel.Brazoderechofuerza=Float.parseFloat(brazoderechofuerza);
-                    antropometriaModel.Brazoizquierdorelajado=Float.parseFloat(brazoizquierdorelajado);
-                    antropometriaModel.Brazoizquierdofuerza=Float.parseFloat(brazoizquierdofuerza);
-                    antropometriaModel.Cintura=Float.parseFloat(cintura);
-                    antropometriaModel.Cadera=Float.parseFloat(cadera);
-                    antropometriaModel.Piernaizquierda=Float.parseFloat(piernaizquierda);
-                    antropometriaModel.Piernaderecho=Float.parseFloat(piernaderecho);
-                    antropometriaModel.Pantorrilladerecha=Float.parseFloat(pantorrilladerecha);
-                    antropometriaModel.Pantorrillaizquierda=Float.parseFloat(pantorrillaizquierda);
+                    antropometriaModel.IMC=Double.parseDouble(iMC);
+                    antropometriaModel.Brazoderechorelajado=Double.parseDouble(brazoderechorelajado);
+                    antropometriaModel.Brazoderechofuerza=Double.parseDouble(brazoderechofuerza);
+                    antropometriaModel.Brazoizquierdorelajado=Double.parseDouble(brazoizquierdorelajado);
+                    antropometriaModel.Brazoizquierdofuerza=Double.parseDouble(brazoizquierdofuerza);
+                    antropometriaModel.Cintura=Double.parseDouble(cintura);
+                    antropometriaModel.Cadera=Double.parseDouble(cadera);
+                    antropometriaModel.Piernaizquierda=Double.parseDouble(piernaizquierda);
+                    antropometriaModel.Piernaderecho=Double.parseDouble(piernaderecho);
+                    antropometriaModel.Pantorrilladerecha=Double.parseDouble(pantorrilladerecha);
+                    antropometriaModel.Pantorrillaizquierda=Double.parseDouble(pantorrillaizquierda);
                     RegistrarAntropometria(antropometriaModel);
                 }
                 else {
                     Toast.makeText(Antropometria.this,"Complete todos los datos antes de continuar",Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
@@ -116,7 +120,7 @@ public class Antropometria extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+               SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
                 int edad=preferences.getInt("EdadCliente",0);
                 String sexo=preferences.getString("SexoCliente","none");
                 DecimalFormat df = new DecimalFormat("#.00");
@@ -182,13 +186,13 @@ public class Antropometria extends AppCompatActivity {
 
     }
 
-    public void RegistrarAntropometria(AntropometriaModel antropometriaModel){
-        // Job http://192.168.56.1:8081/
+    public void RegistrarAntropometria(AntropometriaModel newantro){
+        // Job http://192.168.56.1:8081/ api/Login/RegistrarAntropometria
         // Home http://192.168.100.11:8081/
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<AlertasModel> call = clienteApi.RegistrarAntropometria(antropometriaModel);
+        Call<AlertasModel> call = clienteApi.RegistrarAntropometria(newantro);
         call.enqueue(new Callback<AlertasModel>() {
             @Override
             public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
@@ -249,11 +253,11 @@ public class Antropometria extends AppCompatActivity {
                         }
                     }
                     else{
-                        Toast.makeText(Antropometria.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Antropometria.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (Exception ex){
-                    Toast.makeText(Antropometria.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Antropometria.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -274,6 +278,7 @@ public class Antropometria extends AppCompatActivity {
         editor.putString("ContraseñaCliente",Pass);
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
+        editor.putString("FotoCliente",mensualidadModel.Cliente.Fotoperfil);
         if(mensualidadModel.Id_mensualidad!=0){
             editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 
@@ -341,6 +346,7 @@ public class Antropometria extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //Calulcar el Imc
     public String ValidarImc(Double imc1,int Edad,String sexo)
     {
         if(sexo.toUpperCase()=="Femenino")

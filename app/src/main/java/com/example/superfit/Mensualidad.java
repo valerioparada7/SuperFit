@@ -40,6 +40,7 @@ public class Mensualidad extends AppCompatActivity {
     ArrayList<String> tipoentrenamientoapi = new ArrayList<String>();
     Spinner listtiporutinas,listtipoentrenamiento;
     Button Aceptar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +54,8 @@ public class Mensualidad extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(Mensualidad.this,Antropometria.class);
-               // startActivity(intent);
+                /*Intent intent = new Intent(Mensualidad.this,Antropometria.class);
+                startActivity(intent);*/
 
                 int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
                 int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();

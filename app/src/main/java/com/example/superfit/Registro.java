@@ -50,16 +50,15 @@ public class Registro extends AppCompatActivity {
         Email=(EditText)findViewById(R.id.EmailTxt);
         Contraseña=(EditText)findViewById(R.id.Contratxt);
         listsexo =(Spinner)findViewById(R.id.SexoList);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,Sexo);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Sexo);
         listsexo.setAdapter(adapter);
         Aceptar=(Button)findViewById(R.id.RegistrerseBtn2);
 
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-       //    Intent intent = new Intent(Registro.this,Cuestionario.class);
-          //  startActivity(intent);
-
+          /* Intent intent = new Intent(Registro.this,Cuestionario.class);
+            startActivity(intent);*/
 
                String n=Nombre.getText().toString();
                 String  ap=Ap.getText().toString();
