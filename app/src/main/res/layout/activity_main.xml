@@ -5,104 +5,120 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@drawable/superfly"
     tools:context=".MainActivity">
-
+    <!--android:background="#202732"-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:verticalScrollbarPosition="defaultPosition">
+        android:background="#74000000">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="Superfit"
-            android:fontFamily="@font/playfairdisplayregular"
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="50sp"
-            app:autoSizeMaxTextSize="100sp"
-            app:autoSizeMinTextSize="12sp"
-            app:autoSizeStepGranularity="2sp"
-            app:autoSizeTextType="uniform" />
+            android:layout_marginTop="200dp"
+            android:orientation="vertical"
+            android:verticalScrollbarPosition="defaultPosition">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:fontFamily="@font/playfairdisplayregular"
+                android:text="Superfit"
+                android:textColor="#0A497B"
+                android:textSize="60sp"
+                app:autoSizeMaxTextSize="100sp"
+                app:autoSizeMinTextSize="12sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/Usuariotxt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_login"
+                android:drawableLeft="@drawable/ic_usuario"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:fontFamily="@font/playfairdisplayregular"
+                android:hint="Correo electrónico o número celular"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/black"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/Contraseñatxt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5sp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_login"
+                android:drawableLeft="@drawable/ic_contra"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:fontFamily="@font/playfairdisplayregular"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/white"
+                android:textColorLink="@color/black"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/Loginbtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_redondo"
+                android:text="Iniciar sesión"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/Registrarsebtn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_redondoborder"
+                android:text="Registrarse"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical"
-        android:paddingTop="50sp">
-
-        <EditText
-            android:id="@+id/Usuariotxt"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:background="@drawable/edittext_login"
-            android:drawablePadding="12dp"
-            android:drawableLeft="@drawable/ic_usuario"
-            android:fontFamily="@font/playfairdisplayregular"
-            android:ems="10"
-            android:hint="Correo electrónico o número celular"
-            android:inputType="textPersonName"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/white"
-            android:textColorLink="@color/black"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/Contraseñatxt"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"
-            android:layout_weight="1"
-            android:background="@drawable/edittext_login"
-            android:fontFamily="@font/playfairdisplayregular"
-            android:drawablePadding="12dp"
-            android:drawableLeft="@drawable/ic_contra"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/white"
-            android:textColorLink="@color/black"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/Loginbtn"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"
-            android:layout_weight="1"
-            android:background="@drawable/button_redondo"
-            android:textColor="@color/white"
-            android:text="Iniciar sesión"/>
-
-        <Button
-            android:id="@+id/Registrarsebtn"
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20sp"
-            android:layout_weight="1"
-            android:background="@drawable/button_redondoborder"
-            android:textColor="@color/white"
-            android:text="Registrarse" />
-
-
-    </LinearLayout>
 </LinearLayout>

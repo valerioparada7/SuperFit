@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Antropometria"></activity>
+        <activity android:name=".Antropometria" />
         <activity android:name=".Mensualidad" />
         <activity android:name=".Cuestionario" />
         <activity android:name=".Registro" />
@@ -22,7 +22,9 @@
         <activity android:name=".Ejercicios" />
         <activity android:name=".Rutinas" />
         <activity android:name=".Perfil" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Inicio"
+                android:theme="@style/splashtheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

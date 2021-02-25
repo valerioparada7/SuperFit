@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item>
-    <layer-list>
-        <item>
-            <shape android:shape="rectangle">
-                <solid android:color="#202732"></solid>
-                <corners android:radius="10dp"></corners>
-                <padding android:right="10dp"></padding>
-            </shape>
-        </item>
-    </layer-list>
-</item>
+    <item android:state_pressed="true" >
+        <shape>
+            <solid android:color="@color/white" />
+            <corners android:radius="3dp" />
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
+            <stroke android:width="2dp" android:color="@color/white" />
+        </shape>
+    </item> <!-- spinner_ab_default_new_theme_bs -> this image for corner triangle -->
+
 </selector>
