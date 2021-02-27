@@ -68,7 +68,9 @@ public class Antropometria extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Antropometria.this,Perfil.class);
+                startActivity(intent);
+/*
                 int Idmensualidad = getIntent().getExtras().getInt("Idmensualidad");
                 String peso = Peso.getText().toString();
                 String altura = Altura.getText().toString();
@@ -108,7 +110,7 @@ public class Antropometria extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(Antropometria.this,"Complete todos los datos antes de continuar",Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 

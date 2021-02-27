@@ -57,9 +57,9 @@ public class Registro extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-          /* Intent intent = new Intent(Registro.this,Cuestionario.class);
-            startActivity(intent);*/
-
+           Intent intent = new Intent(Registro.this,Cuestionario.class);
+            startActivity(intent);
+/*
                String n=Nombre.getText().toString();
                 String  ap=Ap.getText().toString();
                 String  am=Am.getText().toString();
@@ -86,6 +86,8 @@ public class Registro extends AppCompatActivity {
                 else{
                     Toast.makeText(Registro.this, "Llene todos los campos requeridos", Toast.LENGTH_SHORT).show();
                 }
+
+ */
             }
         });
     }

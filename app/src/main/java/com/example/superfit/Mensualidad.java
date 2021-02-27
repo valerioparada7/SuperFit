@@ -54,9 +54,9 @@ public class Mensualidad extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(Mensualidad.this,Antropometria.class);
-                startActivity(intent);*/
-
+                Intent intent = new Intent(Mensualidad.this,Antropometria.class);
+                startActivity(intent);
+/*
                 int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
                 int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();
                 int IdCliente = getIntent().getExtras().getInt("IdCliente");
@@ -67,7 +67,7 @@ public class Mensualidad extends AppCompatActivity {
                 mensualidadModel.Cliente.Id_Cliente=IdCliente;
                 mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento=IdTipoEntrenamiento+1;
                 mensualidadModel.Tiporutina.Id_tiporutina=IdTipoRutina+1;
-                RegistrarMensualidad(mensualidadModel);
+                RegistrarMensualidad(mensualidadModel);*/
             }
         });
     }
@@ -128,7 +128,7 @@ public class Mensualidad extends AppCompatActivity {
                         List<TipoentrenamientoModel> tipoentrenamientolist = response.body();
                         if(tipoentrenamientolist.size()>0){
                             for (int i=0;i<tipoentrenamientolist.size();i++){
-                                tipoentrenamientoapi.add(tipoentrenamientolist.get(i).Tipo_entrenamiento);
+                                tipoentrenamientoapi.add(i+1+".- "+tipoentrenamientolist.get(i).Tipo_entrenamiento);
                             }
                             TipoEntrenamientos(tipoentrenamientoapi);
                         }
@@ -167,7 +167,7 @@ public class Mensualidad extends AppCompatActivity {
                         List<TiporutinaModel> tiporutinaslist = response.body();
                         if(tiporutinaslist.size()>0){
                             for (int i=0;i<tiporutinaslist.size();i++){
-                                tiporutinasapi.add(tiporutinaslist.get(i).Descripcion);
+                                tiporutinasapi.add(i+1+".- "+tiporutinaslist.get(i).Descripcion);
                             }
                             TipoRutinas(tiporutinasapi);
                         }
@@ -191,12 +191,12 @@ public class Mensualidad extends AppCompatActivity {
     }
 
     public void TipoRutinas(ArrayList<String> Lista){
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,Lista);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
         listtiporutinas.setAdapter(adapter);
     }
 
     public void TipoEntrenamientos(ArrayList<String> Lista){
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,Lista);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
         listtipoentrenamiento.setAdapter(adapter);
     }
 

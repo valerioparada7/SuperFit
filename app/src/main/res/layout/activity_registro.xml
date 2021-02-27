@@ -30,7 +30,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Datos personales"
                     android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:textSize="25sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -42,31 +42,28 @@
                 <EditText
                     android:id="@+id/NombreTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="45sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_names"
                     android:drawablePadding="12dp"
                     android:ems="10"
                     android:hint="Nombre(s)"
                     android:inputType="textPersonName"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/ApellidoPTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_names"
@@ -74,42 +71,38 @@
                     android:ems="10"
                     android:hint="Primer apellido"
                     android:inputType="textPersonName"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/ApellidoMTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_names"
                     android:drawablePadding="12dp"
                     android:ems="10"
                     android:hint="Segundo Apellido"
                     android:inputType="textPersonName"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/ApodoTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_names"
                     android:drawablePadding="12dp"
@@ -117,42 +110,39 @@
                     android:hint="Apodo"
                     android:inputType="textPersonName"
                     android:maxLength="30"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/EdadTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_edad"
                     android:drawablePadding="12dp"
                     android:ems="10"
+                    android:maxLength="2"
                     android:hint="Edad"
                     android:inputType="number"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/TelefonoTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_celular"
                     android:drawablePadding="12dp"
@@ -160,34 +150,32 @@
                     android:hint="Número celular"
                     android:inputType="phone"
                     android:maxLength="10"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
 
                 <EditText
                     android:id="@+id/EmailTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="45sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_email"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:drawablePadding="12dp"
                     android:ems="10"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
 
                 <LinearLayout
@@ -200,7 +188,7 @@
                     android:id="@+id/textView10"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20sp"
                     android:layout_marginTop="20sp"
                     android:ems="10"
                     android:text="Sexo:"
@@ -208,8 +196,7 @@
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
-                    android:textSize="20sp"
-                    />
+                    android:textSize="15sp"/>
 
                 <Spinner
                     android:id="@+id/SexoList"
@@ -229,12 +216,10 @@
                 <EditText
                     android:id="@+id/Contratxt"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="45sp"
                     android:layout_marginTop="20sp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
                     android:background="@drawable/edittext_login"
                     android:drawableLeft="@drawable/ic_password"
                     android:drawablePadding="12dp"
@@ -242,11 +227,11 @@
                     android:hint="Contraseña"
                     android:inputType="textPassword"
                     android:maxLength="30"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -258,7 +243,7 @@
                 <Button
                     android:id="@+id/RegistrerseBtn2"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="45sp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"

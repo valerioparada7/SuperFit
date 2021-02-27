@@ -62,9 +62,9 @@ public class Cuestionario extends AppCompatActivity {
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /*Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
-               startActivity(intent);*/
-
+               Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
+               startActivity(intent);
+/*
                 int IdCliente = getIntent().getExtras().getInt("IdCliente");
                 String fuma = Veces_semana_fuma.getText().toString();
                 String alcohol = Veces_semana_alcohol.getText().toString();
@@ -92,7 +92,7 @@ public class Cuestionario extends AppCompatActivity {
                 cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
                 cuestionario.Compromisos = Compromisos.getText().toString();
                 cuestionario.Comentarios = Comentarios.getText().toString();
-                RegistroCuestionario(cuestionario);
+                RegistroCuestionario(cuestionario);*/
             }
         });
 

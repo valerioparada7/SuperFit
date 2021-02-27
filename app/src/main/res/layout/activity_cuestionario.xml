@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#202732"
     tools:context=".Cuestionario">
 
         <ScrollView
@@ -22,206 +23,404 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Cuestionario"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/labelenfer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Padece alguna enfermedad?"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/Padece_enfermedadChk"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp"
-                    android:text="¿Padece alguna enfermedad?" />
+                    android:text="¿Si/no?"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/Medicamento_prescrito_medicoTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45sp"
                     android:layout_marginTop="10sp"
                     android:ems="10"
-                    android:hint="medicamento prescrito"
+                    android:hint="medicamento que toma"
+                    android:background="@drawable/edittext_login"
                     android:inputType="textPersonName"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/labellesionesChk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Ha tenido alguna lesión en músculos o articulaciones?"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10sp"/>
 
                 <CheckBox
                     android:id="@+id/lesionesChk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp"
-                    android:text="¿Ha tenido alguna lesión en músculos o \n\articulaciones?" />
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="¿Si/no?"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/Alguna_recomendacion_lesionesTxt"
+                    android:hint="Alguna recomendación actual del \n\médico tratante"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="45sp"
                     android:layout_marginTop="10sp"
                     android:ems="10"
-                    android:hint="Alguna recomendación actual del \n\médico tratante"
+                    android:background="@drawable/edittext_login"
                     android:inputType="textPersonName"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelfuma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Acostumbra a Fumar?"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/FumaChk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp"
-                    android:text="¿Acostumbra a Fumar?" />
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="¿Si/no?"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    />
 
                 <EditText
                     android:id="@+id/Veces_semana_fumaTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:ems="10"
-                    android:hint="cantidad a la semana"
+                    android:hint="Cuantas veces por semana;Ej: 3"
                     android:inputType="number"
                     android:maxLength="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="10sp"
+                    android:ems="10"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/labeltoma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Acostumbra a tomar bebidas alcohólicas?"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/AlcoholChk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp"
-                    android:text="¿Acostumbra a tomar bebidas alcohólicas?" />
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:text="¿Si/no?"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/Veces_semana_alcoholTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:ems="10"
                     android:inputType="number"
                     android:maxLength="2"
-                    android:hint="cantidad a la semana"
+                    android:hint="Cuntas veces por semana;Ej: 2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="10sp"
+                    android:ems="10"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelfisico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Actualmente realizas alguna actividad física?"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/Actividad_fisicaChk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20sp"
-                    android:text="¿Actualmente realizas \n\alguna actividad física?" />
+                    android:layout_marginTop="10sp"
+                    android:text="¿Si/no?"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/textView7"
-                    android:layout_width="match_parent"
+                    android:text="¿Qué tipo de ejercicio realizas y cuánto tiempo le dedicas en cada sesión que haces?"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/white"
                     android:layout_marginTop="10sp"
-                    android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textColorLink="@color/black"
-                    android:text="¿Qué tipo de ejercicio realizas y cuánto tiempo \n\le dedicas en cada sesión que haces?" />
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/Tipo_ejerciciosTxt"
+                    android:hint="Ej: Correr 30 minutos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45sp"
                     android:layout_marginTop="10sp"
                     android:ems="10"
-                    android:hint="Ej: Correr 30 minutos"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelTiempo_dedicadoTxt"
+                    android:text="¿Cuánto tiempo llevas realizando dicha actividad de manera constante?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/Tiempo_dedicadoTxt"
+                    android:hint="Ej:Desde hace dos años,meses etc..."
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:hint="¿Cuánto tiempo llevas realizando \n\dicha actividad de manera constante?"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:paddingTop="10dp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelHorario_entrenoTxt"
+                    android:text="¿En qué horario entrenas?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/Horario_entrenoTxt"
+                    android:hint="Ej: Tardes de 6 a 7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:hint="¿En qué horario entrenas? Ej: Tardes de 6 a 7"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelMetasObjetivosTxt"
+                    android:text="¿Cuáles son tus metas u objetivos para lograr?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/MetasObjetivosTxt"
+                    android:hint="Ej: mejorar condicion..."
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:hint="¿Cuáles son tus metas u objetivos para lograr?"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelCompromisosTxt"
+                    android:text="¿Qué compromiso tienes contigo mismo?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <EditText
                     android:id="@+id/CompromisosTxt"
+                    android:hint="Ej: Ser diciplinado..."
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:hint="¿Cuáles son tus metas u objetivos para lograr?"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelComentariosTxt"
+                    android:text="¿Algún comentario adicional, antes de poder seguir y comenzar?"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/ComentariosTxt"
+                    android:hint="...."
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30sp"
+                    android:layout_height="45sp"
+                    android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:hint="¿Algún comentario adicional, \n\ antes de poder seguir y comenzar?"
-                    android:inputType="textPersonName"
+                    android:background="@drawable/edittext_login"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:drawablePadding="12dp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:textCursorDrawable="@color/black" />
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/RegistrarCuestionarioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
                     android:layout_marginTop="30sp"
-                    android:text="Aceptar" />
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_redondo"
+                    android:text="Registrar"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20sp"
+                    android:orientation="vertical"></LinearLayout>
 
             </LinearLayout>
+
         </ScrollView>
 
 </LinearLayout>
