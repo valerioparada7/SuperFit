@@ -191,6 +191,7 @@ public class Antropometria extends AppCompatActivity {
     public void RegistrarAntropometria(AntropometriaModel newantro){
         // Job http://192.168.56.1:8081/ api/Login/RegistrarAntropometria
         // Home http://192.168.100.11:8081/
+        //web superfit.somee.com
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);

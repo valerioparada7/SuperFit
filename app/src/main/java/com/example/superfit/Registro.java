@@ -93,8 +93,9 @@ public class Registro extends AppCompatActivity {
     }
 
     public void Registrar(ClientesModel newcliente){
-        // Job http://192.168.56.1:8081/    http://192.168.56.1:8081/
+        // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
+        // web superfit.somee.com
         Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);

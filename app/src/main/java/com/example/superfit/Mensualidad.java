@@ -115,8 +115,9 @@ public class Mensualidad extends AppCompatActivity {
     private void GetTipoEntrenamiento() {
         // Job http://192.168.56.1:8081/
         // Home http://:192.168.100.118081/
+        // web superfit.somee.com
 
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://superfit.somee.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         CatalogoApi catalogoapi = retrofit.create(CatalogoApi.class);
         Call<List<TipoentrenamientoModel>> call = catalogoapi.GetTypeTraining();
@@ -154,8 +155,8 @@ public class Mensualidad extends AppCompatActivity {
     private void GetTipoRutinas() {
         // Job http://192.168.56.1:8081/
         // Home http://:192.168.100.118081/
-
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        //web superfit.somee.com
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://superfit.somee.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         CatalogoApi catalogoapi = retrofit.create(CatalogoApi.class);
         Call<List<TiporutinaModel>> call = catalogoapi.GetTypeRutines();

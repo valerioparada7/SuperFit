@@ -99,6 +99,7 @@ public class Perfil extends AppCompatActivity {
         Tipo_entrenamientot.setText(tipoentreno);
         fechait.setText(fechai);
         fechaft.setText(fechaf);
+        //web superfit.somee.com
         String Url_Imagen="http://192.168.56.1:8081/"+fotoperfil;
         Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
     }
