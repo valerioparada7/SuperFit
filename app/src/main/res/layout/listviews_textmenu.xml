@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="40sp"
+    android:paddingLeft="5sp"
+    android:textColor="@color/black"
+    android:textSize="15sp"
+    android:background="@drawable/edittext_login"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>
