@@ -42,14 +42,17 @@ public class Sets extends AppCompatActivity {
         listsets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int dia = getIntent().getExtras().getInt("IdDia");
-                position=position+1;
-                Bundle extras = new Bundle();
-                extras.putInt("IdSet",position);
-                extras.putInt("IdDia",dia);
-                Intent intent = new Intent(Sets.this,Detallejercicio.class);
-                intent.putExtras(extras);
-                startActivity(intent);
+                String valor = setsapis.get(position).toString();
+                if(valor!="No hay rutina asignada"){
+                    int dia = getIntent().getExtras().getInt("IdDia");
+                    position=position+1;
+                    Bundle extras = new Bundle();
+                    extras.putInt("IdSet",position);
+                    extras.putInt("IdDia",dia);
+                    Intent intent = new Intent(Sets.this,Detallejercicio.class);
+                    intent.putExtras(extras);
+                    startActivity(intent);
+                }
             }
         });
 

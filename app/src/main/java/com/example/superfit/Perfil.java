@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ import com.bumptech.glide.Glide;
 public class Perfil extends AppCompatActivity {
     TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft;
     Button salirtbtn;
-    String arraymenu[]= {"Mis rutinas","Mensualidad","Medidas","Cuestionario","Alimentacion"};
+    String arraymenu[]= {"Mis rutinas","Mi Mensualidad","Mis Medidas","Mi Cuestionario","Sobre Alimentacion","Rutinas demostracion"};
     ListView menulist;
     ImageView FotoPerfil;
     @Override
@@ -100,7 +101,10 @@ public class Perfil extends AppCompatActivity {
         fechait.setText(fechai);
         fechaft.setText(fechaf);
         //web superfit.somee.com
-        String Url_Imagen="http://192.168.56.1:8081/"+fotoperfil;
+        //http://192.168.56.1:8081/
+        //String Url_Imagen="http://192.168.56.1:8081"+fotoperfil;
+        String Url_Imagen="http://superfit.somee.com"+fotoperfil;
+        Log.w("FOTO AQUI-->", Url_Imagen);
         Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
     }
 
