@@ -3,62 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300sp"
-    android:orientation="horizontal"
-    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#202732"
     tools:context=".Ejercicios">
-
-    <ImageView
-        android:id="@+id/Imgfoto"
-        android:layout_width="200dp"
-        android:layout_height="200dp"></ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="10sp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Ejerciciolabel"
+            <TextView
+                android:id="@+id/Ejerciciolabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_marginLeft="5sp"
+                android:text="Ejercicio"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="normal"></TextView>
+
+            <TextView
+                android:id="@+id/Repeticioneslb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="10dp"
+                android:text="Repeticiones"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/Serieslb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="10dp"
+                android:text="Sereies"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/Imgfoto"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5sp">
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5sp"
-            android:text="Ejercicio"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal"></TextView>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Descripcionejercicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="10dp"
-            android:text="Descripcion del ejercicio"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="normal"></TextView>
+            <TextView
+                android:id="@+id/Descripcionejercicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginTop="10dp"
+                android:text="Descripcion del ejercicio"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="normal"></TextView>
 
-        <TextView
-            android:id="@+id/Repeticioneslb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="10dp"
-            android:text="Repeticiones"
-            android:textColor="@color/black" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/Serieslb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
-            android:layout_marginLeft="5sp"
-            android:layout_marginTop="10dp"
-            android:text="Sereies"
-            android:textColor="@color/black" />
     </LinearLayout>
+
+
 </LinearLayout>

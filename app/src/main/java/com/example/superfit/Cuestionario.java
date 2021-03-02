@@ -8,12 +8,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
@@ -32,11 +36,15 @@ public class Cuestionario extends AppCompatActivity {
     EditText Medicamento_prescrito_medico,Alguna_recomendacion_lesiones,Veces_semana_fuma,
             Veces_semana_alcohol,Tipo_ejercicios,Tiempo_dedicado,Horario_entreno,MetasObjetivos,
             Compromisos,Comentarios;
+    TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
     Button Aceptar;
+    LinearLayout liner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuestionario);
+
+        liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
         //Checkboxs
         Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
         lesiones =(CheckBox)findViewById(R.id.lesionesChk);
@@ -55,6 +63,11 @@ public class Cuestionario extends AppCompatActivity {
         MetasObjetivos =(EditText) findViewById(R.id.MetasObjetivosTxt);
         Compromisos =(EditText) findViewById(R.id.CompromisosTxt);
         Comentarios =(EditText) findViewById(R.id.ComentariosTxt);
+
+        //TextView
+        TipoejercicioL =(TextView)findViewById(R.id.TipoejercicioLabel);
+        TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
+        HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
 
         //Butons
         Aceptar =(Button)findViewById(R.id.RegistrarCuestionarioBtn);
@@ -96,6 +109,76 @@ public class Cuestionario extends AppCompatActivity {
             }
         });
 
+        Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Padece_enfermedad.isChecked()==true){
+                    Medicamento_prescrito_medico.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Medicamento_prescrito_medico.setVisibility(View.INVISIBLE);
+                    Medicamento_prescrito_medico.setText("");
+                }
+            }
+        });
+
+        lesiones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lesiones.isChecked()==true){
+                    Alguna_recomendacion_lesiones.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Alguna_recomendacion_lesiones.setVisibility(View.INVISIBLE);
+                    Alguna_recomendacion_lesiones.setText("");
+                }
+            }
+        });
+
+        Fuma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Fuma.isChecked()==true){
+                    Veces_semana_fuma.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Veces_semana_fuma.setVisibility(View.INVISIBLE);
+                    Veces_semana_fuma.setText("");
+                }
+            }
+        });
+
+        Alcohol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Alcohol.isChecked()==true){
+                    Veces_semana_alcohol.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Veces_semana_alcohol.setVisibility(View.INVISIBLE);
+                    Veces_semana_alcohol.setText("");
+                }
+            }
+        });
+
+        Actividad_fisica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Actividad_fisica.isChecked()==true){
+                    liner.setVisibility(View.VISIBLE);
+                    liner.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
+                    liner.requestLayout();
+                }
+                else{
+                    liner.setVisibility(View.INVISIBLE);
+                    liner.getLayoutParams().height =0;
+                    liner.requestLayout();
+                    Tipo_ejercicios.setText("");
+                    Tiempo_dedicado.setText("");
+                    Horario_entreno.setText("");
+                }
+            }
+        });
 
     }
 

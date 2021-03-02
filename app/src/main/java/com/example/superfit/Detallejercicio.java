@@ -75,7 +75,7 @@ public class Detallejercicio extends AppCompatActivity {
                         ArrayList<com.example.superfit.Clases.Ejercicios> ejerciciosArrayList = new ArrayList<>();
                         for (int i=0;i<rutinalist.size();i++){
                             //web superfit.somee.com
-                            String Url_Imagen="http://192.168.56.1:8081/"+rutinalist.get(i).Ejercicios.ubicacion_imagen+".gif";
+                            String Url_Imagen="http://superfit.somee.com/"+rutinalist.get(i).Ejercicios.ubicacion_imagen+".gif";
                             ejerciciosArrayList.add(new com.example.superfit.Clases.Ejercicios(
                                     Url_Imagen,
                                     rutinalist.get(i).Ejercicios.Ejercicio,

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0A497B"
+    android:background="#202732"
     tools:context=".Perfil">
 
     <LinearLayout
@@ -59,12 +59,14 @@
                 android:id="@+id/ImagenPerfil"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5sp"/>
 
             <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5sp"
+                android:layout_marginLeft="10sp"
                 android:orientation="vertical">
 
                 <TextView
@@ -104,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5sp"
+                android:layout_marginLeft="10sp"
                 android:orientation="vertical">
 
                 <TextView

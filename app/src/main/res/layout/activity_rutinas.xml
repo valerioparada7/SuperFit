@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Rutinas">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Dias de rutina"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/black"
             android:textColorLink="@color/black"
@@ -40,6 +40,6 @@
             android:id="@+id/ListDias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edittext_login"/>/>
+            android:background="@drawable/edittext_login"/>
     </LinearLayout>
 </LinearLayout>
