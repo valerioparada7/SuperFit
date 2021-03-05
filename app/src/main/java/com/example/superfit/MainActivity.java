@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Contraseña=(EditText) findViewById(R.id.Contraseñatxt);
         Aceptar =(Button) findViewById(R.id.Loginbtn);
         registrarse=(Button)findViewById(R.id.Registrarsebtn);
+
         Getsesion();
 
         Aceptar.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
         // Pagina http://superfit.somee.com/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://superfit.somee.com/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
         Call<MensualidadModel> call = clienteApi.Login(Usuario,Contraseña);
@@ -169,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
         if(!usuario.isEmpty()&&!contraseña.isEmpty()){
             Intent intent = new Intent(MainActivity.this,Perfil.class);
             startActivity(intent);
+            Toast.makeText(MainActivity.this,"Se borro la sesion",Toast.LENGTH_LONG);
+        }
+        else{
+            Toast.makeText(MainActivity.this,"Se borro la sesion",Toast.LENGTH_LONG);
         }
     }
 
@@ -180,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
+
             AlertDialog.Builder builder= new AlertDialog.Builder(this);
             builder.setMessage("¿Desea salir?")
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
@@ -189,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

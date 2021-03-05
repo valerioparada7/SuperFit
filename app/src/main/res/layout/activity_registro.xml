@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".Registro">
 
     <ScrollView
@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Datos personales"
-                    android:textColor="@color/white"
+                    android:textColor="#0A497B"
                     android:textSize="25sp" />
             </LinearLayout>
 
@@ -192,7 +192,7 @@
                     android:layout_marginTop="20sp"
                     android:ems="10"
                     android:text="Sexo:"
-                    android:textColor="@color/white"
+                    android:textColor="#0A497B"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
@@ -204,12 +204,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
                     android:ems="10"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
-                    android:textColorLink="@color/black"
+                    android:textColor="#202732"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/white"
                     android:textSize="30sp"
-                    android:backgroundTint="@color/white"
+                    android:backgroundTint="#0A497B"
                     />
                 </LinearLayout>
 

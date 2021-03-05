@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".Mensualidad">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Personalizar Mensualidad"
-            android:textColor="@color/white"
+            android:textColor="#0A497B"
             android:textSize="25sp" />
     </LinearLayout>
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
-            android:textColor="@color/white"
+            android:textColor="#0A497B"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
@@ -55,7 +55,7 @@
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
             android:textSize="30sp"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="#0A497B" />
 
         <TextView
             android:id="@+id/texviewlabel"
@@ -65,7 +65,7 @@
             android:layout_marginTop="20sp"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
-            android:textColor="@color/white"
+            android:textColor="#0A497B"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
@@ -83,7 +83,7 @@
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
             android:textSize="30sp"
-            android:backgroundTint="@color/white"/>
+            android:backgroundTint="#0A497B"/>
 
         <Button
             android:id="@+id/MensualidadAceptar"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".Ejercicios">
 
     <LinearLayout
@@ -26,7 +26,7 @@
                 android:layout_marginStart="5sp"
                 android:layout_marginLeft="5sp"
                 android:text="Ejercicio"
-                android:textColor="@color/white"
+                android:textColor="#0A497B"
                 android:textSize="20sp"
                 android:textStyle="normal"></TextView>
 
@@ -38,7 +38,7 @@
                 android:layout_marginLeft="5sp"
                 android:layout_marginTop="10dp"
                 android:text="Repeticiones"
-                android:textColor="@color/white" />
+                android:textColor="#0A497B" />
 
             <TextView
                 android:id="@+id/Serieslb"
@@ -48,7 +48,7 @@
                 android:layout_marginLeft="5sp"
                 android:layout_marginTop="10dp"
                 android:text="Sereies"
-                android:textColor="@color/white" />
+                android:textColor="#0A497B" />
 
             <ImageView
                 android:id="@+id/Imgfoto"
@@ -73,7 +73,7 @@
                 android:layout_marginLeft="5sp"
                 android:layout_marginTop="10dp"
                 android:text="Descripcion del ejercicio"
-                android:textColor="@color/white"
+                android:textColor="#0A497B"
                 android:textSize="15sp"
                 android:textStyle="normal"></TextView>
 

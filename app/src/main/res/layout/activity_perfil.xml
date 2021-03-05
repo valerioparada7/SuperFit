@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".Perfil">
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5sp"
                 android:text="Nombre"
-                android:textColor="@color/white"
+                android:textColor="#0A497B"
                 android:textSize="30dp" />
 
             <LinearLayout
@@ -44,7 +44,7 @@
                     android:layout_marginRight="2sp"
                     android:background="@drawable/button_redondoborder"
                     android:textSize="20sp"
-                    android:textColor="@color/white" />
+                    android:textColor="#0A497B" />
             </LinearLayout>
 
         </LinearLayout>
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fecha Inicio "
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fecha Fin"
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tipo Rutina"
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tipo Entrenamiento"
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
             </LinearLayout>
 
             <LinearLayout
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
 
                 <TextView
                     android:id="@+id/fechaf"
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
 
                 <TextView
                     android:id="@+id/tiporutina"
@@ -131,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="@color/white">
+                    android:textColor="#0A497B">
 
                 </TextView>
 
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="@color/white"/>
+                    android:textColor="#0A497B"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -163,7 +163,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_redondoborder"
             android:text="Editar perfil"
-            android:textColor="@color/white"
+            android:textColor="#0A497B"
             android:textSize="20sp" />
 
     </LinearLayout>

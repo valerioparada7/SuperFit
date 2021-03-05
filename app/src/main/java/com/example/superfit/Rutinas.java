@@ -27,7 +27,7 @@ public class Rutinas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutinas);
         listdias =(ListView)findViewById(R.id.ListDias);
-        ArrayAdapter adapter = new ArrayAdapter(this,simple_list_item_1,diassemana);
+        ArrayAdapter adapter = new ArrayAdapter(this,R.layout.spinner_edittext_sexo,diassemana);
         listdias.setAdapter(adapter);
 
         listdias.setOnItemClickListener(new AdapterView.OnItemClickListener() {

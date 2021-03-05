@@ -40,6 +40,7 @@ public class AdaptadorEjercicios extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         Ejercicios item = (Ejercicios) getItem(position);
 
         convertView = LayoutInflater.from(context).inflate(R.layout.activity_ejercicios,null);

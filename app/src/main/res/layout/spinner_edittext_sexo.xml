@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="40sp"
     android:paddingLeft="5sp"
-    android:textColor="@color/white"
+    android:layout_centerHorizontal="true"
+    android:textColor="#0A497B"
     android:textSize="15sp"
-    android:background="#202732"
+    android:background="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"/>
 

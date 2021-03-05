@@ -4,7 +4,10 @@ import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.AntropometriaModel;
 import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.CuestionarioModel;
+import com.example.superfit.models.DetallerutinaModel;
 import com.example.superfit.models.MensualidadModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,6 +35,6 @@ public interface ClienteApi {
     @POST("api/Login/RegistrarAntropometria")
     public Call<AlertasModel> RegistrarAntropometria(@Body AntropometriaModel antropometriaModel);
 
-
+    @GET Call<List<MensualidadModel>> GetMensualidad(@Query("IdCliente") int IdCliente);
 
 }

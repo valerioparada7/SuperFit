@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide;
 public class Perfil extends AppCompatActivity {
     TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft;
     Button salirtbtn;
-    String arraymenu[]= {"Mis rutinas","Mi Mensualidad","Mis Medidas","Mi Cuestionario","Sobre Alimentacion","Rutinas demostracion"};
+    String arraymenu[]= {"Mis rutinas","Mi Mensualidad","Mis Medidas","Cuestionario","Sobre Alimentacion","Rutinas extras"};
     ListView menulist;
     ImageView FotoPerfil;
     @Override
@@ -41,7 +41,7 @@ public class Perfil extends AppCompatActivity {
         salirtbtn =(Button)findViewById(R.id.CerrarSesion);
         GetCliente();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arraymenu);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_edittext_sexo, arraymenu);
         menulist.setAdapter(adapter);
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -51,7 +51,8 @@ public class Perfil extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if(position==1){
-                    Toast.makeText(Perfil.this,"Hola",Toast.LENGTH_LONG);
+                    Intent intent= new Intent(Perfil.this,Mensualidad_menu.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -116,11 +117,6 @@ public class Perfil extends AppCompatActivity {
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("UsuarioCliente","");
-                            editor.putString("ContraseñaCliente","");
-                            editor.commit();
                             Intent intent = new Intent(Intent.ACTION_MAIN);
                             intent.addCategory(Intent.CATEGORY_HOME);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

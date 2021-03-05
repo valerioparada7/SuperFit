@@ -6,11 +6,13 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@mipmap/ic_icono_app_foreground"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Mensualidad_detalle"></activity>
+        <activity android:name=".Mensualidad_menu" />
         <activity android:name=".Antropometria" />
         <activity android:name=".Mensualidad" />
         <activity android:name=".Cuestionario" />
@@ -21,11 +23,13 @@
         <activity android:name=".Ejercicios" />
         <activity android:name=".Rutinas" />
         <activity android:name=".Perfil" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".Inicio"
-                android:theme="@style/splashtheme">
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".Inicio"
+            android:theme="@style/splashtheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
