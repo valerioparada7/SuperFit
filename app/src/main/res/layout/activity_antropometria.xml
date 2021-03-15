@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Antropometria">
 
     <ScrollView
@@ -28,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textColor="#0A497B"
+                    android:textColor="@color/white"
                     android:textSize="25sp"/>
 
                 <TextView
@@ -39,7 +39,7 @@
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:textColor="#0A497B"
+                    android:textColor="@color/white"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
@@ -107,7 +107,7 @@
                         android:layout_marginRight="10dp"
                         android:paddingLeft="20sp"
                         android:paddingRight="5sp"
-                        android:textColor="#0A497B"
+                        android:textColor="@color/white"
                         android:textColorHighlight="@color/black"
                         android:textColorHint="@color/white"
                         android:textColorLink="@color/black"
@@ -119,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="IMC"
-                        android:textColor="#0A497B"
+                        android:textColor="@color/white"
                         android:textSize="1sp"
                         android:visibility="invisible" />
 

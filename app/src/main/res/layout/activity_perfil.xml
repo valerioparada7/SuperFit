@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Perfil">
 
     <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5sp"
                 android:text="Nombre"
-                android:textColor="#0A497B"
+                android:textColor="@color/white"
                 android:textSize="30dp" />
 
             <LinearLayout
@@ -38,13 +38,13 @@
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:text="Salir"
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="2sp"
+                    android:layout_weight="1"
                     android:background="@drawable/button_redondoborder"
-                    android:textSize="20sp"
-                    android:textColor="#0A497B" />
+                    android:text="Salir"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -75,7 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fecha Inicio "
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -83,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fecha Fin"
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -91,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tipo Rutina"
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -99,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tipo Entrenamiento"
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -115,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/fechaf"
@@ -123,7 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/tiporutina"
@@ -131,7 +134,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="#0A497B">
+                    android:textColor="@color/white"
+                    android:textSize="12sp">
 
                 </TextView>
 
@@ -141,7 +145,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text=" "
-                    android:textColor="#0A497B"/>
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -163,28 +168,98 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_redondoborder"
             android:text="Editar perfil"
-            android:textColor="#0A497B"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
     </LinearLayout>
-
+<!--
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="5sp"
-        android:layout_marginRight="5sp"
-        android:layout_marginBottom="5sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20sp"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/ListMenu"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="50dp"
-            android:background="@drawable/edittext_login"/>
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/fly" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/fondo1" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/fondo2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/fondo4" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/fondo3" />
+
+            <ImageButton
+                android:id="@+id/imageButton6"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                app:srcCompat="@drawable/me" />
+        </LinearLayout>
+    </LinearLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/ListMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="50dp"
+                android:background="@drawable/listview_color"/>
+        </LinearLayout>-
 
 </LinearLayout>

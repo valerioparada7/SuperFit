@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
         // Pagina http://superfit.somee.com/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://superfit.somee.com/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
         Call<MensualidadModel> call = clienteApi.Login(Usuario,Contraseña);

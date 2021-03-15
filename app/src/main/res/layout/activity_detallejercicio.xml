@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Detallejercicio">
 
    <LinearLayout
@@ -29,7 +29,7 @@
           android:layout_marginLeft="5sp"
           android:layout_marginRight="5sp"
           android:text="Harás los ejercicios seguidos, al final de cada serie descansas"
-          android:textColor="#0A497B"
+          android:textColor="@color/white"
           android:textSize="20sp" />
 
    </LinearLayout>

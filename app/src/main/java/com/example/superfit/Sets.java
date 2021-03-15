@@ -108,7 +108,7 @@ public class Sets extends AppCompatActivity {
     }
 
     public void Sets(ArrayList<String> Lista){
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,Lista);
         listsets.setAdapter(adapter);
     }
 

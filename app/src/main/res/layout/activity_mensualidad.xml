@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Mensualidad">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Personalizar Mensualidad"
-            android:textColor="#0A497B"
+            android:textColor="@color/white"
             android:textSize="25sp" />
     </LinearLayout>
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
-            android:textColor="#0A497B"
+            android:textColor="@color/white"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
@@ -46,16 +46,16 @@
             android:id="@+id/TiporutinaList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
             android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
             android:layout_marginRight="20sp"
+            android:backgroundTint="@color/white"
             android:ems="10"
             android:textColor="@color/white"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
-            android:textSize="30sp"
-            android:backgroundTint="#0A497B" />
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/texviewlabel"
@@ -65,7 +65,7 @@
             android:layout_marginTop="20sp"
             android:layout_marginLeft="20sp"
             android:layout_marginRight="20sp"
-            android:textColor="#0A497B"
+            android:textColor="@color/white"
             android:textColorHighlight="@color/black"
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
@@ -83,18 +83,22 @@
             android:textColorHint="@color/white"
             android:textColorLink="@color/black"
             android:textSize="30sp"
-            android:backgroundTint="#0A497B"/>
+            android:backgroundTint="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/MensualidadAceptar"
             android:layout_width="match_parent"
             android:layout_height="45sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="50sp"
-            android:layout_marginRight="20sp"
+            android:layout_marginTop="100dp"
             android:background="@drawable/button_redondo"
             android:text="Registrar"
             android:textColor="@color/white" />
-
     </LinearLayout>
 </LinearLayout>

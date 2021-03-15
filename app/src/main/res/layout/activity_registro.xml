@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="#202732"
     tools:context=".Registro">
 
     <ScrollView
@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Datos personales"
-                    android:textColor="#0A497B"
+                    android:textColor="@color/white"
                     android:textSize="25sp" />
             </LinearLayout>
 
@@ -184,19 +184,19 @@
                     android:orientation="horizontal">
 
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginTop="20sp"
-                    android:ems="10"
-                    android:text="Sexo:"
-                    android:textColor="#0A497B"
-                    android:textColorHighlight="@color/black"
-                    android:textColorHint="@color/white"
-                    android:textColorLink="@color/black"
-                    android:textSize="15sp"/>
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20sp"
+                        android:layout_marginTop="20sp"
+                        android:ems="10"
+                        android:text="Sexo:"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/white"
+                        android:textColorLink="@color/black"
+                        android:textSize="15sp" />
 
                 <Spinner
                     android:id="@+id/SexoList"
@@ -209,7 +209,7 @@
                     android:textColorHint="@color/black"
                     android:textColorLink="@color/white"
                     android:textSize="30sp"
-                    android:backgroundTint="#0A497B"
+                    android:backgroundTint="@color/white"
                     />
                 </LinearLayout>
 

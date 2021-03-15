@@ -41,7 +41,7 @@ public class Perfil extends AppCompatActivity {
         salirtbtn =(Button)findViewById(R.id.CerrarSesion);
         GetCliente();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_edittext_sexo, arraymenu);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , arraymenu);
         menulist.setAdapter(adapter);
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
