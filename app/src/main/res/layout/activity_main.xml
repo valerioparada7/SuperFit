@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".MainActivity">
     <!--android:background="#202732"
     android:background="@drawable/fondo1"
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/playfairdisplayregular"
                 android:text="Superfit"
-                android:textColor="#0A497B"
+                android:textColor="#007bff"
                 android:textSize="60sp"
                 app:autoSizeMaxTextSize="100sp"
                 app:autoSizeMinTextSize="12sp"
@@ -102,7 +102,7 @@
                 android:layout_marginRight="20sp"
                 android:background="@drawable/button_redondoborder"
                 android:text="Registrarse"
-                android:textColor="@color/white"
+                android:textColor="#007bff"
                 android:textSize="12sp" />
 
         </LinearLayout>

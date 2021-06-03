@@ -101,9 +101,10 @@ public class Perfil extends AppCompatActivity {
         Tipo_entrenamientot.setText(tipoentreno);
         fechait.setText(fechai);
         fechaft.setText(fechaf);
-        //web superfit.somee.com
+        //web http://superfit.somee.com
         //http://192.168.56.1:8081/
         //String Url_Imagen="http://192.168.56.1:8081"+fotoperfil;
+        //Web imagenes
         String Url_Imagen="http://superfit.somee.com"+fotoperfil;
         Log.w("FOTO AQUI-->", Url_Imagen);
         Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
