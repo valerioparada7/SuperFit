@@ -1,15 +1,19 @@
 package com.example.superfit.models;
 
+import com.google.gson.annotations.Expose;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 public class CuestionarioModel {
     public int Id_cuestionario;
+    @Expose(deserialize = false, serialize = false)
     public  ClientesModel  Cliente;
+
     public String Clave_cuestionario;
     public  Boolean  Padece_enfermedad;
     public String Medicamento_prescrito_medico;
     public  Boolean  lesiones;
-    public String Alguna_recomendacion_lesiones;
+    public  String Alguna_recomendacion_lesiones;
     public  Boolean  Fuma;
     public  int  Veces_semana_fuma;
     public  Boolean  Alcohol;

@@ -281,7 +281,7 @@ public class Antropometria extends AppCompatActivity {
         editor.putString("ContraseñaCliente",Pass);
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
-        editor.putString("FotoCliente",mensualidadModel.Cliente.Fotoperfil);
+        editor.putString("FotoCliente",mensualidadModel.Cliente.Foto_perfil);
         if(mensualidadModel.Id_mensualidad!=0){
             editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 

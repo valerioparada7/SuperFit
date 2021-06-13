@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.ClientesModel;
+import com.example.superfit.models.CuestionarioModel;
 import com.example.superfit.models.MensualidadModel;
 
 import java.text.DateFormat;
@@ -36,9 +37,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    // Job http://192.168.56.1:8081/
+    // Home http://192.168.100.11:8081/
+    // Pagina http://superfit.somee.com/
+    // Pagina nueva http://valerioparada7-001-site1.etempurl.com/
+    //Pagina Actual nueva https://www.bsite.net/valerioparada/
+    String PaginaWeb ="https://www.bsite.net/valerioparada/";
     EditText Usuario,Contraseña;
     Button Aceptar,registrarse;
     LinearLayout linea;
+
     //subircambios
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Iniciar(String Usuario,String Contraseña){
-        // Job http://192.168.56.1:8081/
-        // Home http://192.168.100.11:8081/
-        // Pagina http://superfit.somee.com/
-        // Pagina nueva http://valerioparada7-001-site1.etempurl.com/
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://valerioparada7-001-site1.etempurl.com/")
+
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
         Call<MensualidadModel> call = clienteApi.Login(Usuario,Contraseña);
@@ -120,17 +125,53 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void GetCuestionario(int Idcliente){
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<CuestionarioModel> call = clienteApi.GetCuestionario(Idcliente);
+        call.enqueue(new Callback<CuestionarioModel>() {
+            @Override
+            public void onResponse(Call<CuestionarioModel> call, Response<CuestionarioModel> response) {
+                try {
+                    if(response.isSuccessful()){
+                        CuestionarioModel cuestionario  = response.body();
+                        Log.w("Obtener id -->",String.valueOf(cuestionario.Id_cuestionario));
+                        /*if(cuestionario.Id_cuestionario!=0){
+                            GuardaCuestionario(cuestionario);
+                        }*/
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this,"No se realizo correctamente la conexion en el cuestionario",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception ex){
+                    Log.w("Algun error con el Id->",ex.getMessage());
+                    Toast.makeText(MainActivity.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CuestionarioModel> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void GuardarSesion(MensualidadModel mensualidadModel,String User,String Pass)
     {
         GetDates(mensualidadModel);
+
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
+        SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString("UsuarioCliente",User);
         editor.putString("ContraseñaCliente",Pass);
         editor.putInt("Id_Cliente",mensualidadModel.Cliente.Id_Cliente);
         editor.putString("Nombrescliente",mensualidadModel.Cliente.Nombres);
-        editor.putString("FotoCliente",mensualidadModel.Cliente.Fotoperfil);
+        editor.putString("FotoCliente",mensualidadModel.Cliente.Foto_perfil);
+        String foto=mensualidadModel.Cliente.Nombres;
+
         if(mensualidadModel.Id_mensualidad!=0){
             editor.putInt("Id_mensualidad",mensualidadModel.Id_mensualidad);
 
@@ -161,6 +202,29 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("fechai","No hay fecha asiganda");
             editor.putString("fechaf","No hay fecha asiganda");
         }
+        GetCuestionario(mensualidadModel.Cliente.Id_Cliente);
+        editor.commit();
+
+    }
+    public void GuardaCuestionario(CuestionarioModel cuestionario){
+        SharedPreferences preferences = getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        //Cuestionario
+        editor.putBoolean("Padece_enfermedad",cuestionario.Padece_enfermedad  );
+        editor.putString("Medicamento_prescrito_medico",cuestionario.Medicamento_prescrito_medico );
+        editor.putBoolean("lesiones",cuestionario.lesiones );
+        editor.putString("Alguna_recomendacion_lesiones",cuestionario.Alguna_recomendacion_lesiones );
+        editor.putBoolean("Fuma",cuestionario.Fuma );
+        editor.putInt("Veces_semana_fuma",cuestionario.Veces_semana_fuma );
+        editor.putBoolean("Alcohol",cuestionario.Alcohol );
+        editor.putInt("Veces_semana_alcohol",cuestionario.Veces_semana_alcohol );
+        editor.putBoolean("Actividad_fisica",cuestionario.Actividad_fisica );
+        editor.putString("Tipo_ejercicios",cuestionario.Tipo_ejercicios );
+        editor.putString("Tiempo_dedicado",cuestionario.Tiempo_dedicado );
+        editor.putString("Horario_entreno",cuestionario.Horario_entreno );
+        editor.putString("MetasObjetivos",cuestionario.MetasObjetivos );
+        editor.putString("Compromisos",cuestionario.Compromisos );
+        editor.putString("Comentarios",cuestionario.Comentarios );
         editor.commit();
     }
 

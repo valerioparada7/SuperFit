@@ -11,10 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +26,25 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 public class Perfil extends AppCompatActivity {
-    TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft;
-    Button salirtbtn;
-    String arraymenu[]= {"Mis rutinas","Mi Mensualidad","Mis Medidas","Cuestionario","Sobre Alimentacion","Rutinas extras"};
+    // Job http://192.168.56.1:8081/
+    // Home http://192.168.100.11:8081/
+    // Pagina http://superfit.somee.com/
+    // Pagina nueva http://valerioparada7-001-site1.etempurl.com/
+    //Pagina Actual nueva https://www.bsite.net/valerioparada/
+    String PaginaWeb ="https://www.bsite.net/valerioparada/";
+    TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft,cuestionariotxt;
+    Button salirtbtn1,cuestionariobtn;
     ListView menulist;
     ImageView FotoPerfil;
+
+    //Cuestionario
+    /*CheckBox Padece_enfermedad,lesiones,Fuma,Alcohol,Actividad_fisica;
+    EditText Medicamento_prescrito_medico,Alguna_recomendacion_lesiones,Veces_semana_fuma,
+            Veces_semana_alcohol,Tipo_ejercicios,Tiempo_dedicado,Horario_entreno,MetasObjetivos,
+            Compromisos,Comentarios;
+    TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
+    LinearLayout liner;*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,27 +55,12 @@ public class Perfil extends AppCompatActivity {
         Tipo_entrenamientot=(TextView)findViewById(R.id.tipoentrenamiento);
         fechait=(TextView)findViewById(R.id.fechai);
         fechaft=(TextView)findViewById(R.id.fechaf);
-        menulist =(ListView)findViewById(R.id.ListMenu);
-        salirtbtn =(Button)findViewById(R.id.CerrarSesion);
+        estatusDescripciont=(TextView)findViewById(R.id.estatusmesi);
+        salirtbtn1=(Button)findViewById(R.id.salirbtn);
+        cuestionariobtn=(Button)findViewById(R.id.VerCuestionarioBtn);
         GetCliente();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , arraymenu);
-        menulist.setAdapter(adapter);
-        menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
-                    Intent intent= new Intent(Perfil.this,Rutinas.class);
-                    startActivity(intent);
-                }
-                else if(position==1){
-                    Intent intent= new Intent(Perfil.this,Mensualidad_menu.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        salirtbtn.setOnClickListener(new View.OnClickListener() {
+        salirtbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder= new AlertDialog.Builder(Perfil.this);
@@ -84,6 +87,110 @@ public class Perfil extends AppCompatActivity {
                 builder.show();
             }
         });
+
+        cuestionariobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Perfil.this,Cuestionario.class);
+                startActivity(intent);
+            }
+        });
+/*
+        liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
+        //Checkboxs
+        Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
+        lesiones =(CheckBox)findViewById(R.id.lesionesChk);
+        Fuma =(CheckBox)findViewById(R.id.FumaChk);
+        Alcohol =(CheckBox)findViewById(R.id.AlcoholChk);
+        Actividad_fisica =(CheckBox)findViewById(R.id.Actividad_fisicaChk);
+
+        //editetexp
+        Medicamento_prescrito_medico =(EditText) findViewById(R.id.Medicamento_prescrito_medicoTxt);
+        Alguna_recomendacion_lesiones =(EditText) findViewById(R.id.Alguna_recomendacion_lesionesTxt);
+        Veces_semana_fuma =(EditText) findViewById(R.id.Veces_semana_fumaTxt);
+        Veces_semana_alcohol =(EditText) findViewById(R.id.Veces_semana_alcoholTxt);
+        Tipo_ejercicios =(EditText) findViewById(R.id.Tipo_ejerciciosTxt);
+        Tiempo_dedicado =(EditText) findViewById(R.id.Tiempo_dedicadoTxt);
+        Horario_entreno =(EditText) findViewById(R.id.Horario_entrenoTxt);
+        MetasObjetivos =(EditText) findViewById(R.id.MetasObjetivosTxt);
+        Compromisos =(EditText) findViewById(R.id.CompromisosTxt);
+        Comentarios =(EditText) findViewById(R.id.ComentariosTxt);
+
+        //TextView
+        TipoejercicioL =(TextView)findViewById(R.id.TipoejercicioLabel);
+        TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
+        HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
+
+        Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Padece_enfermedad.isChecked()==true){
+                    Medicamento_prescrito_medico.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Medicamento_prescrito_medico.setVisibility(View.INVISIBLE);
+                    Medicamento_prescrito_medico.setText("");
+                }
+            }
+        });
+
+        lesiones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(lesiones.isChecked()==true){
+                    Alguna_recomendacion_lesiones.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Alguna_recomendacion_lesiones.setVisibility(View.INVISIBLE);
+                    Alguna_recomendacion_lesiones.setText("");
+                }
+            }
+        });
+
+        Fuma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Fuma.isChecked()==true){
+                    Veces_semana_fuma.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Veces_semana_fuma.setVisibility(View.INVISIBLE);
+                    Veces_semana_fuma.setText("");
+                }
+            }
+        });
+
+        Alcohol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Alcohol.isChecked()==true){
+                    Veces_semana_alcohol.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Veces_semana_alcohol.setVisibility(View.INVISIBLE);
+                    Veces_semana_alcohol.setText("");
+                }
+            }
+        });
+
+        Actividad_fisica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Actividad_fisica.isChecked()==true){
+                    liner.setVisibility(View.VISIBLE);
+                    liner.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    liner.requestLayout();
+                }
+                else{
+                    liner.setVisibility(View.INVISIBLE);
+                    liner.getLayoutParams().height =0;
+                    liner.requestLayout();
+                    Tipo_ejercicios.setText("");
+                    Tiempo_dedicado.setText("");
+                    Horario_entreno.setText("");
+                }
+            }
+        });*/
     }
 
     public void GetCliente(){
@@ -96,17 +203,14 @@ public class Perfil extends AppCompatActivity {
         String tipoentreno=preferences.getString("Tipo_entrenamiento","No asignado");
         String fechai=preferences.getString("fechai","No hay fecha asiganda");
         String fechaf=preferences.getString("fechaf","No hay fecha asiganda");
-        Nombresclientet.setText(cliente);
+
+        Nombresclientet.setText(cliente.toUpperCase());
         tiporutinat.setText(tiporutina);
         Tipo_entrenamientot.setText(tipoentreno);
         fechait.setText(fechai);
         fechaft.setText(fechaf);
-        //web http://superfit.somee.com
-        //http://192.168.56.1:8081/
-        //String Url_Imagen="http://192.168.56.1:8081"+fotoperfil;
-        //Web imagenes
-        String Url_Imagen="http://superfit.somee.com"+fotoperfil;
-        Log.w("FOTO AQUI-->", Url_Imagen);
+        estatusDescripciont.setText(estatus);
+        String Url_Imagen=PaginaWeb+fotoperfil;
         Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
     }
 

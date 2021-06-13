@@ -6,6 +6,7 @@ import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.CuestionarioModel;
 import com.example.superfit.models.DetallerutinaModel;
 import com.example.superfit.models.MensualidadModel;
+import com.example.superfit.models.RegistroCliente;
 
 import java.util.List;
 
@@ -35,6 +36,14 @@ public interface ClienteApi {
     @POST("api/Login/RegistrarAntropometria")
     public Call<AlertasModel> RegistrarAntropometria(@Body AntropometriaModel antropometriaModel);
 
-    @GET Call<List<MensualidadModel>> GetMensualidad(@Query("IdCliente") int IdCliente);
+    @GET("api/Login/GetMensualidad")
+    public Call<List<MensualidadModel>> GetMensualidad(@Query("IdCliente") int IdCliente);
 
+
+    @GET("api/Clientes/GetCuestionario")
+    public Call<CuestionarioModel> GetCuestionario(@Query("IdCliente") int IdCliente);
+
+    //Registro completo
+    @POST("api/Login/RegistroCompleto")
+    public Call<AlertasModel> RegistroCompleto(@Body RegistroCliente Registro);
 }

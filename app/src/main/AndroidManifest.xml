@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Mensualidad_detalle"></activity>
+        <activity android:name=".Mensualidad_detalle" />
         <activity android:name=".Mensualidad_menu" />
         <activity android:name=".Antropometria" />
         <activity android:name=".Mensualidad" />

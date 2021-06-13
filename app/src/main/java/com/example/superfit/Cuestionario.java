@@ -37,8 +37,8 @@ public class Cuestionario extends AppCompatActivity {
             Veces_semana_alcohol,Tipo_ejercicios,Tiempo_dedicado,Horario_entreno,MetasObjetivos,
             Compromisos,Comentarios;
     TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
-    Button Aceptar;
     LinearLayout liner;
+    Button Aceptar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,15 +69,19 @@ public class Cuestionario extends AppCompatActivity {
         TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
         HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
 
-        //Butons
-        Aceptar =(Button)findViewById(R.id.RegistrarCuestionarioBtn);
+        //Obtnemos los datos
+        GetCuestionario();
 
+
+        //Butons
+        //Aceptar =(Button)findViewById(R.id.RegistrarCuestionarioBtn);
+/*
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
                startActivity(intent);
-/*
+
                 int IdCliente = getIntent().getExtras().getInt("IdCliente");
                 String fuma = Veces_semana_fuma.getText().toString();
                 String alcohol = Veces_semana_alcohol.getText().toString();
@@ -105,9 +109,9 @@ public class Cuestionario extends AppCompatActivity {
                 cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
                 cuestionario.Compromisos = Compromisos.getText().toString();
                 cuestionario.Comentarios = Comentarios.getText().toString();
-                RegistroCuestionario(cuestionario);*/
+                RegistroCuestionario(cuestionario);
             }
-        });
+        });*/
 
         Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,22 +168,51 @@ public class Cuestionario extends AppCompatActivity {
         Actividad_fisica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Actividad_fisica.isChecked()==true){
-                    liner.setVisibility(View.VISIBLE);
-                    liner.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
-                    liner.requestLayout();
-                }
-                else{
-                    liner.setVisibility(View.INVISIBLE);
-                    liner.getLayoutParams().height =0;
-                    liner.requestLayout();
-                    Tipo_ejercicios.setText("");
-                    Tiempo_dedicado.setText("");
-                    Horario_entreno.setText("");
-                }
+                Actividad();
             }
         });
 
+    }
+
+    public void GetCuestionario(){
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        //Cuestionario
+        Boolean Padece_enfermedadU = preferences.getBoolean("Padece_enfermedad",false);
+        String Medicamento_prescrito_medicoU = preferences.getString("Medicamento_prescrito_medico","" );
+        Boolean lesionesU =preferences.getBoolean("lesiones",false);
+        String Alguna_recomendacion_lesionesU = preferences.getString ("Alguna_recomendacion_lesiones","");
+        Boolean FumaU =preferences.getBoolean("Fuma",false );
+        int  Veces_semana_fumaU =preferences.getInt("Veces_semana_fuma",0 );
+        Boolean AlcoholU = preferences.getBoolean("Alcohol",false );
+        int Veces_semana_alcoholU = preferences.getInt("Veces_semana_alcohol",0 );
+        Boolean Actividad_fisicaU = preferences.getBoolean("Actividad_fisica",false);
+
+        String Tipo_ejerciciosU=preferences.getString("Tipo_ejercicios","" );
+        String Tiempo_dedicadoU=preferences.getString("Tiempo_dedicado","" );
+        String Horario_entrenoU=preferences.getString("Horario_entreno","" );
+        String MetasObjetivosU=preferences.getString("MetasObjetivos", "");
+        String CompromisosU=preferences.getString("Compromisos","" );
+        String ComentariosU=preferences.getString("Comentarios","" );
+
+        //Mostrar datos
+        Padece_enfermedad.setChecked(Padece_enfermedadU);
+        lesiones.setChecked(lesionesU);
+        Fuma.setChecked(FumaU);
+        Alcohol.setChecked(AlcoholU);
+        Actividad_fisica.setChecked(Actividad_fisicaU);
+        //Validamos los datos de actividad fisica
+        Actividad();
+        //editetexp
+        Medicamento_prescrito_medico.setText(Medicamento_prescrito_medicoU);
+        Alguna_recomendacion_lesiones.setText(Alguna_recomendacion_lesionesU);
+        Veces_semana_fuma.setText(String.valueOf(Veces_semana_fumaU));
+        Veces_semana_alcohol.setText(String.valueOf(Veces_semana_alcoholU));
+        Tipo_ejercicios.setText(Tipo_ejerciciosU);
+        Tiempo_dedicado.setText(Tiempo_dedicadoU);
+        Horario_entreno.setText(Horario_entrenoU);
+        MetasObjetivos.setText(MetasObjetivosU);
+        Compromisos.setText(CompromisosU);
+        Comentarios.setText(ComentariosU);
     }
 
     public void RegistroCuestionario(CuestionarioModel newcuestionario){
@@ -197,12 +230,7 @@ public class Cuestionario extends AppCompatActivity {
                     if(response.isSuccessful()){
                         AlertasModel result = response.body();
                         if(result.Result==true){
-                            Toast.makeText(Cuestionario.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                            Bundle extras = new Bundle();
-                            extras.putInt("IdCliente",newcuestionario.Cliente.Id_Cliente);
-                            Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
-                            intent.putExtras(extras);
-                            startActivity(intent);
+                            Toast.makeText(Cuestionario.this,"Se actualizaron tus datos con exito",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Toast.makeText(Cuestionario.this,result.Mensaje,Toast.LENGTH_SHORT).show();
@@ -224,31 +252,26 @@ public class Cuestionario extends AppCompatActivity {
         });
     }
 
+    public void Actividad(){
+        if(Actividad_fisica.isChecked()==true){
+            liner.setVisibility(View.VISIBLE);
+            liner.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
+            liner.requestLayout();
+        }
+        else{
+            liner.setVisibility(View.INVISIBLE);
+            liner.getLayoutParams().height =0;
+            liner.requestLayout();
+            Tipo_ejercicios.setText("");
+            Tiempo_dedicado.setText("");
+            Horario_entreno.setText("");
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
-            AlertDialog.Builder builder= new AlertDialog.Builder(this);
-            builder.setMessage("¿Desea salir? se perdera el progreso")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("UsuarioCliente","");
-                            editor.putString("ContraseñaCliente","");
-                            editor.putInt("EdadCliente",0);
-                            editor.commit();
-                            Intent intent = new Intent(Cuestionario.this,MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            builder.show();
+            Intent intent = new Intent(Cuestionario.this,Perfil.class);
+            startActivity(intent);
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -5,33 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#202732"
+    android:background="@color/white"
     tools:context=".Cuestionario">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!--CUESTIONARIO-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:background="#e9ecef"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/Cuestionariolabel"
+                    android:id="@+id/cuestionario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
                     android:layout_gravity="center_horizontal"
                     android:text="Cuestionario"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textColor="#007bff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/mensaje"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marque la casilla en caso de que sea si para cada pregunta"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/labelenfer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Padece alguna enfermedad?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="15sp" />
@@ -41,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Si?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="5dp"
                     android:textSize="15sp"/>
@@ -74,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Ha tenido alguna lesión en músculos o articulaciones?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="10sp"/>
@@ -86,7 +99,7 @@
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="5dp"
                     android:text="¿Si?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <EditText
@@ -117,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Acostumbra a Fumar?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="10dp"
                     android:textSize="15sp" />
@@ -129,7 +142,7 @@
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="5dp"
                     android:text="¿Si?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
                 <EditText
@@ -161,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Acostumbra a tomar bebidas alcohólicas?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="15sp" />
@@ -173,39 +186,39 @@
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="10sp"
                     android:text="¿Si?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
                 <EditText
                     android:id="@+id/Veces_semana_alcoholTxt"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:hint="Cuntas veces por semana;Ej: 2"
                     android:layout_width="match_parent"
                     android:layout_height="45sp"
-                    android:layout_marginTop="10sp"
-                    android:ems="10"
-                    android:background="@drawable/edittext_login"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10sp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
                     android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Cuntas veces por semana;Ej: 2"
+                    android:inputType="number"
+                    android:maxLength="2"
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
                     android:textColorHighlight="@color/black"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
-                    android:visibility="invisible"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/labelfisico"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="¿Actualmente realizas alguna actividad física?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="20sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="15sp" />
@@ -216,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0sp"
                     android:text="¿Si?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="15sp"/>
 
                 <LinearLayout
@@ -234,7 +247,7 @@
                         android:layout_marginLeft="10sp"
                         android:layout_marginTop="10sp"
                         android:text="¿Qué tipo de ejercicio realizas y cuánto tiempo le dedicas en cada sesión que haces?"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
                     <EditText
@@ -265,7 +278,7 @@
                         android:layout_marginLeft="10sp"
                         android:layout_marginTop="10sp"
                         android:text="¿Cuánto tiempo llevas realizando dicha actividad de manera constante?"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
                     <EditText
@@ -297,7 +310,7 @@
                         android:layout_marginLeft="10sp"
                         android:layout_marginTop="10sp"
                         android:text="¿En qué horario entrenas?"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
                     <EditText
@@ -328,7 +341,7 @@
                     android:text="¿Cuáles son tus metas u objetivos para lograr?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="30sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="15sp" />
@@ -359,7 +372,7 @@
                     android:text="¿Qué compromiso tienes contigo mismo?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="30sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="15sp" />
@@ -390,7 +403,7 @@
                     android:text="¿Algún comentario adicional, antes de poder seguir y comenzar?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:layout_marginTop="30sp"
                     android:layout_marginLeft="10sp"
                     android:textSize="18sp" />
@@ -415,23 +428,17 @@
                     android:textSize="15sp" />
 
                 <Button
-                    android:id="@+id/RegistrarCuestionarioBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="45sp"
-                    android:layout_marginTop="30sp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
-                    android:layout_weight="1"
-                    android:background="@drawable/button_redondo"
-                    android:text="Registrar"
-                    android:textColor="@color/white" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/GuardarCuestionarioBtn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="150sp"
+                    android:layout_height="50sp"
                     android:layout_marginTop="20sp"
-                    android:orientation="vertical"></LinearLayout>
-
+                    android:layout_marginBottom="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_redondoborder"
+                    android:text="Guardar"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </ScrollView>

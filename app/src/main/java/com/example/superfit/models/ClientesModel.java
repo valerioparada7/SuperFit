@@ -12,7 +12,7 @@ public class ClientesModel {
     public String Apodo ;
     public String Contraseña;
     public String Sexo;
-    public String Fotoperfil;
+    public String Foto_perfil;
     public Boolean Validar ;
 
     public int getId_Cliente() {
@@ -103,12 +103,12 @@ public class ClientesModel {
         Validar = validar;
     }
 
-    public String getFotoperfil() {
-        return Fotoperfil;
+    public String getFoto_perfil() {
+        return Foto_perfil;
     }
 
     public void setFotoperfil(String fotoperfil) {
-        Fotoperfil = fotoperfil;
+        Foto_perfil = fotoperfil;
     }
 
 
