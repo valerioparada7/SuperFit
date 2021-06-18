@@ -1,5 +1,6 @@
 package com.example.superfit;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +8,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.Editable;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,17 +22,29 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.text.TextWatcher;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.superfit.interfaces.CatalogoApi;
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
+import com.example.superfit.models.AntropometriaModel;
 import com.example.superfit.models.ClientesModel;
+import com.example.superfit.models.CuestionarioModel;
+import com.example.superfit.models.Imagenes;
 import com.example.superfit.models.MensualidadModel;
+import com.example.superfit.models.RegistroCliente;
+import com.example.superfit.models.TipoentrenamientoModel;
+import com.example.superfit.models.TiporutinaModel;
 
+import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,17 +53,35 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Registro extends AppCompatActivity {
+    //Pagina Actual nueva https://www.bsite.net/valerioparada/
+    String PaginaWeb ="https://www.bsite.net/valerioparada/";
+    //Variables globales
+    AntropometriaModel antropometriaModel= new AntropometriaModel();
+    ClientesModel cliente = new ClientesModel();
+    CuestionarioModel cuestionario = new CuestionarioModel();
+    MensualidadModel mensualidadModel= new MensualidadModel();
+
+    //Boton salir
+    Button BtnSalir;
+
     //Botones de navegacion y para guardar
     Button BtnAtras,BtnAdelante,BtnGuardar;
     int pagactual = 1;
     //Ventanas layout a ocupar
     LinearLayout linerpersonal,linercuestionario,linermensualidad,linermedidas;
-
+//contador de las imagenes que se seleccionan
+    public int cuentaperfil=0,perfil=0,frontal=0,posterior=0;
 
     //Datos personales
     EditText Nombre,Ap,Am,Apodo,Edad,Telefono,Email,Contraseña;
     Spinner listsexo;
     String[] Sexo=  {"Masculino","Femenino"};
+    //foto de perfil usuario
+    ImageView imagenperfilusuario;
+    Button fotoperfilususario;
+    private int img_requestperfil = 21;
+    private Bitmap bitmapfotousuarioperfil;
+    LinearLayout linerfotousuario;
 
     //Cuestionario
     CheckBox Padece_enfermedad,lesiones,Fuma,Alcohol,Actividad_fisica;
@@ -55,19 +91,54 @@ public class Registro extends AppCompatActivity {
     TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
     LinearLayout liner;
 
+    //Mensualidad
+    ArrayList<String> tiporutinasapi = new ArrayList<String>();
+    ArrayList<String> tipoentrenamientoapi = new ArrayList<String>();
+    Spinner listtiporutinas,listtipoentrenamiento;
+
+    //Medidas
+    EditText Peso, Altura,Brazoderechorelajado,Brazoderechofuerza,Brazoizquierdorelajado,
+            Brazoizquierdofuerza,Cintura,Cadera,Piernaizquierda,Piernaderecho,
+            Pantorrilladerecha,Pantorrillaizquierda;
+    TextView IMC,imc2,Msj;
+    //fotos de las medidas
+    //perfil
+    ImageView imagenperfilmedida;
+    Button fotoperfilmedida;
+    private int img_requestperfilmedida = 21;
+    private Bitmap bitmapfotousuarioperfilmedida;
+    LinearLayout linerfotoperfilmedida;
+    //frontal
+    ImageView imagenfrontal;
+    Button fotofrontal;
+    private int img_requestfrontal = 21;
+    private Bitmap bitmapfotofrontal;
+    LinearLayout linerfotofrontal;
+    //posterior
+    ImageView imagenposterior;
+    Button fotoposterior;
+    private int img_requestposterior = 21;
+    private Bitmap bitmapfotoposterior;
+    LinearLayout linerfotoposterior;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-//BOTONES NAVEGACION
+
+        //Boton de salir
+        BtnSalir=(Button)findViewById(R.id.salirbtn);
+        //BOTONES NAVEGACION
         BtnAtras=(Button)findViewById(R.id.BotonAtras);
         BtnAdelante=(Button)findViewById(R.id.BotonSiguiente);
         BtnGuardar=(Button)findViewById(R.id.registrarcliente);
-        //Diseños
+
+        //Diseños de cada ventana para cada tema
         linerpersonal =(LinearLayout)findViewById(R.id.DatosPersonalesLayout);
         linercuestionario=(LinearLayout)findViewById(R.id.CuestionarioLayout);
-        //linermensualidad=(LinearLayout)findViewById(R.id.LinerCuestionario);
-        //linermedidas=(LinearLayout)findViewById(R.id.LinerCuestionario);
+        linermensualidad=(LinearLayout)findViewById(R.id.MensualidadLayout);
+        linermedidas=(LinearLayout)findViewById(R.id.MedidasLayout);
 
         //Datos personales
         Nombre=(EditText)findViewById(R.id.NombreTxt);
@@ -81,18 +152,21 @@ public class Registro extends AppCompatActivity {
         listsexo =(Spinner)findViewById(R.id.SexoList);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Sexo);
         listsexo.setAdapter(adapter);
-
+        //imagen de usuario
+        imagenperfilusuario=(ImageView)findViewById(R.id.FotoperfilId);
+        fotoperfilususario=(Button)findViewById(R.id.FotoperfilBtn);
+        linerfotousuario=(LinearLayout)findViewById(R.id.linerfotoperfilId);
 
         //Cuestionario
         liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
-        //Checkboxs
+        //Checkboxs de cuestionario
         Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
         lesiones =(CheckBox)findViewById(R.id.lesionesChk);
         Fuma =(CheckBox)findViewById(R.id.FumaChk);
         Alcohol =(CheckBox)findViewById(R.id.AlcoholChk);
         Actividad_fisica =(CheckBox)findViewById(R.id.Actividad_fisicaChk);
 
-        //editetexp
+        //Edittext de cuestionario
         Medicamento_prescrito_medico =(EditText) findViewById(R.id.Medicamento_prescrito_medicoTxt);
         Alguna_recomendacion_lesiones =(EditText) findViewById(R.id.Alguna_recomendacion_lesionesTxt);
         Veces_semana_fuma =(EditText) findViewById(R.id.Veces_semana_fumaTxt);
@@ -104,10 +178,46 @@ public class Registro extends AppCompatActivity {
         Compromisos =(EditText) findViewById(R.id.CompromisosTxt);
         Comentarios =(EditText) findViewById(R.id.ComentariosTxt);
 
-        //TextView
+        //TextView de cuestionario
         TipoejercicioL =(TextView)findViewById(R.id.TipoejercicioLabel);
         TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
         HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
+
+        //Mensualidad
+        listtiporutinas = (Spinner) findViewById(R.id.TiporutinaList);
+        listtipoentrenamiento =(Spinner)findViewById(R.id.Tipoentrenamientolist);
+        //Llenar combos de mensualidad
+        GetTipoRutinas();
+        GetTipoEntrenamiento();
+
+        //Medidas
+        Peso=(EditText)findViewById(R.id.PesoTxt);
+        Altura=(EditText)findViewById(R.id.AlturaTxt);
+        IMC=(TextView)findViewById(R.id.imcTxt);
+        imc2=(TextView)findViewById(R.id.labelimc);
+        Brazoderechorelajado=(EditText)findViewById(R.id.BrazoderechorelajadoTxt);
+        Brazoderechofuerza=(EditText)findViewById(R.id.BrazoderechofuerzaTxt);
+        Brazoizquierdorelajado=(EditText)findViewById(R.id.BrazoizquierdorelajadoTxt);
+        Brazoizquierdofuerza=(EditText)findViewById(R.id.BrazoizquierdofuerzaTxt);
+        Cintura=(EditText)findViewById(R.id.CinturaTxt);
+        Cadera=(EditText)findViewById(R.id.CaderaTxt);
+        Piernaizquierda=(EditText)findViewById(R.id.PiernaizquierdaTxt);
+        Piernaderecho=(EditText)findViewById(R.id.PiernaderechoTxt);
+        Pantorrilladerecha=(EditText)findViewById(R.id.PantorrilladerechaTxt);
+        Pantorrillaizquierda=(EditText)findViewById(R.id.PantorrillaizquierdaTxt);
+        //imagenes de las medidas
+        //perfil
+        imagenperfilmedida=(ImageView)findViewById(R.id.FotoperfilmedidaId);
+        fotoperfilmedida=(Button)findViewById(R.id.FotoperfilmedidaBtn);
+        linerfotoperfilmedida=(LinearLayout)findViewById(R.id.linerfotoperfilmedidaId);
+        //frontal
+        imagenfrontal=(ImageView)findViewById(R.id.FotofrontalId);
+        fotofrontal=(Button)findViewById(R.id.FotofrontalBtn);
+        linerfotofrontal=(LinearLayout)findViewById(R.id.linerfotofrontalId);
+        //posterior
+        imagenposterior=(ImageView)findViewById(R.id.FotoposteriorId);
+        fotoposterior=(Button)findViewById(R.id.FotoposteriorBtn);
+        linerfotoposterior=(LinearLayout)findViewById(R.id.linerfotoposteriorId);
 
 
 
@@ -160,7 +270,7 @@ public class Registro extends AppCompatActivity {
                     if (siguiente == 2) {
                         boolean result = true;//ValidarCliente();
                         if (result == true) {
-                            BtnAtras.setVisibility(View.INVISIBLE);
+                            BtnAtras.setVisibility(View.VISIBLE);
                             linercuestionario.setVisibility(View.VISIBLE);
                             linercuestionario.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
                             linercuestionario.requestLayout();
@@ -182,7 +292,7 @@ public class Registro extends AppCompatActivity {
 
                     }
                     else {
-                        BtnAdelante.setVisibility(View.VISIBLE);
+                        BtnAdelante.setVisibility(View.INVISIBLE);
                         BtnGuardar.setVisibility(View.VISIBLE);
                         linermedidas.setVisibility(View.VISIBLE);
                         linermedidas.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -195,44 +305,30 @@ public class Registro extends AppCompatActivity {
                 }
             }
         });
-/*
-        Aceptar.setOnClickListener(new View.OnClickListener() {
+
+        BtnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           Intent intent = new Intent(Registro.this,Cuestionario.class);
-            startActivity(intent);
-
-               String n=Nombre.getText().toString();
-                String  ap=Ap.getText().toString();
-                String  am=Am.getText().toString();
-                String  apo=Apodo.getText().toString();
-                String  tel=Telefono.getText().toString();
-                String  ed=Edad.getText().toString();
-                String  em=Email.getText().toString();
-                String  pass=Contraseña.getText().toString();
-                String sex=listsexo.getSelectedItem().toString();
-
-                if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
-                    ClientesModel cliente = new ClientesModel();
-                    cliente.Nombres =n.toUpperCase();
-                    cliente.Apellido_Paterno=ap.toUpperCase();
-                    cliente.Apellido_Materno=am.toUpperCase();
-                    cliente.Apodo=apo;
-                    cliente.Telefono= Double.parseDouble(tel);
-                    cliente.Edad=Integer.parseInt(ed);
-                    cliente.Correo_electronico=em;
-                    cliente.Contraseña=pass;
-                    cliente.Sexo=sex;
-                    Registrar(cliente);
-                }
-                else{
-                    Toast.makeText(Registro.this, "Llene todos los campos requeridos", Toast.LENGTH_SHORT).show();
-                }
-
-
+                AlertDialog.Builder builder= new AlertDialog.Builder(Registro.this);
+                builder.setMessage("¿Desea salir? se perdera el progreso")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Registro.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
             }
-        });*/
+        });
 
+      //checkbox para interactuar
         Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,6 +387,159 @@ public class Registro extends AppCompatActivity {
                 Actividad();
             }
         });
+
+        //calcula imc
+        Peso.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                int edad=preferences.getInt("EdadCliente",0);
+                String sexo=preferences.getString("SexoCliente","none");
+                DecimalFormat df = new DecimalFormat("#.00");
+                String height =Altura.getText().toString();
+                String weight=s.toString();
+                if(!height.isEmpty()&&!weight.isEmpty()){
+                    double he2 = 0,we=0,imc=0;
+                    he2=Double.parseDouble(height);
+                    we=Double.parseDouble(weight);
+                    he2=he2/100;
+                    he2=he2*he2;
+                    imc=we/he2;
+                    String valor =df.format(imc);
+                    valor=valor.replace(",",".");
+                    imc=Double.parseDouble(valor);
+                    String rango=ValidarImc(imc,edad,sexo);
+                    imc2.setText("Tu IMC es: "+imc +" "+rango);
+                    IMC.setText(String.valueOf(imc));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        Altura.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                int edad=preferences.getInt("EdadCliente",0);
+                String sexo=preferences.getString("SexoCliente","none");
+                DecimalFormat df = new DecimalFormat("#.00");
+                String height =s.toString();
+                String weight=Peso.getText().toString();
+                if(!weight.isEmpty()&&!height.isEmpty()){
+                    double he2 = 0,we=0,imc=0;
+                    he2=Double.parseDouble(height);
+                    we=Double.parseDouble(weight);//2.7225
+                    he2=he2/100;
+                    he2=he2*he2;
+                    imc=we/he2;
+                    String valor =df.format(imc);
+                    valor=valor.replace(",",".");
+                    imc=Double.parseDouble(valor);
+                    String rango=ValidarImc(imc,edad,sexo);
+                    imc2.setText("Tu IMC es: "+imc +" "+rango);
+                    IMC.setText(String.valueOf(imc));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        //botones para seleccionar fotos
+        //perfil de la cuenta del usuario
+        fotoperfilususario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,img_requestperfil);
+                cuentaperfil=1;
+                perfil=0;
+                frontal=0;
+                posterior=0;
+            }
+        });
+        //fotos de als medias
+        fotoperfilmedida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,img_requestperfilmedida);
+                perfil=1;
+                cuentaperfil=0;
+                frontal=0;
+                posterior=0;
+            }
+        });
+        fotofrontal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,img_requestfrontal);
+                frontal=1;
+                perfil=0;
+                cuentaperfil=0;
+                posterior=0;
+            }
+        });
+        fotoposterior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,img_requestposterior);
+                posterior=1;
+                perfil=0;
+                cuentaperfil=0;
+                frontal=0;
+            }
+        });
+
+        //boton de registro
+        BtnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateImagen();
+                /*
+                if(ValidarCliente()==true && ValidarMedidas()==true){
+                    RegistroCliente registro = new RegistroCliente();
+                    registro.Cliente = new ClientesModel();
+                    registro.Cuestionario = new CuestionarioModel();
+                    registro.Mensualidad = new MensualidadModel();
+                    registro.Medidas = new AntropometriaModel();
+
+                    //Asignamos valores
+                    registro.Cliente = cliente;
+                    registro.Medidas = antropometriaModel;
+                    registro.Cuestionario = cuestionario;
+                    registro.Mensualidad =mensualidadModel;
+                    Registrar(registro);
+                }*/
+
+            }
+        });
     }
     public void Actividad(){
         if(Actividad_fisica.isChecked()==true){
@@ -307,14 +556,68 @@ public class Registro extends AppCompatActivity {
             Horario_entreno.setText("");
         }
     }
-    public void Registrar(ClientesModel newcliente){
+
+
+    //Cargar imagenes
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==img_requestperfil&&resultCode==RESULT_OK && data !=null){
+            Uri pathperfiluser = data.getData();
+            Uri pathperfil = data.getData();
+            Uri pathfrontal = data.getData();
+            Uri pathposterior = data.getData();
+            try {
+                if(cuentaperfil==1){
+                    bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfiluser);
+                    imagenperfilusuario.setImageBitmap(bitmapfotousuarioperfil);
+                    linerfotousuario.setVisibility(View.VISIBLE);
+                    linerfotousuario.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    linerfotousuario.requestLayout();
+                }
+                else if(perfil==1){
+                    bitmapfotousuarioperfilmedida = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfil);
+                    imagenperfilmedida.setImageBitmap(bitmapfotousuarioperfilmedida);
+                    linerfotoperfilmedida.setVisibility(View.VISIBLE);
+                    linerfotoperfilmedida.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    linerfotoperfilmedida.requestLayout();
+                }
+                else if(frontal==1){
+                    bitmapfotofrontal = MediaStore.Images.Media.getBitmap(getContentResolver(),pathfrontal);
+                    imagenfrontal.setImageBitmap(bitmapfotofrontal);
+                    linerfotofrontal.setVisibility(View.VISIBLE);
+                    linerfotofrontal.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    linerfotofrontal.requestLayout();
+                }
+                else if(posterior==1){
+                    bitmapfotoposterior = MediaStore.Images.Media.getBitmap(getContentResolver(),pathposterior);
+                    imagenposterior.setImageBitmap(bitmapfotoposterior);
+                    linerfotoposterior.setVisibility(View.VISIBLE);
+                    linerfotoposterior.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    linerfotoposterior.requestLayout();
+                }
+                else{
+
+                }
+
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public void Registrar(RegistroCliente registro){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
         // web superfit.somee.com
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        //Primero registramos los datos
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<AlertasModel> call = clienteApi.RegistrarCliente(newcliente);
+        Call<AlertasModel> call = clienteApi.RegistroCompleto(registro);
         call.enqueue(new Callback<AlertasModel>() {
             @Override
             public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
@@ -322,19 +625,26 @@ public class Registro extends AppCompatActivity {
                     if(response.isSuccessful()){
                         AlertasModel result = response.body();
                         if(result.Result==true){
-                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor=preferences.edit();
-                            editor.putString("UsuarioCliente",newcliente.Correo_electronico);
-                            editor.putString("ContraseñaCliente",newcliente.Contraseña);
-                            editor.putString("SexoCliente", listsexo.getSelectedItem().toString());
-                            editor.putInt("EdadCliente",newcliente.Edad);
-                            editor.commit();
                             Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                            Bundle extras = new Bundle();
-                            extras.putInt("IdCliente",result.Id);
-                            Intent intent = new Intent(Registro.this,Cuestionario.class);
-                            intent.putExtras(extras);
-                            startActivity(intent);
+                            /*AlertDialog.Builder builder= new AlertDialog.Builder(Registro.this);
+                            builder.setMessage("Registro exito,espera tu respuesta a tu correo o celular que proporcionaste")
+                                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Registro.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .setNegativeButton("", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Registro.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            builder.show();*/
+                            //Intent intent = new Intent(Registro.this,MainActivity.class);
+                            //startActivity(intent);
                         }
                         else {
                             Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
@@ -355,9 +665,383 @@ public class Registro extends AppCompatActivity {
             }
 
 
+
         });
     }
 
+    public void UpdateImagen(){
+        try
+        {
+            //pasamos las imagenes a base64 string
+
+            Imagenes imagenes = new Imagenes();
+            imagenes.ImagenPerfilCuenta ="";
+            imagenes.ImagenPerfil ="";
+            imagenes.ImagenFrontal ="";
+            imagenes.ImagenPosterior ="";
+            if(bitmapfotousuarioperfil!=null){
+                ByteArrayOutputStream byteperfilcuenta = new ByteArrayOutputStream();
+                bitmapfotousuarioperfil.compress(Bitmap.CompressFormat.JPEG,75,byteperfilcuenta);
+                byte[] byte64cuenta =byteperfilcuenta.toByteArray();
+                String base64cuenta = Base64.encodeToString(byte64cuenta,Base64.DEFAULT);
+                imagenes.ImagenPerfilCuenta =base64cuenta;
+                Toast.makeText(Registro.this,"cuenta",Toast.LENGTH_SHORT).show();
+            }
+            if(bitmapfotousuarioperfilmedida!=null){
+                ByteArrayOutputStream byteperfil = new ByteArrayOutputStream();
+                bitmapfotousuarioperfilmedida.compress(Bitmap.CompressFormat.JPEG,75,byteperfil);
+                byte[] byte64perfil =byteperfil.toByteArray();
+                String base64perfil = Base64.encodeToString(byte64perfil,Base64.DEFAULT);
+                imagenes.ImagenPerfil =base64perfil;
+                Toast.makeText(Registro.this,"perfil",Toast.LENGTH_SHORT).show();
+            }
+            if(bitmapfotofrontal!=null){
+                ByteArrayOutputStream bytefrontal = new ByteArrayOutputStream();
+                bitmapfotofrontal.compress(Bitmap.CompressFormat.JPEG,75,bytefrontal);
+                byte[] byte64frontal =bytefrontal.toByteArray();
+                String base64frontal = Base64.encodeToString(byte64frontal,Base64.DEFAULT);
+                imagenes.ImagenFrontal =base64frontal;
+                Toast.makeText(Registro.this,"frontal",Toast.LENGTH_SHORT).show();
+            }
+            if(bitmapfotoposterior!=null){
+                ByteArrayOutputStream byteposterior = new ByteArrayOutputStream();
+                bitmapfotoposterior.compress(Bitmap.CompressFormat.JPEG,75,byteposterior);
+                byte[] byte64posterior = byteposterior.toByteArray();
+                String base64posterior= Base64.encodeToString(byte64posterior,Base64.DEFAULT);
+                imagenes.ImagenPosterior =base64posterior;
+                Toast.makeText(Registro.this,"posterior",Toast.LENGTH_SHORT).show();
+            }
+            //despues registramos las imagenes
+
+            // Local http://localhost:49953/
+            Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                    .addConverterFactory(GsonConverterFactory.create()).build();
+            ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+            Call<AlertasModel> call = clienteApi.UpdateImagenes(imagenes);
+            call.enqueue(new Callback<AlertasModel>() {
+                @Override
+                public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
+                    try {
+                        if(response.isSuccessful()){
+                            AlertasModel result = response.body();
+                            if(result.Result==true){
+                                Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Registro.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception ex){
+                        Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AlertasModel> call, Throwable t) {
+
+                }
+            });
+        }
+        catch (Exception ex){
+            Toast.makeText(Registro.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+            Log.w("Error VALERIO:",ex.getMessage());
+        }
+    }
+
+    public void GetTipoEntrenamiento() {
+
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        CatalogoApi catalogoapi = retrofit.create(CatalogoApi.class);
+        Call<List<TipoentrenamientoModel>> call = catalogoapi.GetTypeTraining();
+        call.enqueue(new Callback<List<TipoentrenamientoModel>>() {
+            @Override
+            public void onResponse(Call<List<TipoentrenamientoModel>> call, Response<List<TipoentrenamientoModel>> response) {
+                try {
+                    if(response.isSuccessful()){
+                        List<TipoentrenamientoModel> tipoentrenamientolist = response.body();
+                        if(tipoentrenamientolist.size()>0){
+                            for (int i=0;i<tipoentrenamientolist.size();i++){
+                                tipoentrenamientoapi.add(i+1+".- "+tipoentrenamientolist.get(i).Tipo_entrenamiento);
+                            }
+                            TipoEntrenamientos(tipoentrenamientoapi);
+                        }
+                        else{
+                            tiporutinasapi.add("No hay rutinas");
+                            TipoEntrenamientos(tipoentrenamientoapi);
+                        }
+                    }
+                }
+                catch (Exception ex){
+                    Log.w("",ex.getMessage());
+                    Toast.makeText(Registro.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TipoentrenamientoModel>> call, Throwable t) {
+                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void GetTipoRutinas() {
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        CatalogoApi catalogoapi = retrofit.create(CatalogoApi.class);
+        Call<List<TiporutinaModel>> call = catalogoapi.GetTypeRutines();
+        call.enqueue(new Callback<List<TiporutinaModel>>() {
+            @Override
+            public void onResponse(Call<List<TiporutinaModel>> call, Response<List<TiporutinaModel>> response) {
+                try {
+                    if(response.isSuccessful()){
+                        List<TiporutinaModel> tiporutinaslist = response.body();
+                        if(tiporutinaslist.size()>0){
+                            for (int i=0;i<tiporutinaslist.size();i++){
+                                tiporutinasapi.add(i+1+".- "+tiporutinaslist.get(i).Descripcion);
+                            }
+                            TipoRutinas(tiporutinasapi);
+                        }
+                        else{
+                            tiporutinasapi.add("No hay rutinas");
+                            TipoRutinas(tiporutinasapi);
+                        }
+                    }
+                }
+                catch (Exception ex){
+                    Log.w("",ex.getMessage());
+                    Toast.makeText(Registro.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TiporutinaModel>> call, Throwable t) {
+                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void TipoRutinas(ArrayList<String> Lista){
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
+        listtiporutinas.setAdapter(adapter);
+    }
+
+    public void TipoEntrenamientos(ArrayList<String> Lista){
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
+        listtipoentrenamiento.setAdapter(adapter);
+    }
+
+    //Calulcar el Imc
+    public String ValidarImc(Double imc1,int Edad,String sexo)
+    {
+        if(sexo.toUpperCase()=="Femenino")
+        {
+            if(Edad<=14){
+                if (imc1 <= 15.49) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 15.50 && imc1 <= 22.79) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 22.80 && imc1 <= 27.39) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==15){
+                if (imc1 <= 15.99) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.00 && imc1 <= 23.59) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 23.60 && imc1 <= 28.29) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==16){
+                if (imc1 <= 16.29) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.30 && imc1 <= 24.19) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 24.20 && imc1 <= 28.99) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==17){
+                if (imc1 <= 16.49) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.50 && imc1 <= 24.59) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 24.60 && imc1 <=29.39) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==18){
+                if (imc1 <= 16.49) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.50 && imc1 <= 24.89) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 24.90 && imc1 <=29.59) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==19){
+                if (imc1 <= 16.59) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.60 && imc1 <= 25.09) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 25.10 && imc1 <=29.79) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else{
+                if (imc1 <= 16.59) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.60 && imc1 <= 25.09) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 25.10 && imc1 <=29.79) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+        }
+        else{
+            if(Edad<=14){
+                if (imc1 <= 15.59) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 15.60 && imc1 <= 21.89) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 21.90 && imc1 <=25.99) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==15){
+                if (imc1 <= 16.09) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.10 && imc1 <=  22.79) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 22.80 && imc1 <=27.09) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==16){
+                if (imc1 <= 16.59) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 16.60 && imc1 <= 23.59) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 23.60 && imc1 <=27.99) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==17){
+                if (imc1 <= 16.99) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 17.00 && imc1 <= 24.39) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 24.40 && imc1 <=28.69) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==18){
+                if (imc1 <= 17.39) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 17.40 && imc1 <= 24.99) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 25.00 && imc1 <=29.29) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else if(Edad==19){
+                if (imc1 <= 17.69) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 17.70 && imc1 <= 25.49) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 25.50 && imc1 <=29.79) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+            else{
+                if (imc1 <= 17.69) {
+                    return  "Bajo peso";
+                }
+                else if (imc1 >= 17.70 && imc1 <= 25.49) {
+                    return  "Normal";
+                }
+                else if (imc1 >= 25.50 && imc1 <=29.79) {
+                    return  "Sobrepreso";
+                }
+                else{
+                    return  "Obesidad";
+                }
+            }
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){
@@ -380,4 +1064,124 @@ public class Registro extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    public Boolean ValidarCliente(){
+        boolean result= false;
+        String n=Nombre.getText().toString();
+        String  ap=Ap.getText().toString();
+        String  am=Am.getText().toString();
+        String  apo=Apodo.getText().toString();
+        String  tel=Telefono.getText().toString();
+        String  ed=Edad.getText().toString();
+        String  em=Email.getText().toString();
+        String  pass=Contraseña.getText().toString();
+        String sex=listsexo.getSelectedItem().toString();
+
+        if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
+            cliente.Nombres =n.toUpperCase();
+            cliente.Apellido_Paterno=ap.toUpperCase();
+            cliente.Apellido_Materno=am.toUpperCase();
+            cliente.Apodo=apo;
+            cliente.Telefono= Double.parseDouble(tel);
+            cliente.Edad=Integer.parseInt(ed);
+            cliente.Correo_electronico=em;
+            cliente.Contraseña=pass;
+            cliente.Sexo=sex;
+            //Registrar(cliente);
+            result = true;
+        }
+        else{
+
+            Toast.makeText(Registro.this, "Llene todos los campos requeridos", Toast.LENGTH_SHORT).show();
+        }
+        return result;
+    }
+
+    public void DatosCuestioario(){
+        int IdCliente = getIntent().getExtras().getInt("IdCliente");
+        String fuma = Veces_semana_fuma.getText().toString();
+        String alcohol = Veces_semana_alcohol.getText().toString();
+        if(fuma.isEmpty()){
+            fuma="0";
+        }
+        if(alcohol.isEmpty()){
+            alcohol="0";
+        }
+
+        cuestionario.Cliente=new ClientesModel();
+        cuestionario.Cliente.Id_Cliente=IdCliente;
+        cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
+        cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
+        cuestionario.lesiones = lesiones.isChecked();
+        cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
+        cuestionario.Fuma = Fuma.isChecked();
+        cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
+        cuestionario.Alcohol = Alcohol.isChecked();
+        cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
+        cuestionario.Actividad_fisica = Actividad_fisica.isChecked();
+        cuestionario.Tipo_ejercicios = Tipo_ejercicios.getText().toString();
+        cuestionario.Tiempo_dedicado = Tiempo_dedicado.getText().toString();
+        cuestionario.Horario_entreno = Horario_entreno.getText().toString();
+        cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
+        cuestionario.Compromisos = Compromisos.getText().toString();
+        cuestionario.Comentarios = Comentarios.getText().toString();
+
+    }
+
+    public void DatosMensualidad(){
+        int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
+        int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();
+        mensualidadModel.Cliente=new ClientesModel();
+        mensualidadModel.TipoEntrenamiento=new TipoentrenamientoModel();
+        mensualidadModel.Tiporutina=new TiporutinaModel();
+        mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento=IdTipoEntrenamiento+1;
+        mensualidadModel.Tiporutina.Id_tiporutina=IdTipoRutina+1;
+    }
+
+    public Boolean ValidarMedidas(){
+        boolean result= false;
+        int Idmensualidad = getIntent().getExtras().getInt("Idmensualidad");
+        String peso = Peso.getText().toString();
+        String altura = Altura.getText().toString();
+        String iMC=IMC.getText().toString();
+        String brazoderechorelajado		=Brazoderechorelajado.getText().toString();
+        String brazoderechofuerza		=Brazoderechofuerza.getText().toString();
+        String brazoizquierdorelajado	=Brazoizquierdorelajado.getText().toString();
+        String brazoizquierdofuerza		=Brazoizquierdofuerza.getText().toString();
+        String cintura					=Cintura.getText().toString();
+        String cadera					=Cadera.getText().toString();
+        String piernaizquierda			=Piernaizquierda.getText().toString();
+        String piernaderecho			=Piernaderecho.getText().toString();
+        String pantorrilladerecha		=Pantorrilladerecha.getText().toString();
+        String pantorrillaizquierda		=Pantorrillaizquierda.getText().toString();
+
+        if(!peso.isEmpty()&&!altura.isEmpty()&&!brazoderechorelajado.isEmpty()&&!brazoderechofuerza.isEmpty()&&
+                !brazoizquierdorelajado.isEmpty()&&!brazoizquierdofuerza.isEmpty()&&!cintura.isEmpty()&&!cadera.isEmpty()&&
+                !piernaderecho.isEmpty()&&!piernaizquierda.isEmpty()&&!pantorrilladerecha.isEmpty()&&!pantorrillaizquierda.isEmpty()){
+
+
+            antropometriaModel.Mensualidad=new MensualidadModel();
+            antropometriaModel.Mensualidad.Id_mensualidad=Idmensualidad;
+            antropometriaModel.Peso=Double.parseDouble(peso);
+            antropometriaModel.Altura=Integer.parseInt(altura);
+            antropometriaModel.IMC=Double.parseDouble(iMC);
+            antropometriaModel.Brazoderechorelajado=Double.parseDouble(brazoderechorelajado);
+            antropometriaModel.Brazoderechofuerza=Double.parseDouble(brazoderechofuerza);
+            antropometriaModel.Brazoizquierdorelajado=Double.parseDouble(brazoizquierdorelajado);
+            antropometriaModel.Brazoizquierdofuerza=Double.parseDouble(brazoizquierdofuerza);
+            antropometriaModel.Cintura=Double.parseDouble(cintura);
+            antropometriaModel.Cadera=Double.parseDouble(cadera);
+            antropometriaModel.Piernaizquierda=Double.parseDouble(piernaizquierda);
+            antropometriaModel.Piernaderecho=Double.parseDouble(piernaderecho);
+            antropometriaModel.Pantorrilladerecha=Double.parseDouble(pantorrilladerecha);
+            antropometriaModel.Pantorrillaizquierda=Double.parseDouble(pantorrillaizquierda);
+            result = true;
+            //RegistrarAntropometria(antropometriaModel);
+        }
+        else {
+            Toast.makeText(Registro.this,"Complete todos los datos antes de continuar",Toast.LENGTH_SHORT).show();
+        }
+        return  result;
+    }
+
 }

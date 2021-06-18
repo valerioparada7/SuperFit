@@ -52,7 +52,7 @@
                         android:layout_height="30sp"
                         android:layout_marginLeft="50sp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@color/white"
+                        android:background="@null"
                         android:text="Salir"
                         android:textColor="#007bff"
                         android:textSize="15sp" />
@@ -71,7 +71,7 @@
                         android:layout_width="150sp"
                         android:layout_height="30sp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_redondoborder"
+                        android:background="@drawable/button_redondo"
                         android:text="Editar perfil"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -201,7 +201,7 @@
                         android:layout_width="150sp"
                         android:layout_height="30sp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_redondoborder"
+                        android:background="@drawable/button_redondo"
                         android:text="Ver mi cuestionario"
                         android:textColor="@color/white"
                         android:textSize="12sp" />

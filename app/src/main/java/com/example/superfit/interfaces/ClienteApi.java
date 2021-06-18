@@ -5,6 +5,7 @@ import com.example.superfit.models.AntropometriaModel;
 import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.CuestionarioModel;
 import com.example.superfit.models.DetallerutinaModel;
+import com.example.superfit.models.Imagenes;
 import com.example.superfit.models.MensualidadModel;
 import com.example.superfit.models.RegistroCliente;
 
@@ -46,4 +47,8 @@ public interface ClienteApi {
     //Registro completo
     @POST("api/Login/RegistroCompleto")
     public Call<AlertasModel> RegistroCompleto(@Body RegistroCliente Registro);
+
+    //Registro completo
+    @POST("api/Login/UpdateImagenes")
+    public Call<AlertasModel> UpdateImagenes(@Body Imagenes imagenes);
 }

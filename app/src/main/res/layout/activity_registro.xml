@@ -17,7 +17,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--diseño de los datos personales-->
+            <!--Boton Salir-->
+        <LinearLayout
+            android:id="@+id/Layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/salirbtn"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="100sp"
+                android:layout_height="30sp"
+                android:background="@null"
+                android:text="Salir"
+                android:textColor="#FF0000"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+            <!--Datos personales-->
             <LinearLayout
                 android:id="@+id/DatosPersonalesLayout"
                 android:layout_width="match_parent"
@@ -31,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Datos personales"
-                    android:textColor="@color/black"
+                    android:textColor="#007bff"
                     android:textSize="25sp" />
 
                 <EditText
@@ -228,6 +246,45 @@
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:id="@+id/textfoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp"
+                        android:text="Seleccione foto de perifl"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textColorLink="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/FotoperfilBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_camera"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linerfotoperfilId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+                    <ImageView
+                        android:id="@+id/FotoperfilId"
+                        android:layout_width="200sp"
+                        android:layout_height="200sp">
+                    </ImageView>
+                </LinearLayout>
             </LinearLayout>
 
             <!--CUESTIONARIO-->
@@ -245,7 +302,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Cuestionario"
                     android:textColor="#007bff"
-                    android:textSize="20sp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/mensaje"
@@ -644,26 +701,546 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
+            </LinearLayout>
 
-                <Button
-                    android:id="@+id/GuardarCuestionarioBtn"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="150sp"
-                    android:layout_height="50sp"
-                    android:layout_marginTop="20sp"
-                    android:layout_marginBottom="5sp"
+            <!--MENSUALIDAD-->
+            <LinearLayout
+                android:id="@+id/MensualidadLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_redondoborder"
-                    android:text="Guardar"
+                    android:text="Personalizar Mensualidad"
+                    android:textColor="#007bff"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:text="Tipo de rutina: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
+                    android:textSize="20sp"/>
+
+                <Spinner
+                    android:id="@+id/TiporutinaList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="20sp"
+                    android:backgroundTint="@color/black"
+                    android:ems="10"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/texviewlabel"
+                    android:text="Tipo entrenamiento :"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
+                    android:textSize="20sp"/>
+
+                <Spinner
+                    android:id="@+id/Tipoentrenamientolist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:backgroundTint="@color/black"
+                    android:ems="10"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textColorLink="@color/black"
+                    android:textSize="30sp"/>
+            </LinearLayout>
+
+            <!--Medidas-->
+            <LinearLayout
+                android:id="@+id/MedidasLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0sp"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Medidas Antropometria"
+                    android:textColor="#007bff"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:text="Con la ayuda de una sinta métrica mediras lo siguiente"
                     android:textColor="@color/white"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
                     android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PesoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Peso (Kg)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/AlturaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Altura (Cm)"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelimc"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:hint="IMC"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/imcTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="IMC"
+                    android:textColor="@color/black"
+                    android:textSize="1sp"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/BrazoderechorelajadoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo derecho relajado (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoderechofuerzaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo derecho haciendo fuerza (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoizquierdorelajadoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo izquierdo relajado (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoizquierdofuerzaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo izquierdo  haciendo fuerza (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/CinturaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Cintura (cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/CaderaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Cadera (cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PiernaizquierdaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pierna izquierda (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PiernaderechoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pierna derecha (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PantorrilladerechaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pantorrilla derecha (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PantorrillaizquierdaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pantorrilla izquierda (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/black"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                //Foto frontal
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:id="@+id/textfotofrontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp"
+                        android:text="Seleccione foto frontal"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textColorLink="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/FotofrontalBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_camera"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linerfotofrontalId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+                    <ImageView
+                        android:id="@+id/FotofrontalId"
+                        android:layout_width="200sp"
+                        android:layout_height="200sp">
+                    </ImageView>
+                </LinearLayout>
+
+                //Foto perfil
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:id="@+id/textfotoperfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp"
+                        android:text="Seleccione foto perfil"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textColorLink="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/FotoperfilmedidaBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_camera"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linerfotoperfilmedidaId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+                    <ImageView
+                        android:id="@+id/FotoperfilmedidaId"
+                        android:layout_width="200sp"
+                        android:layout_height="200sp">
+                    </ImageView>
+                </LinearLayout>
+
+                //Foto posterior
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:id="@+id/textfotoposterior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50sp"
+                        android:text="Seleccione foto posterior"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textColorLink="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/FotoposteriorBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30sp"
+                        android:layout_marginLeft="20sp"
+                        android:background="@null"
+                        android:drawableLeft="@drawable/ic_camera"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linerfotoposteriorId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0sp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20sp">
+                    <ImageView
+                        android:id="@+id/FotoposteriorId"
+                        android:layout_width="200sp"
+                        android:layout_height="200sp">
+                    </ImageView>
+                </LinearLayout>
             </LinearLayout>
 
             //Botones de Navegacion
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="10sp"
                 android:orientation="horizontal">
 
                 <Button
