@@ -57,7 +57,7 @@
                 android:hint="Correo electrónico o número celular"
                 android:inputType="textPersonName"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
+                android:textColorHighlight="#2271b3"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
                 android:textSize="15sp" />
@@ -76,7 +76,7 @@
                 android:hint="Contraseña"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/black"
+                android:textColorHighlight="#2271b3"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
                 android:textSize="15sp" />

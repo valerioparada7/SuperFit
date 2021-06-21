@@ -17,7 +17,6 @@ public class Inicio extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-
         Intent intent = new Intent(Inicio.this,MainActivity.class);
         startActivity(intent);
     }

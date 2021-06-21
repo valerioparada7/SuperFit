@@ -6,13 +6,11 @@ import java.time.LocalDateTime;
 import java.util.Date;
 public class CuestionarioModel {
     public int Id_cuestionario;
-    @Expose(deserialize = false, serialize = false)
     public  ClientesModel  Cliente;
-
     public String Clave_cuestionario;
     public  Boolean  Padece_enfermedad;
     public String Medicamento_prescrito_medico;
-    public  Boolean  lesiones;
+    public  Boolean  Lesiones;
     public  String Alguna_recomendacion_lesiones;
     public  Boolean  Fuma;
     public  int  Veces_semana_fuma;
@@ -25,7 +23,7 @@ public class CuestionarioModel {
     public String MetasObjetivos;
     public String Compromisos;
     public String Comentarios;
-    public Date Fecha_registro;
+    public String Fecha_registro;
 
     public int getId_cuestionario() {
         return Id_cuestionario;
@@ -68,11 +66,11 @@ public class CuestionarioModel {
     }
 
     public Boolean getLesiones() {
-        return lesiones;
+        return Lesiones;
     }
 
     public void setLesiones(Boolean lesiones) {
-        this.lesiones = lesiones;
+        Lesiones = lesiones;
     }
 
     public String getAlguna_recomendacion_lesiones() {
@@ -171,11 +169,11 @@ public class CuestionarioModel {
         Comentarios = comentarios;
     }
 
-    public Date getFecha_registro() {
+    public String getFecha_registro() {
         return Fecha_registro;
     }
 
-    public void setFecha_registro(Date fecha_registro) {
+    public void setFecha_registro(String fecha_registro) {
         Fecha_registro = fecha_registro;
     }
 }

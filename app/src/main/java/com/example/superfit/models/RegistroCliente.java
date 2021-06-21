@@ -5,6 +5,7 @@ public class RegistroCliente {
     public MensualidadModel Mensualidad;
     public CuestionarioModel Cuestionario;
     public AntropometriaModel Medidas;
+    public Imagenes Imagenes;
 
     public ClientesModel getCliente() {
         return Cliente;
@@ -36,5 +37,13 @@ public class RegistroCliente {
 
     public void setMedidas(AntropometriaModel medidas) {
         Medidas = medidas;
+    }
+
+    public com.example.superfit.models.Imagenes getImagenes() {
+        return Imagenes;
+    }
+
+    public void setImagenes(com.example.superfit.models.Imagenes imagenes) {
+        Imagenes = imagenes;
     }
 }

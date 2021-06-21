@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegistroMedidas">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--Medidas-->
+            <LinearLayout
+                android:id="@+id/MedidasLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Medidas Antropometria"
+                    android:textColor="#007bff"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:text="Con la ayuda de una sinta métrica mediras lo siguiente"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PesoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Peso (Kg)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/AlturaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Altura (Cm)"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/labelimc"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:hint="IMC"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/imcTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="IMC"
+                    android:textColor="@color/black"
+                    android:textSize="1sp"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/BrazoderechorelajadoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo derecho relajado (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoderechofuerzaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo derecho haciendo fuerza (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoizquierdorelajadoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo izquierdo relajado (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/BrazoizquierdofuerzaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Brazo izquierdo  haciendo fuerza (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/CinturaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Cintura (cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/CaderaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Cadera (cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PiernaizquierdaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pierna izquierda (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PiernaderechoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pierna derecha (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PantorrilladerechaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pantorrilla derecha (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/PantorrillaizquierdaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="45sp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_login"
+                    android:drawablePadding="12dp"
+                    android:ems="10"
+                    android:hint="Pantorrilla izquierda (Cm)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="5sp"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
+                    android:textColorHint="@android:color/darker_gray"
+                    android:textColorLink="@color/black"
+                    android:textSize="15sp" />
+
+                <!--Botons de sleccion de fotos-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotofrontalBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto frontal"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotoperfilmedidaBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto perfil"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotoposteriorBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto posterior"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--Donde se cargaran las fotos-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/linerfotofrontalId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/FotofrontalId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linerfotoperfilmedidaId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/FotoperfilmedidaId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linerfotoposteriorId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/FotoposteriorId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/RegistrarMedidasbtn"
+                    android:layout_width="200sp"
+                    android:layout_height="50sp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/button_redondoborder"
+                    android:text="Guardar"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

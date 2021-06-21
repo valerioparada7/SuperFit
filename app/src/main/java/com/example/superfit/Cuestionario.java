@@ -3,6 +3,7 @@ package com.example.superfit;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.CuestionarioModel;
+import com.example.superfit.models.MensualidadModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +34,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Cuestionario extends AppCompatActivity {
+    // Job http://192.168.56.1:8081/
+    // Home http://192.168.100.11:8081/
+    // Pagina http://superfit.somee.com/
+    // Pagina nueva http://valerioparada7-001-site1.etempurl.com/
+    //Pagina Actual nueva https://www.bsite.net/valerioparada/
+    String PaginaWeb ="https://www.bsite.net/valerioparada/";
+
     CheckBox Padece_enfermedad,lesiones,Fuma,Alcohol,Actividad_fisica;
     EditText Medicamento_prescrito_medico,Alguna_recomendacion_lesiones,Veces_semana_fuma,
             Veces_semana_alcohol,Tipo_ejercicios,Tiempo_dedicado,Horario_entreno,MetasObjetivos,
@@ -39,11 +48,17 @@ public class Cuestionario extends AppCompatActivity {
     TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
     LinearLayout liner;
     Button Aceptar;
+    public int Idcuestionario=0;
+    CuestionarioModel cuestionario = new CuestionarioModel();
+    final Cargando cargando = new Cargando(Cuestionario.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuestionario);
-
+        //Obtnemos los datos
+        cargando.cargardialogo();
+        GetCuestionario();
+        cargando.ocultar();
         liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
         //Checkboxs
         Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
@@ -68,50 +83,19 @@ public class Cuestionario extends AppCompatActivity {
         TipoejercicioL =(TextView)findViewById(R.id.TipoejercicioLabel);
         TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
         HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
-
-        //Obtnemos los datos
-        GetCuestionario();
-
-
         //Butons
-        //Aceptar =(Button)findViewById(R.id.RegistrarCuestionarioBtn);
-/*
+        Aceptar =(Button)findViewById(R.id.GuardarCuestionarioBtn);
+
         Aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = new Intent(Cuestionario.this,Mensualidad.class);
-               startActivity(intent);
+                DatosCuestioario();
+                if(cuestionario!=null){
+                    RegistroCuestionario();
+                }
 
-                int IdCliente = getIntent().getExtras().getInt("IdCliente");
-                String fuma = Veces_semana_fuma.getText().toString();
-                String alcohol = Veces_semana_alcohol.getText().toString();
-                if(fuma.isEmpty()){
-                    fuma="0";
-                }
-                if(alcohol.isEmpty()){
-                    alcohol="0";
-                }
-                CuestionarioModel cuestionario = new CuestionarioModel();
-                cuestionario.Cliente=new ClientesModel();
-                cuestionario.Cliente.Id_Cliente=IdCliente;
-                cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
-                cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
-                cuestionario.lesiones = lesiones.isChecked();
-                cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
-                cuestionario.Fuma = Fuma.isChecked();
-                cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
-                cuestionario.Alcohol = Alcohol.isChecked();
-                cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
-                cuestionario.Actividad_fisica = Actividad_fisica.isChecked();
-                cuestionario.Tipo_ejercicios = Tipo_ejercicios.getText().toString();
-                cuestionario.Tiempo_dedicado = Tiempo_dedicado.getText().toString();
-                cuestionario.Horario_entreno = Horario_entreno.getText().toString();
-                cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
-                cuestionario.Compromisos = Compromisos.getText().toString();
-                cuestionario.Comentarios = Comentarios.getText().toString();
-                RegistroCuestionario(cuestionario);
             }
-        });*/
+        });
 
         Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,53 +160,80 @@ public class Cuestionario extends AppCompatActivity {
 
     public void GetCuestionario(){
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-        //Cuestionario
-        Boolean Padece_enfermedadU = preferences.getBoolean("Padece_enfermedad",false);
-        String Medicamento_prescrito_medicoU = preferences.getString("Medicamento_prescrito_medico","" );
-        Boolean lesionesU =preferences.getBoolean("lesiones",false);
-        String Alguna_recomendacion_lesionesU = preferences.getString ("Alguna_recomendacion_lesiones","");
-        Boolean FumaU =preferences.getBoolean("Fuma",false );
-        int  Veces_semana_fumaU =preferences.getInt("Veces_semana_fuma",0 );
-        Boolean AlcoholU = preferences.getBoolean("Alcohol",false );
-        int Veces_semana_alcoholU = preferences.getInt("Veces_semana_alcohol",0 );
-        Boolean Actividad_fisicaU = preferences.getBoolean("Actividad_fisica",false);
+        int Idcliente =preferences.getInt("Idcliente",0);
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<CuestionarioModel> call = clienteApi.GetCuestionario(Idcliente);
+        call.enqueue(new Callback<CuestionarioModel>() {
+            @Override
+            public void onResponse(Call<CuestionarioModel> call, Response<CuestionarioModel> response) {
+                try {
+                    if(response.isSuccessful()){
+                        CuestionarioModel C = response.body();
+                        MostrarCuestionario(C);
+                    }
+                    else{
+                        Toast.makeText(Cuestionario.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                    }
 
-        String Tipo_ejerciciosU=preferences.getString("Tipo_ejercicios","" );
-        String Tiempo_dedicadoU=preferences.getString("Tiempo_dedicado","" );
-        String Horario_entrenoU=preferences.getString("Horario_entreno","" );
-        String MetasObjetivosU=preferences.getString("MetasObjetivos", "");
-        String CompromisosU=preferences.getString("Compromisos","" );
-        String ComentariosU=preferences.getString("Comentarios","" );
+                }
+                catch (Exception ex){
+                    Toast.makeText(Cuestionario.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        //Mostrar datos
-        Padece_enfermedad.setChecked(Padece_enfermedadU);
-        lesiones.setChecked(lesionesU);
-        Fuma.setChecked(FumaU);
-        Alcohol.setChecked(AlcoholU);
-        Actividad_fisica.setChecked(Actividad_fisicaU);
-        //Validamos los datos de actividad fisica
-        Actividad();
-        //editetexp
-        Medicamento_prescrito_medico.setText(Medicamento_prescrito_medicoU);
-        Alguna_recomendacion_lesiones.setText(Alguna_recomendacion_lesionesU);
-        Veces_semana_fuma.setText(String.valueOf(Veces_semana_fumaU));
-        Veces_semana_alcohol.setText(String.valueOf(Veces_semana_alcoholU));
-        Tipo_ejercicios.setText(Tipo_ejerciciosU);
-        Tiempo_dedicado.setText(Tiempo_dedicadoU);
-        Horario_entreno.setText(Horario_entrenoU);
-        MetasObjetivos.setText(MetasObjetivosU);
-        Compromisos.setText(CompromisosU);
-        Comentarios.setText(ComentariosU);
+            @Override
+            public void onFailure(Call<CuestionarioModel> call, Throwable t) {
+            Toast.makeText(Cuestionario.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    public void RegistroCuestionario(CuestionarioModel newcuestionario){
+    public void MostrarCuestionario(CuestionarioModel cuestionario){
+        //Mostrar datos
+        Idcuestionario = cuestionario.Id_cuestionario;
+        Padece_enfermedad.setChecked(cuestionario.Padece_enfermedad);
+        if(Padece_enfermedad.isChecked()==true){
+            Medicamento_prescrito_medico.setVisibility(View.VISIBLE);
+        }
+        lesiones.setChecked(cuestionario.Lesiones);
+        if(lesiones.isChecked()==true){
+            Alguna_recomendacion_lesiones.setVisibility(View.VISIBLE);
+        }
+        Fuma.setChecked(cuestionario.Fuma);
+        if(Fuma.isChecked()==true){
+            Veces_semana_fuma.setVisibility(View.VISIBLE);
+        }
+        Alcohol.setChecked(cuestionario.Alcohol);
+        if(Alcohol.isChecked()==true){
+            Veces_semana_alcohol.setVisibility(View.VISIBLE);
+        }
+        Actividad_fisica.setChecked(cuestionario.Actividad_fisica);
+        //Validamos los datos de actividad fisica
+        Actividad();
+
+        //editetexp
+        Medicamento_prescrito_medico.setText(cuestionario.Medicamento_prescrito_medico);
+        Alguna_recomendacion_lesiones.setText(cuestionario.Alguna_recomendacion_lesiones);
+        Veces_semana_fuma.setText(String.valueOf(cuestionario.Veces_semana_fuma));
+        Veces_semana_alcohol.setText(String.valueOf(cuestionario.Veces_semana_alcohol));
+        Tipo_ejercicios.setText(cuestionario.Tipo_ejercicios);
+        Tiempo_dedicado.setText(cuestionario.Tiempo_dedicado);
+        Horario_entreno.setText(cuestionario.Horario_entreno);
+        MetasObjetivos.setText(cuestionario.MetasObjetivos);
+        Compromisos.setText(cuestionario.Compromisos);
+        Comentarios.setText(cuestionario.Comentarios);
+    }
+
+    public void RegistroCuestionario(){
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
         // web superfit.somee.com
-        Retrofit retrofit=new Retrofit.Builder().baseUrl("http://192.168.56.1:8081/")
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<AlertasModel> call = clienteApi.RegistroCuestionario(newcuestionario);
+        Call<AlertasModel> call = clienteApi.UpdateCuestionario(cuestionario);
         call.enqueue(new Callback<AlertasModel>() {
             @Override
             public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
@@ -231,6 +242,7 @@ public class Cuestionario extends AppCompatActivity {
                         AlertasModel result = response.body();
                         if(result.Result==true){
                             Toast.makeText(Cuestionario.this,"Se actualizaron tus datos con exito",Toast.LENGTH_SHORT).show();
+                            GetCuestionario();
                         }
                         else {
                             Toast.makeText(Cuestionario.this,result.Mensaje,Toast.LENGTH_SHORT).show();
@@ -252,6 +264,37 @@ public class Cuestionario extends AppCompatActivity {
         });
     }
 
+    public void DatosCuestioario(){
+        String fuma = Veces_semana_fuma.getText().toString();
+        String alcohol = Veces_semana_alcohol.getText().toString();
+        if(fuma.isEmpty()){
+            fuma="0";
+        }
+        if(alcohol.isEmpty()){
+            alcohol="0";
+        }
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        int Idcliente =preferences.getInt("Idcliente",0);
+        cuestionario.Cliente=new ClientesModel();
+        cuestionario.Cliente.Id_cliente=Idcliente;
+        cuestionario.Id_cuestionario =Idcuestionario;
+        cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
+        cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
+        cuestionario.Lesiones = lesiones.isChecked();
+        cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
+        cuestionario.Fuma = Fuma.isChecked();
+        cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
+        cuestionario.Alcohol = Alcohol.isChecked();
+        cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
+        cuestionario.Actividad_fisica = Actividad_fisica.isChecked();
+        cuestionario.Tipo_ejercicios = Tipo_ejercicios.getText().toString();
+        cuestionario.Tiempo_dedicado = Tiempo_dedicado.getText().toString();
+        cuestionario.Horario_entreno = Horario_entreno.getText().toString();
+        cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
+        cuestionario.Compromisos = Compromisos.getText().toString();
+        cuestionario.Comentarios = Comentarios.getText().toString();
+    }
+
     public void Actividad(){
         if(Actividad_fisica.isChecked()==true){
             liner.setVisibility(View.VISIBLE);
@@ -267,6 +310,7 @@ public class Cuestionario extends AppCompatActivity {
             Horario_entreno.setText("");
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){

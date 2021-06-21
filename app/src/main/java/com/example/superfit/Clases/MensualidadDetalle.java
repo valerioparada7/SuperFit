@@ -1,6 +1,9 @@
 package com.example.superfit.Clases;
 
-public class MensualidadDetalle {
+import java.io.Serializable;
+
+public class MensualidadDetalle implements Serializable {
+    public int Idmensualidad;
     public String Tipo;
     public String DescripcionTiporutina;
     public String Tipo_entrenamiento;
@@ -9,9 +12,9 @@ public class MensualidadDetalle {
     public String Fecha_inicio;
     public String Fecha_fin;
 
-    public MensualidadDetalle(String tipo,String descripcionTiporutina,String tipo_entrenamiento,
+    public MensualidadDetalle(int idmensualidad,String tipo,String descripcionTiporutina,String tipo_entrenamiento,
                               String mes,String descripcionEstatus,String fecha_inicio,String fecha_fin){
-
+        this.Idmensualidad = idmensualidad;
         this.Tipo=tipo;
         this.DescripcionTiporutina	=descripcionTiporutina;
         this.Tipo_entrenamiento	=tipo_entrenamiento;
@@ -20,6 +23,14 @@ public class MensualidadDetalle {
         this.Fecha_inicio=fecha_inicio;
         this.Fecha_fin=fecha_fin;
 
+    }
+
+    public int getIdmensualidad() {
+        return Idmensualidad;
+    }
+
+    public void setIdmensualidad(int idmensualidad) {
+        Idmensualidad = idmensualidad;
     }
 
     public String getTipo() {

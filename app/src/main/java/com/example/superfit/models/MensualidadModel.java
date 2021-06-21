@@ -13,6 +13,11 @@ public class MensualidadModel {
     public TipoentrenamientoModel TipoEntrenamiento;
     public String Fecha_inicio;
     public String  Fecha_fin;
+    public String Fechafin ;
+    public String Fechainicio;
+    public String SinfechaAsignadaI ;
+    public String SinfechaAsignadaF;
+
 
     public int getId_mensualidad() {
         return Id_mensualidad;
@@ -78,4 +83,35 @@ public class MensualidadModel {
         Fecha_fin = fecha_fin;
     }
 
+    public String getFechafin() {
+        return Fechafin;
+    }
+
+    public void setFechafin(String fechafin) {
+        Fechafin = fechafin;
+    }
+
+    public String getFechainicio() {
+        return Fechainicio;
+    }
+
+    public void setFechainicio(String fechainicio) {
+        Fechainicio = fechainicio;
+    }
+
+    public String getSinfechaAsignadaI() {
+        return SinfechaAsignadaI;
+    }
+
+    public void setSinfechaAsignadaI(String sinfechaAsignadaI) {
+        SinfechaAsignadaI = sinfechaAsignadaI;
+    }
+
+    public String getSinfechaAsignadaF() {
+        return SinfechaAsignadaF;
+    }
+
+    public void setSinfechaAsignadaF(String sinfechaAsignadaF) {
+        SinfechaAsignadaF = sinfechaAsignadaF;
+    }
 }

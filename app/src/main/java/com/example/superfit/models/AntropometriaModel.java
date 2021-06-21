@@ -19,7 +19,13 @@ public class AntropometriaModel {
     public double Piernaderecho ;
     public double Pantorrilladerecha ;
     public double Pantorrillaizquierda ;
-    public Date Fecha_registro ;
+    public String Fotofrontal;
+    public String Fotoperfil;
+    public String Fotoposterior;
+    public String Foto_frontal64 ;
+    public String Foto_perfil64;
+    public String Foto_posterior64;
+    public String Fecharegistro;
 
     public int getId() {
         return Id;
@@ -141,11 +147,59 @@ public class AntropometriaModel {
         Pantorrillaizquierda = pantorrillaizquierda;
     }
 
-    public Date getFecha_registro() {
-        return Fecha_registro;
+    public String getFotofrontal() {
+        return Fotofrontal;
     }
 
-    public void setFecha_registro(Date fecha_registro) {
-        Fecha_registro = fecha_registro;
+    public void setFotofrontal(String fotofrontal) {
+        Fotofrontal = fotofrontal;
+    }
+
+    public String getFotoperfil() {
+        return Fotoperfil;
+    }
+
+    public void setFotoperfil(String fotoperfil) {
+        Fotoperfil = fotoperfil;
+    }
+
+    public String getFotoposterior() {
+        return Fotoposterior;
+    }
+
+    public void setFotoposterior(String fotoposterior) {
+        Fotoposterior = fotoposterior;
+    }
+
+    public String getFecharegistro() {
+        return Fecharegistro;
+    }
+
+    public void setFecharegistro(String fecharegistro) {
+        Fecharegistro = fecharegistro;
+    }
+
+    public String getFoto_frontal64() {
+        return Foto_frontal64;
+    }
+
+    public void setFoto_frontal64(String foto_frontal64) {
+        Foto_frontal64 = foto_frontal64;
+    }
+
+    public String getFoto_perfil64() {
+        return Foto_perfil64;
+    }
+
+    public void setFoto_perfil64(String foto_perfil64) {
+        Foto_perfil64 = foto_perfil64;
+    }
+
+    public String getFoto_posterior64() {
+        return Foto_posterior64;
+    }
+
+    public void setFoto_posterior64(String foto_posterior64) {
+        Foto_posterior64 = foto_posterior64;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.superfit;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +8,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,6 +30,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.superfit.interfaces.ClienteApi;
+import com.example.superfit.models.Imagenes;
+import com.example.superfit.models.MensualidadModel;
+
+import java.io.ByteArrayOutputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Perfil extends AppCompatActivity {
     // Job http://192.168.56.1:8081/
@@ -32,34 +49,61 @@ public class Perfil extends AppCompatActivity {
     // Pagina nueva http://valerioparada7-001-site1.etempurl.com/
     //Pagina Actual nueva https://www.bsite.net/valerioparada/
     String PaginaWeb ="https://www.bsite.net/valerioparada/";
-    TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft,cuestionariotxt;
-    Button salirtbtn1,cuestionariobtn;
-    ListView menulist;
+    TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft,mes;
+    Button salirtbtn1,cuestionariobtn,misrutinasbtn,mismensaulidadesbtn,rutinasrapidasbtn,alimentacionbtn,editarperfilbtn;
     ImageView FotoPerfil;
+    Imagenes imagenes = new Imagenes();
+    final Cargando cargando = new Cargando(Perfil.this);
 
-    //Cuestionario
-    /*CheckBox Padece_enfermedad,lesiones,Fuma,Alcohol,Actividad_fisica;
-    EditText Medicamento_prescrito_medico,Alguna_recomendacion_lesiones,Veces_semana_fuma,
-            Veces_semana_alcohol,Tipo_ejercicios,Tiempo_dedicado,Horario_entreno,MetasObjetivos,
-            Compromisos,Comentarios;
-    TextView TipoejercicioL,TiempodedicadoL,HorarioentrenoL;
-    LinearLayout liner;*/
+    //Datos para actualizar la foto de perfil
+    //foto de perfil usuario
+    private ImageView ImagenPerfilmodallocal;
+    Button fotoperfilususario;
+    private Button actualizarfotobtn,cancelbtn;
+    public int img_requestperfil = 21;
+    public Bitmap bitmapfotousuarioperfil;
+    public AlertDialog.Builder dialogbuilder;
+    public AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+
         Nombresclientet=(TextView)findViewById(R.id.Nombrecliente);
-        FotoPerfil =(ImageView)findViewById(R.id.ImagenPerfil);
+        FotoPerfil = (ImageView)findViewById(R.id.ImagenPerfil);
         tiporutinat=(TextView)findViewById(R.id.tiporutina);
         Tipo_entrenamientot=(TextView)findViewById(R.id.tipoentrenamiento);
         fechait=(TextView)findViewById(R.id.fechai);
         fechaft=(TextView)findViewById(R.id.fechaf);
+        mes=(TextView)findViewById(R.id.NombreMeslb);
         estatusDescripciont=(TextView)findViewById(R.id.estatusmesi);
         salirtbtn1=(Button)findViewById(R.id.salirbtn);
         cuestionariobtn=(Button)findViewById(R.id.VerCuestionarioBtn);
+        misrutinasbtn=(Button)findViewById(R.id.MisrutinasBtn);
+        mismensaulidadesbtn=(Button)findViewById(R.id.MensualidadesBtn);
+        rutinasrapidasbtn=(Button)findViewById(R.id.RutinasrapidasBtn);
+        alimentacionbtn=(Button)findViewById(R.id.DietasBtn);
+        editarperfilbtn=(Button)findViewById(R.id.EditarPerfilBtn);
         GetCliente();
 
+        //imagen de usuario
+        fotoperfilususario=(Button)findViewById(R.id.ActualizarfotoBtn);
+
+        //perfil de la cuenta del usuario
+        fotoperfilususario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrearModal();
+            }
+        });
+        editarperfilbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Perfil.this,EditarPerfil.class);
+                startActivity(intent);
+            }
+        });
         salirtbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,9 +114,7 @@ public class Perfil extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor=preferences.edit();
-
-                                editor.putString("UsuarioCliente","");
-                                editor.putString("ContraseñaCliente","");
+                                editor.putInt("Idcliente",0);
                                 editor.commit();
                                 Intent intent = new Intent(Perfil.this,MainActivity.class);
                                 startActivity(intent);
@@ -95,125 +137,193 @@ public class Perfil extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-/*
-        liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
-        //Checkboxs
-        Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
-        lesiones =(CheckBox)findViewById(R.id.lesionesChk);
-        Fuma =(CheckBox)findViewById(R.id.FumaChk);
-        Alcohol =(CheckBox)findViewById(R.id.AlcoholChk);
-        Actividad_fisica =(CheckBox)findViewById(R.id.Actividad_fisicaChk);
 
-        //editetexp
-        Medicamento_prescrito_medico =(EditText) findViewById(R.id.Medicamento_prescrito_medicoTxt);
-        Alguna_recomendacion_lesiones =(EditText) findViewById(R.id.Alguna_recomendacion_lesionesTxt);
-        Veces_semana_fuma =(EditText) findViewById(R.id.Veces_semana_fumaTxt);
-        Veces_semana_alcohol =(EditText) findViewById(R.id.Veces_semana_alcoholTxt);
-        Tipo_ejercicios =(EditText) findViewById(R.id.Tipo_ejerciciosTxt);
-        Tiempo_dedicado =(EditText) findViewById(R.id.Tiempo_dedicadoTxt);
-        Horario_entreno =(EditText) findViewById(R.id.Horario_entrenoTxt);
-        MetasObjetivos =(EditText) findViewById(R.id.MetasObjetivosTxt);
-        Compromisos =(EditText) findViewById(R.id.CompromisosTxt);
-        Comentarios =(EditText) findViewById(R.id.ComentariosTxt);
-
-        //TextView
-        TipoejercicioL =(TextView)findViewById(R.id.TipoejercicioLabel);
-        TiempodedicadoL =(TextView)findViewById(R.id.labelTiempo_dedicado);
-        HorarioentrenoL =(TextView)findViewById(R.id.labelHorario_entreno);
-
-        Padece_enfermedad.setOnClickListener(new View.OnClickListener() {
+        misrutinasbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Padece_enfermedad.isChecked()==true){
-                    Medicamento_prescrito_medico.setVisibility(View.VISIBLE);
-                }
-                else{
-                    Medicamento_prescrito_medico.setVisibility(View.INVISIBLE);
-                    Medicamento_prescrito_medico.setText("");
-                }
+                Intent intent = new Intent(Perfil.this,Rutinas.class);
+                startActivity(intent);
             }
         });
 
-        lesiones.setOnClickListener(new View.OnClickListener() {
+        mismensaulidadesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(lesiones.isChecked()==true){
-                    Alguna_recomendacion_lesiones.setVisibility(View.VISIBLE);
-                }
-                else{
-                    Alguna_recomendacion_lesiones.setVisibility(View.INVISIBLE);
-                    Alguna_recomendacion_lesiones.setText("");
-                }
+                Intent intent = new Intent(Perfil.this,Mensualidad_menu.class);
+                startActivity(intent);
             }
         });
 
-        Fuma.setOnClickListener(new View.OnClickListener() {
+        rutinasrapidasbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Fuma.isChecked()==true){
-                    Veces_semana_fuma.setVisibility(View.VISIBLE);
-                }
-                else{
-                    Veces_semana_fuma.setVisibility(View.INVISIBLE);
-                    Veces_semana_fuma.setText("");
-                }
+                Intent intent = new Intent(Perfil.this,Cuestionario.class);
+                startActivity(intent);
             }
         });
 
-        Alcohol.setOnClickListener(new View.OnClickListener() {
+        alimentacionbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Alcohol.isChecked()==true){
-                    Veces_semana_alcohol.setVisibility(View.VISIBLE);
-                }
-                else{
-                    Veces_semana_alcohol.setVisibility(View.INVISIBLE);
-                    Veces_semana_alcohol.setText("");
-                }
+                Intent intent = new Intent(Perfil.this,Cuestionario.class);
+                startActivity(intent);
             }
         });
-
-        Actividad_fisica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Actividad_fisica.isChecked()==true){
-                    liner.setVisibility(View.VISIBLE);
-                    liner.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    liner.requestLayout();
-                }
-                else{
-                    liner.setVisibility(View.INVISIBLE);
-                    liner.getLayoutParams().height =0;
-                    liner.requestLayout();
-                    Tipo_ejercicios.setText("");
-                    Tiempo_dedicado.setText("");
-                    Horario_entreno.setText("");
-                }
-            }
-        });*/
     }
+
+
 
     public void GetCliente(){
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-        String mensualidad=preferences.getString("mensualidad","No asignado");
-        String cliente=preferences.getString("Nombrescliente","");
-        String fotoperfil=preferences.getString("FotoCliente","");
-        String tiporutina=preferences.getString("tiporutina","No asignado");
-        String estatus=preferences.getString("estatusDescripcion","No asignado");
-        String tipoentreno=preferences.getString("Tipo_entrenamiento","No asignado");
-        String fechai=preferences.getString("fechai","No hay fecha asiganda");
-        String fechaf=preferences.getString("fechaf","No hay fecha asiganda");
+        int Idcliente =preferences.getInt("Idcliente",0);
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<MensualidadModel> call = clienteApi.GetMensualidad(Idcliente);
+        call.enqueue(new Callback<MensualidadModel>() {
+            @Override
+            public void onResponse(Call<MensualidadModel> call, Response<MensualidadModel> response) {
+                try {
+                    if(response.isSuccessful()){
+                        MensualidadModel M = response.body();
+                        MostrarDatos(M);
+                    }
+                    else{
+                        Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                    }
 
-        Nombresclientet.setText(cliente.toUpperCase());
-        tiporutinat.setText(tiporutina);
-        Tipo_entrenamientot.setText(tipoentreno);
-        fechait.setText(fechai);
-        fechaft.setText(fechaf);
-        estatusDescripciont.setText(estatus);
-        String Url_Imagen=PaginaWeb+fotoperfil;
-        Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
+                }
+                catch (Exception ex){
+                    Toast.makeText(Perfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MensualidadModel> call, Throwable t) {
+                Toast.makeText(Perfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    public void MostrarDatos(MensualidadModel  mensualidad){
+        Nombresclientet.setText(mensualidad.Cliente.Nombres);
+        tiporutinat.setText(mensualidad.Tiporutina.Tipo);
+        Tipo_entrenamientot.setText(mensualidad.TipoEntrenamiento.Tipo_entrenamiento);
+        fechait.setText(mensualidad.Fechainicio);
+        fechaft.setText(mensualidad.Fechafin);
+        estatusDescripciont.setText(mensualidad.Estatus.Descripcion);
+        mes.setText(mensualidad.Mes.Mes);
+        String Url_Imagen=PaginaWeb+mensualidad.Cliente.Foto_perfil;
+        Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
+        if(mensualidad.Id_mensualidad!=0){
+            SharedPreferences preferences = getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("IdMensualidad",mensualidad.Id_mensualidad);
+            editor.putInt("IdEstatus",mensualidad.Estatus.Id_estatus);
+            editor.commit();
+        }
+    }
+    //Actualizar Imagen
+    public void UpdateImagen(){
+        ByteArrayOutputStream byteperfilcuenta = new ByteArrayOutputStream();
+        bitmapfotousuarioperfil.compress(Bitmap.CompressFormat.JPEG,75,byteperfilcuenta);
+        byte[] byte64cuenta = byteperfilcuenta.toByteArray();
+        String base64cuenta = Base64.encodeToString(byte64cuenta,Base64.DEFAULT);
+        imagenes.ImagenPerfilCuenta = base64cuenta;
+        imagenes.ImagenPerfil="";
+        imagenes.ImagenFrontal="";
+        imagenes.ImagenPosterior="";
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        int Idcliente =preferences.getInt("Idcliente",0);
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<Boolean> call = clienteApi.UpdateClienteFoto(imagenes,Idcliente);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                try {
+                    if(response.isSuccessful()){
+                        Boolean c = response.body();
+                        if(c==true){
+                            Toast.makeText(Perfil.this,"Foto actualizada",Toast.LENGTH_SHORT).show();
+                            cargando.ocultar();
+                            dialog.dismiss();
+
+                            GetCliente();
+                        }
+                        else{
+                            Toast.makeText(Perfil.this,"Ocurrio un error al actualizar la foto intente mas tarde",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                catch (Exception ex){
+                    Toast.makeText(Perfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(Perfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    //Cargar imagenes
+    public void CrearModal(){
+        dialogbuilder = new AlertDialog.Builder(this);
+        final View conetent = getLayoutInflater().inflate(R.layout.modalfoto,null);
+        ImagenPerfilmodallocal = (ImageView) conetent.findViewById(R.id.ImagenPerfilmodal);
+        actualizarfotobtn =(Button)conetent.findViewById(R.id.AceptarUpdatebtn);
+        cancelbtn=(Button)conetent.findViewById(R.id.Cancelarbtn);
+        dialogbuilder.setView(conetent);
+        dialog = dialogbuilder.create();
+        dialog.show();
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,img_requestperfil);
+
+        actualizarfotobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargando.cargardialogo();
+                UpdateImagen();
+
+            }
+        });
+
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              dialog.dismiss();
+            }
+        });
+
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==img_requestperfil&&resultCode==RESULT_OK && data !=null){
+            Uri pathperfilcuenta = data.getData();
+            try {
+                bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfilcuenta);
+                ImagenPerfilmodallocal.setImageBitmap(bitmapfotousuarioperfil);
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        else{
+            dialog.dismiss();
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){

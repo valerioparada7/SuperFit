@@ -11,13 +11,13 @@ import retrofit2.http.Query;
 
 public interface DetallerutinaApi {
     //Regresar nuemero de sets por dia
-    @GET("api/Clientes")
+    @GET("api/Clientes/GetDetalleRutinaSets")
     public Call<List<DetallerutinaModel>> GetDetalleRutinaSets(@Query("IdMensualidad") int IdMensualidad,
                                                                @Query("IdEstatusMes") int IdEstatusMes,
                                                                @Query("IdDIa") int IdDIa);
 
     //Regresar nuemero de ejercicios por sets correspondientes al dia
-    @GET("api/Clientes")
+    @GET("api/Clientes/GetDetalleRutinaEjercicios")
     public Call<List<DetallerutinaModel>> GetDetalleRutinaEjercicios(@Query("IdMensualidad") int IdMensualidad,
                                                                      @Query("IdEstatusMes") int IdEstatusMes,
                                                                      @Query("IdDIa") int IdDIa,

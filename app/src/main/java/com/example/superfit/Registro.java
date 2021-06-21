@@ -60,6 +60,7 @@ public class Registro extends AppCompatActivity {
     ClientesModel cliente = new ClientesModel();
     CuestionarioModel cuestionario = new CuestionarioModel();
     MensualidadModel mensualidadModel= new MensualidadModel();
+    Imagenes imagenes = new Imagenes();
 
     //Boton salir
     Button BtnSalir;
@@ -75,7 +76,7 @@ public class Registro extends AppCompatActivity {
     //Datos personales
     EditText Nombre,Ap,Am,Apodo,Edad,Telefono,Email,Contraseña;
     Spinner listsexo;
-    String[] Sexo=  {"Masculino","Femenino"};
+    String[] Sexo =  {"Masculino","Femenino"};
     //foto de perfil usuario
     ImageView imagenperfilusuario;
     Button fotoperfilususario;
@@ -121,7 +122,7 @@ public class Registro extends AppCompatActivity {
     private Bitmap bitmapfotoposterior;
     LinearLayout linerfotoposterior;
 
-
+    final Cargando cargando = new Cargando(Registro.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -219,8 +220,6 @@ public class Registro extends AppCompatActivity {
         fotoposterior=(Button)findViewById(R.id.FotoposteriorBtn);
         linerfotoposterior=(LinearLayout)findViewById(R.id.linerfotoposteriorId);
 
-
-
         //Botones de navegacion
         BtnAtras.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -268,7 +267,7 @@ public class Registro extends AppCompatActivity {
                 if (siguiente < 4) {
                     siguiente++;
                     if (siguiente == 2) {
-                        boolean result = true;//ValidarCliente();
+                        boolean result = ValidarCliente();
                         if (result == true) {
                             BtnAtras.setVisibility(View.VISIBLE);
                             linercuestionario.setVisibility(View.VISIBLE);
@@ -283,6 +282,7 @@ public class Registro extends AppCompatActivity {
                         }
                     }
                     else if (siguiente == 3) {
+                        DatosCuestioario();
                         linermensualidad.setVisibility(View.VISIBLE);
                         linermensualidad.getLayoutParams().height =ViewGroup.LayoutParams.WRAP_CONTENT;
                         linermensualidad.requestLayout();
@@ -292,6 +292,7 @@ public class Registro extends AppCompatActivity {
 
                     }
                     else {
+                        DatosMensualidad();
                         BtnAdelante.setVisibility(View.INVISIBLE);
                         BtnGuardar.setVisibility(View.VISIBLE);
                         linermedidas.setVisibility(View.VISIBLE);
@@ -302,6 +303,35 @@ public class Registro extends AppCompatActivity {
                         linermensualidad.requestLayout();
                     }
                     pagactual = siguiente;
+                }
+            }
+        });
+
+        //boton de registro
+        BtnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean validacliente =ValidarCliente();
+                if(validacliente==true){
+                    boolean validamedidas = ValidarMedidas();
+                    if(validamedidas==true){
+                        cargando.cargardialogo();
+                        RegistroCliente registro = new RegistroCliente();
+                        registro.Cliente = new ClientesModel();
+                        registro.Cuestionario = new CuestionarioModel();
+                        registro.Mensualidad = new MensualidadModel();
+                        registro.Medidas = new AntropometriaModel();
+                        //Asignamos las imagenes
+                        UpdateImagen();
+                        //Asignamos valores
+                        registro.Cliente = cliente;
+                        registro.Medidas = antropometriaModel;
+                        registro.Cuestionario = cuestionario;
+                        registro.Mensualidad = mensualidadModel;
+                        registro.Imagenes = imagenes;
+                        Registrar(registro);
+                        cargando.ocultar();
+                    }
                 }
             }
         });
@@ -516,31 +546,106 @@ public class Registro extends AppCompatActivity {
                 frontal=0;
             }
         });
+    }
 
-        //boton de registro
-        BtnGuardar.setOnClickListener(new View.OnClickListener() {
+    //Registro
+    public void Registrar(RegistroCliente registro){
+        // Job http://192.168.56.1:8081/
+        // Home http://192.168.100.11:8081/
+        // web superfit.somee.com
+        //Primero registramos los datos
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<AlertasModel> call = clienteApi.RegistroCompleto(registro);
+        call.enqueue(new Callback<AlertasModel>() {
             @Override
-            public void onClick(View v) {
-                UpdateImagen();
-                /*
-                if(ValidarCliente()==true && ValidarMedidas()==true){
-                    RegistroCliente registro = new RegistroCliente();
-                    registro.Cliente = new ClientesModel();
-                    registro.Cuestionario = new CuestionarioModel();
-                    registro.Mensualidad = new MensualidadModel();
-                    registro.Medidas = new AntropometriaModel();
+            public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
+                try {
+                    if(response.isSuccessful()){
+                        AlertasModel result = response.body();
+                        if(result.Result==true){
+                            AlertDialog.Builder builder= new AlertDialog.Builder(Registro.this);
+                            builder.setMessage("Registro exito, ingresa con tu correo o numero celular")
+                                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Registro.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .setNegativeButton("", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(Registro.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            builder.show();
+                        }
+                        else {
+                            Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception ex){
+                    Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
 
-                    //Asignamos valores
-                    registro.Cliente = cliente;
-                    registro.Medidas = antropometriaModel;
-                    registro.Cuestionario = cuestionario;
-                    registro.Mensualidad =mensualidadModel;
-                    Registrar(registro);
-                }*/
-
+            @Override
+            public void onFailure(Call<AlertasModel> call, Throwable t) {
+                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
     }
+    //subir imagenes en el registro
+    public void UpdateImagen(){
+        try
+        {
+            imagenes.ImagenPerfilCuenta ="";
+            imagenes.ImagenPerfil ="";
+            imagenes.ImagenFrontal ="";
+            imagenes.ImagenPosterior ="";
+            if(bitmapfotousuarioperfil!=null){
+                ByteArrayOutputStream byteperfilcuenta = new ByteArrayOutputStream();
+                bitmapfotousuarioperfil.compress(Bitmap.CompressFormat.JPEG,75,byteperfilcuenta);
+                byte[] byte64cuenta =byteperfilcuenta.toByteArray();
+                String base64cuenta = Base64.encodeToString(byte64cuenta,Base64.DEFAULT);
+                imagenes.ImagenPerfilCuenta =base64cuenta;
+            }
+            if(bitmapfotousuarioperfilmedida!=null){
+                ByteArrayOutputStream byteperfil = new ByteArrayOutputStream();
+                bitmapfotousuarioperfilmedida.compress(Bitmap.CompressFormat.JPEG,75,byteperfil);
+                byte[] byte64perfil =byteperfil.toByteArray();
+                String base64perfil = Base64.encodeToString(byte64perfil,Base64.DEFAULT);
+                imagenes.ImagenPerfil =base64perfil;
+            }
+            if(bitmapfotofrontal!=null){
+                ByteArrayOutputStream bytefrontal = new ByteArrayOutputStream();
+                bitmapfotofrontal.compress(Bitmap.CompressFormat.JPEG,75,bytefrontal);
+                byte[] byte64frontal =bytefrontal.toByteArray();
+                String base64frontal = Base64.encodeToString(byte64frontal,Base64.DEFAULT);
+                imagenes.ImagenFrontal =base64frontal;
+            }
+            if(bitmapfotoposterior!=null){
+                ByteArrayOutputStream byteposterior = new ByteArrayOutputStream();
+                bitmapfotoposterior.compress(Bitmap.CompressFormat.JPEG,75,byteposterior);
+                byte[] byte64posterior = byteposterior.toByteArray();
+                String base64posterior= Base64.encodeToString(byte64posterior,Base64.DEFAULT);
+                imagenes.ImagenPosterior =base64posterior;
+            }
+        }
+        catch (Exception ex){
+            Toast.makeText(Registro.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+            Log.w("Error VALERIO:",ex.getMessage());
+        }
+    }
+
+    //para mostrar un diseño de si practica algun deporte en la seccion de cuestionario
     public void Actividad(){
         if(Actividad_fisica.isChecked()==true){
             liner.setVisibility(View.VISIBLE);
@@ -557,25 +662,23 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-
     //Cargar imagenes
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==img_requestperfil&&resultCode==RESULT_OK && data !=null){
-            Uri pathperfiluser = data.getData();
+        if((requestCode==img_requestperfil||requestCode==img_requestperfilmedida||requestCode==img_requestfrontal ||requestCode==img_requestposterior)
+                &&resultCode==RESULT_OK && data !=null){
+            Uri pathperfilcuenta = data.getData();
             Uri pathperfil = data.getData();
             Uri pathfrontal = data.getData();
             Uri pathposterior = data.getData();
             try {
-                if(cuentaperfil==1){
-                    bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfiluser);
+                 if(cuentaperfil==1){
+                    bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfilcuenta);
                     imagenperfilusuario.setImageBitmap(bitmapfotousuarioperfil);
                     linerfotousuario.setVisibility(View.VISIBLE);
-                    linerfotousuario.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                    linerfotousuario.requestLayout();
+                     linerfotousuario.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                     linerfotousuario.requestLayout();
                 }
                 else if(perfil==1){
                     bitmapfotousuarioperfilmedida = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfil);
@@ -609,151 +712,9 @@ public class Registro extends AppCompatActivity {
         }
     }
 
-    public void Registrar(RegistroCliente registro){
-        // Job http://192.168.56.1:8081/
-        // Home http://192.168.100.11:8081/
-        // web superfit.somee.com
-        //Primero registramos los datos
-        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<AlertasModel> call = clienteApi.RegistroCompleto(registro);
-        call.enqueue(new Callback<AlertasModel>() {
-            @Override
-            public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
-                try {
-                    if(response.isSuccessful()){
-                        AlertasModel result = response.body();
-                        if(result.Result==true){
-                            Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                            /*AlertDialog.Builder builder= new AlertDialog.Builder(Registro.this);
-                            builder.setMessage("Registro exito,espera tu respuesta a tu correo o celular que proporcionaste")
-                                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(Registro.this,MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    })
-                                    .setNegativeButton("", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(Registro.this,MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-                            builder.show();*/
-                            //Intent intent = new Intent(Registro.this,MainActivity.class);
-                            //startActivity(intent);
-                        }
-                        else {
-                            Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-                catch (Exception ex){
-                    Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<AlertasModel> call, Throwable t) {
-                Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
-            }
-
-
-
-        });
-    }
-
-    public void UpdateImagen(){
-        try
-        {
-            //pasamos las imagenes a base64 string
-
-            Imagenes imagenes = new Imagenes();
-            imagenes.ImagenPerfilCuenta ="";
-            imagenes.ImagenPerfil ="";
-            imagenes.ImagenFrontal ="";
-            imagenes.ImagenPosterior ="";
-            if(bitmapfotousuarioperfil!=null){
-                ByteArrayOutputStream byteperfilcuenta = new ByteArrayOutputStream();
-                bitmapfotousuarioperfil.compress(Bitmap.CompressFormat.JPEG,75,byteperfilcuenta);
-                byte[] byte64cuenta =byteperfilcuenta.toByteArray();
-                String base64cuenta = Base64.encodeToString(byte64cuenta,Base64.DEFAULT);
-                imagenes.ImagenPerfilCuenta =base64cuenta;
-                Toast.makeText(Registro.this,"cuenta",Toast.LENGTH_SHORT).show();
-            }
-            if(bitmapfotousuarioperfilmedida!=null){
-                ByteArrayOutputStream byteperfil = new ByteArrayOutputStream();
-                bitmapfotousuarioperfilmedida.compress(Bitmap.CompressFormat.JPEG,75,byteperfil);
-                byte[] byte64perfil =byteperfil.toByteArray();
-                String base64perfil = Base64.encodeToString(byte64perfil,Base64.DEFAULT);
-                imagenes.ImagenPerfil =base64perfil;
-                Toast.makeText(Registro.this,"perfil",Toast.LENGTH_SHORT).show();
-            }
-            if(bitmapfotofrontal!=null){
-                ByteArrayOutputStream bytefrontal = new ByteArrayOutputStream();
-                bitmapfotofrontal.compress(Bitmap.CompressFormat.JPEG,75,bytefrontal);
-                byte[] byte64frontal =bytefrontal.toByteArray();
-                String base64frontal = Base64.encodeToString(byte64frontal,Base64.DEFAULT);
-                imagenes.ImagenFrontal =base64frontal;
-                Toast.makeText(Registro.this,"frontal",Toast.LENGTH_SHORT).show();
-            }
-            if(bitmapfotoposterior!=null){
-                ByteArrayOutputStream byteposterior = new ByteArrayOutputStream();
-                bitmapfotoposterior.compress(Bitmap.CompressFormat.JPEG,75,byteposterior);
-                byte[] byte64posterior = byteposterior.toByteArray();
-                String base64posterior= Base64.encodeToString(byte64posterior,Base64.DEFAULT);
-                imagenes.ImagenPosterior =base64posterior;
-                Toast.makeText(Registro.this,"posterior",Toast.LENGTH_SHORT).show();
-            }
-            //despues registramos las imagenes
-
-            // Local http://localhost:49953/
-            Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
-                    .addConverterFactory(GsonConverterFactory.create()).build();
-            ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-            Call<AlertasModel> call = clienteApi.UpdateImagenes(imagenes);
-            call.enqueue(new Callback<AlertasModel>() {
-                @Override
-                public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
-                    try {
-                        if(response.isSuccessful()){
-                            AlertasModel result = response.body();
-                            if(result.Result==true){
-                                Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Registro.this,MainActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else{
-                            Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    catch (Exception ex){
-                        Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<AlertasModel> call, Throwable t) {
-
-                }
-            });
-        }
-        catch (Exception ex){
-            Toast.makeText(Registro.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
-            Log.w("Error VALERIO:",ex.getMessage());
-        }
-    }
-
+    //Consultas
+    //Llenar los dropdown list o cobos
     public void GetTipoEntrenamiento() {
 
         Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
@@ -835,6 +796,144 @@ public class Registro extends AppCompatActivity {
     public void TipoEntrenamientos(ArrayList<String> Lista){
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.spinner_edittext_sexo,Lista);
         listtipoentrenamiento.setAdapter(adapter);
+    }
+    //
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==event.KEYCODE_BACK){
+            AlertDialog.Builder builder= new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea salir? se perdera el progreso")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Registro.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public Boolean ValidarCliente(){
+        boolean result= false;
+        String n=Nombre.getText().toString();
+        String  ap=Ap.getText().toString();
+        String  am=Am.getText().toString();
+        String  apo=Apodo.getText().toString();
+        String  tel=Telefono.getText().toString();
+        String  ed=Edad.getText().toString();
+        String  em=Email.getText().toString();
+        String  pass=Contraseña.getText().toString();
+        String sex=listsexo.getSelectedItem().toString();
+
+        if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
+            cliente.Nombres =n.toUpperCase();
+            cliente.Apellido_paterno=ap.toUpperCase();
+            cliente.Apellido_materno=am.toUpperCase();
+            cliente.Apodo=apo;
+            cliente.Telefono= Double.parseDouble(tel);
+            cliente.Edad=Integer.parseInt(ed);
+            cliente.Correo_electronico=em;
+            cliente.Contraseña=pass;
+            cliente.Sexo=sex;
+            //Registrar(cliente);
+            result = true;
+        }
+        else{
+            Toast.makeText(Registro.this, "Complete todos los datos", Toast.LENGTH_SHORT).show();
+        }
+        return result;
+    }
+
+    public void DatosCuestioario(){
+        String fuma = Veces_semana_fuma.getText().toString();
+        String alcohol = Veces_semana_alcohol.getText().toString();
+        if(fuma.isEmpty()){
+            fuma="0";
+        }
+        if(alcohol.isEmpty()){
+            alcohol="0";
+        }
+        cuestionario.Cliente=new ClientesModel();
+        cuestionario.Cliente.Id_cliente=0;
+        cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
+        cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
+        cuestionario.Lesiones = lesiones.isChecked();
+        cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
+        cuestionario.Fuma = Fuma.isChecked();
+        cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
+        cuestionario.Alcohol = Alcohol.isChecked();
+        cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
+        cuestionario.Actividad_fisica = Actividad_fisica.isChecked();
+        cuestionario.Tipo_ejercicios = Tipo_ejercicios.getText().toString();
+        cuestionario.Tiempo_dedicado = Tiempo_dedicado.getText().toString();
+        cuestionario.Horario_entreno = Horario_entreno.getText().toString();
+        cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
+        cuestionario.Compromisos = Compromisos.getText().toString();
+        cuestionario.Comentarios = Comentarios.getText().toString();
+    }
+
+    public void DatosMensualidad(){
+        int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
+        int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();
+        mensualidadModel.Cliente=new ClientesModel();
+        mensualidadModel.TipoEntrenamiento=new TipoentrenamientoModel();
+        mensualidadModel.Tiporutina=new TiporutinaModel();
+        mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento=IdTipoEntrenamiento+1;
+        mensualidadModel.Tiporutina.Id_tiporutina=IdTipoRutina+1;
+    }
+
+    public Boolean ValidarMedidas(){
+        boolean result= false;
+        String peso = Peso.getText().toString();
+        String altura = Altura.getText().toString();
+        String iMC=IMC.getText().toString();
+        String brazoderechorelajado		=Brazoderechorelajado.getText().toString();
+        String brazoderechofuerza		=Brazoderechofuerza.getText().toString();
+        String brazoizquierdorelajado	=Brazoizquierdorelajado.getText().toString();
+        String brazoizquierdofuerza		=Brazoizquierdofuerza.getText().toString();
+        String cintura					=Cintura.getText().toString();
+        String cadera					=Cadera.getText().toString();
+        String piernaizquierda			=Piernaizquierda.getText().toString();
+        String piernaderecho			=Piernaderecho.getText().toString();
+        String pantorrilladerecha		=Pantorrilladerecha.getText().toString();
+        String pantorrillaizquierda		=Pantorrillaizquierda.getText().toString();
+
+        if(!peso.isEmpty()&&!altura.isEmpty()&&!brazoderechorelajado.isEmpty()&&!brazoderechofuerza.isEmpty()&&
+                !brazoizquierdorelajado.isEmpty()&&!brazoizquierdofuerza.isEmpty()&&!cintura.isEmpty()&&!cadera.isEmpty()&&
+                !piernaderecho.isEmpty()&&!piernaizquierda.isEmpty()&&!pantorrilladerecha.isEmpty()&&!pantorrillaizquierda.isEmpty()){
+
+
+            antropometriaModel.Mensualidad=new MensualidadModel();
+            antropometriaModel.Mensualidad.Id_mensualidad=0;
+            antropometriaModel.Peso=Double.parseDouble(peso);
+            antropometriaModel.Altura=Integer.parseInt(altura);
+            antropometriaModel.IMC=Double.parseDouble(iMC);
+            antropometriaModel.Brazoderechorelajado=Double.parseDouble(brazoderechorelajado);
+            antropometriaModel.Brazoderechofuerza=Double.parseDouble(brazoderechofuerza);
+            antropometriaModel.Brazoizquierdorelajado=Double.parseDouble(brazoizquierdorelajado);
+            antropometriaModel.Brazoizquierdofuerza=Double.parseDouble(brazoizquierdofuerza);
+            antropometriaModel.Cintura=Double.parseDouble(cintura);
+            antropometriaModel.Cadera=Double.parseDouble(cadera);
+            antropometriaModel.Piernaizquierda=Double.parseDouble(piernaizquierda);
+            antropometriaModel.Piernaderecho=Double.parseDouble(piernaderecho);
+            antropometriaModel.Pantorrilladerecha=Double.parseDouble(pantorrilladerecha);
+            antropometriaModel.Pantorrillaizquierda=Double.parseDouble(pantorrillaizquierda);
+            result = true;
+            //RegistrarAntropometria(antropometriaModel);
+        }
+        else {
+            Toast.makeText(Registro.this,"Complete todos los datos",Toast.LENGTH_SHORT).show();
+        }
+        return  result;
     }
 
     //Calulcar el Imc
@@ -1041,147 +1140,6 @@ public class Registro extends AppCompatActivity {
                 }
             }
         }
-    }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode==event.KEYCODE_BACK){
-            AlertDialog.Builder builder= new AlertDialog.Builder(this);
-            builder.setMessage("¿Desea salir? se perdera el progreso")
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(Registro.this,MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            builder.show();
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    public Boolean ValidarCliente(){
-        boolean result= false;
-        String n=Nombre.getText().toString();
-        String  ap=Ap.getText().toString();
-        String  am=Am.getText().toString();
-        String  apo=Apodo.getText().toString();
-        String  tel=Telefono.getText().toString();
-        String  ed=Edad.getText().toString();
-        String  em=Email.getText().toString();
-        String  pass=Contraseña.getText().toString();
-        String sex=listsexo.getSelectedItem().toString();
-
-        if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
-            cliente.Nombres =n.toUpperCase();
-            cliente.Apellido_Paterno=ap.toUpperCase();
-            cliente.Apellido_Materno=am.toUpperCase();
-            cliente.Apodo=apo;
-            cliente.Telefono= Double.parseDouble(tel);
-            cliente.Edad=Integer.parseInt(ed);
-            cliente.Correo_electronico=em;
-            cliente.Contraseña=pass;
-            cliente.Sexo=sex;
-            //Registrar(cliente);
-            result = true;
-        }
-        else{
-
-            Toast.makeText(Registro.this, "Llene todos los campos requeridos", Toast.LENGTH_SHORT).show();
-        }
-        return result;
-    }
-
-    public void DatosCuestioario(){
-        int IdCliente = getIntent().getExtras().getInt("IdCliente");
-        String fuma = Veces_semana_fuma.getText().toString();
-        String alcohol = Veces_semana_alcohol.getText().toString();
-        if(fuma.isEmpty()){
-            fuma="0";
-        }
-        if(alcohol.isEmpty()){
-            alcohol="0";
-        }
-
-        cuestionario.Cliente=new ClientesModel();
-        cuestionario.Cliente.Id_Cliente=IdCliente;
-        cuestionario.Padece_enfermedad = Padece_enfermedad.isChecked();
-        cuestionario.Medicamento_prescrito_medico = Medicamento_prescrito_medico.getText().toString();
-        cuestionario.lesiones = lesiones.isChecked();
-        cuestionario.Alguna_recomendacion_lesiones = Alguna_recomendacion_lesiones.getText().toString();
-        cuestionario.Fuma = Fuma.isChecked();
-        cuestionario.Veces_semana_fuma = Integer.parseInt(fuma);
-        cuestionario.Alcohol = Alcohol.isChecked();
-        cuestionario.Veces_semana_alcohol =  Integer.parseInt(alcohol);
-        cuestionario.Actividad_fisica = Actividad_fisica.isChecked();
-        cuestionario.Tipo_ejercicios = Tipo_ejercicios.getText().toString();
-        cuestionario.Tiempo_dedicado = Tiempo_dedicado.getText().toString();
-        cuestionario.Horario_entreno = Horario_entreno.getText().toString();
-        cuestionario.MetasObjetivos = MetasObjetivos.getText().toString();
-        cuestionario.Compromisos = Compromisos.getText().toString();
-        cuestionario.Comentarios = Comentarios.getText().toString();
-
-    }
-
-    public void DatosMensualidad(){
-        int IdTipoRutina =listtiporutinas.getSelectedItemPosition();
-        int IdTipoEntrenamiento =listtipoentrenamiento.getSelectedItemPosition();
-        mensualidadModel.Cliente=new ClientesModel();
-        mensualidadModel.TipoEntrenamiento=new TipoentrenamientoModel();
-        mensualidadModel.Tiporutina=new TiporutinaModel();
-        mensualidadModel.TipoEntrenamiento.Id_TipoEntrenamiento=IdTipoEntrenamiento+1;
-        mensualidadModel.Tiporutina.Id_tiporutina=IdTipoRutina+1;
-    }
-
-    public Boolean ValidarMedidas(){
-        boolean result= false;
-        int Idmensualidad = getIntent().getExtras().getInt("Idmensualidad");
-        String peso = Peso.getText().toString();
-        String altura = Altura.getText().toString();
-        String iMC=IMC.getText().toString();
-        String brazoderechorelajado		=Brazoderechorelajado.getText().toString();
-        String brazoderechofuerza		=Brazoderechofuerza.getText().toString();
-        String brazoizquierdorelajado	=Brazoizquierdorelajado.getText().toString();
-        String brazoizquierdofuerza		=Brazoizquierdofuerza.getText().toString();
-        String cintura					=Cintura.getText().toString();
-        String cadera					=Cadera.getText().toString();
-        String piernaizquierda			=Piernaizquierda.getText().toString();
-        String piernaderecho			=Piernaderecho.getText().toString();
-        String pantorrilladerecha		=Pantorrilladerecha.getText().toString();
-        String pantorrillaizquierda		=Pantorrillaizquierda.getText().toString();
-
-        if(!peso.isEmpty()&&!altura.isEmpty()&&!brazoderechorelajado.isEmpty()&&!brazoderechofuerza.isEmpty()&&
-                !brazoizquierdorelajado.isEmpty()&&!brazoizquierdofuerza.isEmpty()&&!cintura.isEmpty()&&!cadera.isEmpty()&&
-                !piernaderecho.isEmpty()&&!piernaizquierda.isEmpty()&&!pantorrilladerecha.isEmpty()&&!pantorrillaizquierda.isEmpty()){
-
-
-            antropometriaModel.Mensualidad=new MensualidadModel();
-            antropometriaModel.Mensualidad.Id_mensualidad=Idmensualidad;
-            antropometriaModel.Peso=Double.parseDouble(peso);
-            antropometriaModel.Altura=Integer.parseInt(altura);
-            antropometriaModel.IMC=Double.parseDouble(iMC);
-            antropometriaModel.Brazoderechorelajado=Double.parseDouble(brazoderechorelajado);
-            antropometriaModel.Brazoderechofuerza=Double.parseDouble(brazoderechofuerza);
-            antropometriaModel.Brazoizquierdorelajado=Double.parseDouble(brazoizquierdorelajado);
-            antropometriaModel.Brazoizquierdofuerza=Double.parseDouble(brazoizquierdofuerza);
-            antropometriaModel.Cintura=Double.parseDouble(cintura);
-            antropometriaModel.Cadera=Double.parseDouble(cadera);
-            antropometriaModel.Piernaizquierda=Double.parseDouble(piernaizquierda);
-            antropometriaModel.Piernaderecho=Double.parseDouble(piernaderecho);
-            antropometriaModel.Pantorrilladerecha=Double.parseDouble(pantorrilladerecha);
-            antropometriaModel.Pantorrillaizquierda=Double.parseDouble(pantorrillaizquierda);
-            result = true;
-            //RegistrarAntropometria(antropometriaModel);
-        }
-        else {
-            Toast.makeText(Registro.this,"Complete todos los datos antes de continuar",Toast.LENGTH_SHORT).show();
-        }
-        return  result;
     }
 
 }

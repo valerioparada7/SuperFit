@@ -18,23 +18,23 @@
             android:orientation="vertical">
 
             <!--Boton Salir-->
-        <LinearLayout
-            android:id="@+id/Layout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/Layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/salirbtn"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="100sp"
-                android:layout_height="30sp"
-                android:background="@null"
-                android:text="Salir"
-                android:textColor="#FF0000"
-                android:textSize="15sp" />
+                <Button
+                    android:id="@+id/salirbtn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="100sp"
+                    android:layout_height="30sp"
+                    android:background="@null"
+                    android:text="Salir"
+                    android:textColor="#FF0000"
+                    android:textSize="15sp" />
 
-        </LinearLayout>
+            </LinearLayout>
             <!--Datos personales-->
             <LinearLayout
                 android:id="@+id/DatosPersonalesLayout"
@@ -66,7 +66,7 @@
                     android:hint="Nombre(s)"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -86,7 +86,7 @@
                     android:hint="Primer apellido"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -105,7 +105,7 @@
                     android:hint="Segundo Apellido"
                     android:inputType="textPersonName"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -125,7 +125,7 @@
                     android:inputType="textPersonName"
                     android:maxLength="30"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -145,7 +145,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -165,7 +165,7 @@
                     android:inputType="phone"
                     android:maxLength="10"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -186,7 +186,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLength="50"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -207,7 +207,7 @@
                         android:ems="10"
                         android:text="Sexo:"
                         android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@color/black"
                         android:textColorLink="@color/black"
                         android:textSize="15sp" />
@@ -220,7 +220,7 @@
                         android:backgroundTint="@color/black"
                         android:ems="10"
                         android:textColor="@color/white"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@color/black"
                         android:textColorLink="@color/black"
                         android:textSize="30sp" />
@@ -241,7 +241,7 @@
                     android:inputType="textPassword"
                     android:maxLength="30"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -258,7 +258,7 @@
                         android:layout_height="50sp"
                         android:text="Seleccione foto de perifl"
                         android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@color/black"
                         android:textColorLink="@color/black"
                         android:textSize="15sp" />
@@ -351,7 +351,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:visibility="invisible"
@@ -394,7 +394,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp"
@@ -438,7 +438,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:visibility="invisible"
@@ -482,7 +482,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp"
@@ -541,7 +541,7 @@
                         android:paddingLeft="20sp"
                         android:paddingRight="5sp"
                         android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@android:color/darker_gray"
                         android:textColorLink="@color/black"
                         android:textSize="15sp" />
@@ -573,7 +573,7 @@
                         android:paddingTop="10dp"
                         android:paddingRight="5sp"
                         android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@android:color/darker_gray"
                         android:textColorLink="@color/black"
                         android:textSize="15sp" />
@@ -604,7 +604,7 @@
                         android:paddingLeft="20sp"
                         android:paddingRight="5sp"
                         android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
+                        android:textColorHighlight="#2271b3"
                         android:textColorHint="@android:color/darker_gray"
                         android:textColorLink="@color/black"
                         android:textSize="15sp" />
@@ -637,7 +637,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -668,7 +668,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -697,7 +697,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -728,7 +728,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
                     android:textSize="20sp"/>
@@ -743,7 +743,7 @@
                     android:backgroundTint="@color/black"
                     android:ems="10"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/black"
                     android:textColorLink="@color/black"
                     android:textSize="30sp" />
@@ -757,7 +757,7 @@
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
                     android:textSize="20sp"/>
@@ -772,7 +772,7 @@
                     android:backgroundTint="@color/black"
                     android:ems="10"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/black"
                     android:textColorLink="@color/black"
                     android:textSize="30sp"/>
@@ -804,8 +804,8 @@
                     android:layout_marginTop="20sp"
                     android:layout_marginRight="10dp"
                     android:text="Con la ayuda de una sinta métrica mediras lo siguiente"
-                    android:textColor="@color/white"
-                    android:textColorHighlight="@color/black"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -828,7 +828,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -851,7 +851,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -867,7 +867,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@color/white"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -900,7 +900,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -923,7 +923,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -946,7 +946,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -969,7 +969,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -992,7 +992,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -1015,7 +1015,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -1038,7 +1038,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -1061,7 +1061,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -1084,7 +1084,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
@@ -1107,132 +1107,137 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="5sp"
                     android:textColor="@color/black"
-                    android:textColorHighlight="@color/black"
+                    android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp" />
 
-                //Foto frontal
+                <!--Botons de sleccion de fotos-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textfotofrontal"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:text="Seleccione foto frontal"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textColorLink="@color/black"
-                        android:textSize="15sp" />
-
-                    <Button
-                        android:id="@+id/FotofrontalBtn"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotofrontalBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto frontal"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
-                        android:layout_marginLeft="20sp"
-                        android:background="@null"
-                        android:drawableLeft="@drawable/ic_camera"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linerfotofrontalId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0sp"
-                    android:visibility="invisible"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
-                    <ImageView
-                        android:id="@+id/FotofrontalId"
-                        android:layout_width="200sp"
-                        android:layout_height="200sp">
-                    </ImageView>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotoperfilmedidaBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto perfil"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/FotoposteriorBtn"
+                            style="@style/Widget.AppCompat.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"
+                            android:background="@null"
+                            android:drawableBottom="@drawable/ic_camera"
+                            android:text="Foto posterior"
+                            android:textColor="#007bff"/>
+                    </LinearLayout>
                 </LinearLayout>
 
-                //Foto perfil
+                <!--Donde se cargaran las fotos-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
-
-                    <TextView
-                        android:id="@+id/textfotoperfil"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/linerfotofrontalId"
                         android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:text="Seleccione foto perfil"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textColorLink="@color/black"
-                        android:textSize="15sp" />
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/FotofrontalId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/FotoperfilmedidaBtn"
+                    <LinearLayout
+                        android:id="@+id/linerfotoperfilmedidaId"
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
-                        android:layout_marginLeft="20sp"
-                        android:background="@null"
-                        android:drawableLeft="@drawable/ic_camera"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linerfotoperfilmedidaId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0sp"
-                    android:visibility="invisible"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
-                    <ImageView
-                        android:id="@+id/FotoperfilmedidaId"
-                        android:layout_width="200sp"
-                        android:layout_height="200sp">
-                    </ImageView>
-                </LinearLayout>
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
 
-                //Foto posterior
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
+                        <ImageView
+                            android:id="@+id/FotoperfilmedidaId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textfotoposterior"
+                    <LinearLayout
+                        android:id="@+id/linerfotoposteriorId"
                         android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:text="Seleccione foto posterior"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textColorLink="@color/black"
-                        android:textSize="15sp" />
+                        android:layout_height="1sp"
+                        android:visibility="invisible"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/FotoposteriorBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30sp"
-                        android:layout_marginLeft="20sp"
-                        android:background="@null"
-                        android:drawableLeft="@drawable/ic_camera"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linerfotoposteriorId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0sp"
-                    android:visibility="invisible"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20sp">
-                    <ImageView
-                        android:id="@+id/FotoposteriorId"
-                        android:layout_width="200sp"
-                        android:layout_height="200sp">
-                    </ImageView>
+                        <ImageView
+                            android:id="@+id/FotoposteriorId"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginLeft="5sp"/>
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
 

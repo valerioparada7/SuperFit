@@ -42,17 +42,17 @@ public class AdaptadorMensualidadDetalle extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MensualidadDetalle item=(MensualidadDetalle)getItem(position);
-
+        convertView = LayoutInflater.from(context).inflate(R.layout.activity_mensualidad_detalle,null);
+        TextView Idmendualidad =(TextView)convertView.findViewById(R.id.Idmensualidadlabelm);
         TextView tipolabelm =(TextView)convertView.findViewById(R.id.Tipolabelm);
-        TextView descripcionlabelm =(TextView)convertView.findViewById(R.id.Descripcionlabelm);
         TextView tipo_entrenamientolabelm =(TextView)convertView.findViewById(R.id.Tipo_entrenamientolabelm);
         TextView meslabelm =(TextView)convertView.findViewById(R.id.Meslabelm);
         TextView estatus_menusalidadlabelm =(TextView)convertView.findViewById(R.id.Estatus_menusalidadlabelm);
         TextView fechaIlabelm =(TextView)convertView.findViewById(R.id.FechaIlabelm);
         TextView fechafinlabelm =(TextView)convertView.findViewById(R.id.Fechafinlabelm);
 
+        Idmendualidad.setText(String.valueOf(item.getIdmensualidad()));
         tipolabelm.setText(item.getTipo());
-        descripcionlabelm.setText(item.getDescripcionTiporutina());
         tipo_entrenamientolabelm.setText(item.getTipo_entrenamiento());
         meslabelm.setText(item.getMes());
         estatus_menusalidadlabelm.setText(item.getDescripcionEstatus());

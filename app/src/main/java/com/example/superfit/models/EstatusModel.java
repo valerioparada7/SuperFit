@@ -4,6 +4,8 @@ public class EstatusModel {
 
     public int Id_estatus ;
 
+    public String Descripcion;
+
     public int getId_estatus() {
         return Id_estatus;//
     }
@@ -20,6 +22,6 @@ public class EstatusModel {
         Descripcion = descripcion;
     }
 
-    public String Descripcion;
+
 
 }

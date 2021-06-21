@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -22,33 +23,51 @@ public interface ClienteApi {
     //Aqui llamaremos a nuestra api y sus metodos al controladores correspondientes
 
     //Login
-    @GET("api/Login")
+    @GET("api/Login/Login")
     public Call<MensualidadModel> Login(@Query("User") String User, @Query("Pass") String Pass);
 
-    @POST("api/Login/RegistrarCliente")
-    public Call<AlertasModel> RegistrarCliente(@Body ClientesModel clientesModel);
+    //Obtener los datos personales del cliente
+    @GET("api/Clientes/GetCliente")
+    public Call<ClientesModel> GetCliente(@Query("Id_cliente") int Id_cliente);
 
-    @POST("api/Login/RegistroCuestionario")
-    public Call<AlertasModel> RegistroCuestionario(@Body CuestionarioModel cuestionarioModel);
+    //Actualizar los datos del cliente
+    @PUT("api/Clientes/UpdateCliente")
+    public Call<Boolean> UpdateCliente(@Body ClientesModel ClientesMdl);
 
-    @POST("api/Login/RegistrarMensualidad")
-    public Call<AlertasModel> RegistrarMensualidad(@Body MensualidadModel mensualidadModel);
-
-    @POST("api/Login/RegistrarAntropometria")
-    public Call<AlertasModel> RegistrarAntropometria(@Body AntropometriaModel antropometriaModel);
-
-    @GET("api/Login/GetMensualidad")
-    public Call<List<MensualidadModel>> GetMensualidad(@Query("IdCliente") int IdCliente);
+    //Actualizar foto de perfil
+    @POST("api/Clientes/UpdateClienteFoto")
+    public Call<Boolean> UpdateClienteFoto(@Body Imagenes imagenes,@Query("Id_cliente") int Id_cliente);
 
 
+    //Obtener las mensualidaddes
+    @GET("api/Clientes/GetMensualidad")
+    public Call<MensualidadModel> GetMensualidad(@Query("IdCliente") int IdCliente);
+
+    @GET("api/Clientes/GetMensualidades")
+    public Call<List<MensualidadModel>> GetMensualidades(@Query("IdCliente") int IdCliente);
+
+    //Obtener las medidas por una mensualidad
+    @GET("api/Clientes/GetAsesoriaantropometria")
+    public Call<List<AntropometriaModel>> GetAsesoriaantropometria(@Query("Id_mensualidad") int Id_mensualidad);
+
+    //Registar una nueva medida a una mensualidad
+    @POST("api/Clientes/RegistrarMedidas")
+    public Call<AlertasModel> RegistrarMedidas(@Body AntropometriaModel antropometriaModel,@Query("Id_Cliente") int Id_Cliente);
+
+    //Obtener el cuestionario o actualizarlo
     @GET("api/Clientes/GetCuestionario")
     public Call<CuestionarioModel> GetCuestionario(@Query("IdCliente") int IdCliente);
+
+    @POST("api/Clientes/UpdateCuestionario")
+    public Call<AlertasModel> UpdateCuestionario(@Body CuestionarioModel cuestionarioModel);
 
     //Registro completo
     @POST("api/Login/RegistroCompleto")
     public Call<AlertasModel> RegistroCompleto(@Body RegistroCliente Registro);
 
-    //Registro completo
+    //Registro completo para las imagenes
     @POST("api/Login/UpdateImagenes")
     public Call<AlertasModel> UpdateImagenes(@Body Imagenes imagenes);
+
+
 }

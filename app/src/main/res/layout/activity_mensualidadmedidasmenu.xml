@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Mensualidad_menu">
+    tools:context=".mensualidadmedidasmenu">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +18,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Mensualidades"
+            android:text="Detalle de Mensualidad"
             android:textColor="#007bff"
             android:textSize="30sp" />
+        <Button
+            android:id="@+id/RegistrarMedidaBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginBottom="5sp"
+            android:background="@null"
+            android:fontFamily="sans-serif"
+            android:drawableBottom="@drawable/ic_camera"
+            android:text="Hacer un nuevo registro de medidas"
+            android:textColor="#007bff"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -30,9 +47,9 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/medidaslista"
+            android:id="@+id/Listmensualidadmedidasmenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent" />
     </LinearLayout>
+
 </LinearLayout>
