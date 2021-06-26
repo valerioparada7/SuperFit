@@ -44,7 +44,7 @@ public class EditarPerfil extends AppCompatActivity {
     //Datos personales
     EditText Nombre,Ap,Am,Apodo,Edad,Telefono,Email,Contraseña;
     Spinner listsexo;
-    String[] Sexo =  {"Masculino","Femenino"};
+    String[] Sexo =  {"Hombre","Mujer"};
     ClientesModel cliente = new ClientesModel();
     Button Registraclientebtn;
     int IdclienteUpdate=0;

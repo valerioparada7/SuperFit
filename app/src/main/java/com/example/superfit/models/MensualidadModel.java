@@ -17,6 +17,8 @@ public class MensualidadModel {
     public String Fechainicio;
     public String SinfechaAsignadaI ;
     public String SinfechaAsignadaF;
+    public PagosmensualModel pagomes;
+
 
 
     public int getId_mensualidad() {
@@ -113,5 +115,13 @@ public class MensualidadModel {
 
     public void setSinfechaAsignadaF(String sinfechaAsignadaF) {
         SinfechaAsignadaF = sinfechaAsignadaF;
+    }
+
+    public PagosmensualModel getPagomes() {
+        return pagomes;
+    }
+
+    public void setPagomes(PagosmensualModel pagomes) {
+        this.pagomes = pagomes;
     }
 }

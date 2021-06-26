@@ -123,6 +123,18 @@
                         android:text="Ver mi cuestionario"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/ActualizarPagobtn"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginBottom="10sp"
+                        android:layout_height="30sp"
+                        android:background="@null"
+                        android:text=" Subir comoprobante de pago"
+                        android:textColor="#007bff"
+                        android:layout_gravity="center"/>
                 </LinearLayout>
 
                 <!--Datos de la mensualidad-->

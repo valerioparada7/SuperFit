@@ -69,5 +69,9 @@ public interface ClienteApi {
     @POST("api/Login/UpdateImagenes")
     public Call<AlertasModel> UpdateImagenes(@Body Imagenes imagenes);
 
-
+    //Registro de pago
+    @POST("api/Clientes/PagoMes")
+    public Call<AlertasModel> PagoMes(@Query("imagen") String imagen,@Query("IdCliente") int IdCliente,
+                                      @Query("Idmes") int Idmes,@Query("monto") double monto,
+                                        @Query("descripcion") String descripcion);
 }

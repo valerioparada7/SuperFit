@@ -76,7 +76,7 @@ public class Registro extends AppCompatActivity {
     //Datos personales
     EditText Nombre,Ap,Am,Apodo,Edad,Telefono,Email,Contraseña;
     Spinner listsexo;
-    String[] Sexo =  {"Masculino","Femenino"};
+    String[] Sexo =  {"Hombre","Mujer"};
     //foto de perfil usuario
     ImageView imagenperfilusuario;
     Button fotoperfilususario;

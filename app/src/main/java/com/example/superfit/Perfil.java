@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.superfit.interfaces.ClienteApi;
+import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.Imagenes;
 import com.example.superfit.models.MensualidadModel;
 
@@ -65,6 +66,16 @@ public class Perfil extends AppCompatActivity {
     public AlertDialog.Builder dialogbuilder;
     public AlertDialog dialog;
 
+    //Datos para abrir el modal de pago
+    private ImageView Imagenpago;
+    Button fotopago;
+    EditText monto,descripcion;
+    private Button actualizarpago,cancelarpago;
+    public int img_requetspago = 21;
+    public Bitmap bitmappago;
+    public AlertDialog.Builder dialogbuilderpago;
+    public AlertDialog dialogpago;
+    int cfotoperfil=0,cfotopago=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +108,25 @@ public class Perfil extends AppCompatActivity {
                 CrearModal();
             }
         });
+
+        //imagen de pago
+        fotopago=(Button)findViewById(R.id.ActualizarPagobtn);
+
+        fotopago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                int Id_pago =preferences.getInt("Id_pago",0);
+                if (Id_pago != 0) {
+                    fotopago.setText("Su pago esta en revison");
+                }
+                else{
+                    ModalPago();
+                }
+
+            }
+        });
+
         editarperfilbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +134,7 @@ public class Perfil extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         salirtbtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,8 +202,6 @@ public class Perfil extends AppCompatActivity {
         });
     }
 
-
-
     public void GetCliente(){
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         int Idcliente =preferences.getInt("Idcliente",0);
@@ -220,8 +249,16 @@ public class Perfil extends AppCompatActivity {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("IdMensualidad",mensualidad.Id_mensualidad);
             editor.putInt("IdEstatus",mensualidad.Estatus.Id_estatus);
+            editor.putInt("Id_pago",mensualidad.pagomes.Id_pago);
             editor.commit();
+            if(mensualidad.Id_mensualidad==1) {
+                if (mensualidad.pagomes.Id_pago != 0) {
+                    actualizarpago.setText("Su pago esta en revison");
+                }
+            }
+
         }
+
     }
     //Actualizar Imagen
     public void UpdateImagen(){
@@ -273,7 +310,7 @@ public class Perfil extends AppCompatActivity {
         });
     }
 
-    //Cargar imagenes
+    //Cargar imagen de perfil
     public void CrearModal(){
         dialogbuilder = new AlertDialog.Builder(this);
         final View conetent = getLayoutInflater().inflate(R.layout.modalfoto,null);
@@ -283,12 +320,11 @@ public class Perfil extends AppCompatActivity {
         dialogbuilder.setView(conetent);
         dialog = dialogbuilder.create();
         dialog.show();
-
+        cfotoperfil=1;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,img_requestperfil);
-
         actualizarfotobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,14 +343,104 @@ public class Perfil extends AppCompatActivity {
 
 
     }
+
+    public void ModalPago(){
+        dialogbuilderpago = new AlertDialog.Builder(this);
+        final View conetent = getLayoutInflater().inflate(R.layout.comprobantepago,null);
+        Imagenpago = (ImageView) conetent.findViewById(R.id.ImagenPagomodal);
+        monto =(EditText) conetent.findViewById(R.id.MontoTxt);
+        descripcion =(EditText) conetent.findViewById(R.id.DescricionTxt);
+        actualizarpago =(Button)conetent.findViewById(R.id.AceptarpagoBtn);
+        cancelarpago=(Button)conetent.findViewById(R.id.Cancelarpagobtn);
+        dialogbuilderpago.setView(conetent);
+        dialogpago = dialogbuilderpago.create();
+        dialogpago.show();
+        cfotopago=1;
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,img_requetspago);
+        actualizarpago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargando.cargardialogo();
+                String dinero = monto.getText().toString().trim();
+                double money = Double.parseDouble(dinero);
+                String concepto= descripcion.getText().toString().trim();
+                UpdateImagenPago(money,concepto);
+            }
+        });
+
+        cancelarpago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void UpdateImagenPago(double Mont,String Desc){
+        ByteArrayOutputStream byteperfilcuenta = new ByteArrayOutputStream();
+        bitmappago.compress(Bitmap.CompressFormat.JPEG,75,byteperfilcuenta);
+        byte[] byte64cuenta = byteperfilcuenta.toByteArray();
+        String base64cuenta = Base64.encodeToString(byte64cuenta,Base64.DEFAULT);
+        SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+        int Idcliente =preferences.getInt("Idcliente",0);
+        int Idmes =preferences.getInt("IdMensualidad",0);
+        Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        ClienteApi clienteApi = retrofit.create(ClienteApi.class);
+        Call<AlertasModel> call = clienteApi.PagoMes( base64cuenta, Idcliente,  Idmes,  Mont,  Desc);
+        call.enqueue(new Callback<AlertasModel>() {
+            @Override
+            public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
+                try {
+                    if(response.isSuccessful()){
+                        AlertasModel c = response.body();
+                        if(c.Result==true){
+                            Toast.makeText(Perfil.this,c.Mensaje,Toast.LENGTH_SHORT).show();
+                            cargando.ocultar();
+                            dialog.dismiss();
+                            GetCliente();
+                        }
+                        else{
+                            Toast.makeText(Perfil.this,"Ocurrio un error al actualizar la foto intente mas tarde",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                catch (Exception ex){
+                    Toast.makeText(Perfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AlertasModel> call, Throwable t) {
+                Toast.makeText(Perfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==img_requestperfil&&resultCode==RESULT_OK && data !=null){
+        if(requestCode==img_requestperfil || requestCode==img_requetspago &&resultCode==RESULT_OK && data !=null){
             Uri pathperfilcuenta = data.getData();
+            Uri pathcuenta = data.getData();
             try {
-                bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfilcuenta);
-                ImagenPerfilmodallocal.setImageBitmap(bitmapfotousuarioperfil);
+                if(cfotoperfil==1){
+                    bitmapfotousuarioperfil = MediaStore.Images.Media.getBitmap(getContentResolver(),pathperfilcuenta);
+                    ImagenPerfilmodallocal.setImageBitmap(bitmapfotousuarioperfil);
+                    cfotoperfil=0;
+                }
+                if(cfotopago==1){
+                    bitmappago = MediaStore.Images.Media.getBitmap(getContentResolver(),pathcuenta);
+                    Imagenpago.setImageBitmap(bitmappago);
+                    cfotopago=0;
+                }
             }
             catch (Exception ex){
                 ex.printStackTrace();
