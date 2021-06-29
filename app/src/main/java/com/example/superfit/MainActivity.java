@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     //Pagina Actual nueva https://www.bsite.net/valerioparada/
     String PaginaWeb ="https://www.bsite.net/valerioparada/";
     EditText Usuario,Contraseña;
-    Button Aceptar,registrarse;
+    Button Aceptar,registrarse,recuperar;
     LinearLayout linea;
     final Cargando cargando = new Cargando(MainActivity.this);
     //subircambios
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Contraseña=(EditText) findViewById(R.id.Contraseñatxt);
         Aceptar =(Button) findViewById(R.id.Loginbtn);
         registrarse=(Button)findViewById(R.id.Registrarsebtn);
+        recuperar=(Button)findViewById(R.id.Recuperarbtn);
         //Validamos si esta logueado
         Getsesion();
         Aceptar.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +85,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        recuperar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Registro.class);
+                startActivity(intent);
+            }
+        });
     }
 
 

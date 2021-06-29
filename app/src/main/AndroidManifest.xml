@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegistroMedidas"></activity>
+        <activity android:name=".RecuperarContra"></activity>
+        <activity android:name=".RegistroMedidas" />
         <activity android:name=".mensualidadmedidasdetalle" />
         <activity android:name=".mensualidadmedidasmenu" />
         <activity android:name=".Mensualidad_detalle" />
