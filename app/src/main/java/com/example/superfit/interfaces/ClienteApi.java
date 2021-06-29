@@ -38,6 +38,9 @@ public interface ClienteApi {
     @POST("api/Clientes/UpdateClienteFoto")
     public Call<Boolean> UpdateClienteFoto(@Body Imagenes imagenes,@Query("Id_cliente") int Id_cliente);
 
+    //Recuperar contraseña
+    @POST("api/Login/Recuperarcuenta")
+    public Call<AlertasModel> Recuperarcuenta(@Body String User);
 
     //Obtener las mensualidaddes
     @GET("api/Clientes/GetMensualidad")

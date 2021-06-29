@@ -10,9 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.superfit.interfaces.ClienteApi;
+import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.MensualidadModel;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -58,7 +61,39 @@ public class RecuperarContra extends AppCompatActivity {
             Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
                     .addConverterFactory(GsonConverterFactory.create()).build();
             ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-            Call<MensualidadModel> call = clienteApi.Login(Usuario);
+            Call<AlertasModel> call = clienteApi.Recuperarcuenta(usuario);
+            call.enqueue(new Callback<AlertasModel>() {
+                @Override
+                public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
+                    try {
+                        if(response.isSuccessful()){
+                            AlertasModel c = response.body();
+                            if(c.Result==true){
+                                cargando.ocultar();
+                                Toast.makeText(RecuperarContra.this,c.Mensaje,Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                cargando.ocultar();
+                                Toast.makeText(RecuperarContra.this,c.Mensaje,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else{
+                            cargando.ocultar();
+                            Toast.makeText(RecuperarContra.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    catch (Exception ex){
+                        cargando.ocultar();
+                        Toast.makeText(RecuperarContra.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AlertasModel> call, Throwable t) {
+                    cargando.ocultar();
+                    Toast.makeText(RecuperarContra.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         else{
             Toast.makeText(RecuperarContra.this,"Ingrese usuario ",Toast.LENGTH_SHORT).show();

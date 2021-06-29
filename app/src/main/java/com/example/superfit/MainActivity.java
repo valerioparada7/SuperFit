@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         recuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Registro.class);
+                Intent intent = new Intent(MainActivity.this,RecuperarContra.class);
                 startActivity(intent);
             }
         });
