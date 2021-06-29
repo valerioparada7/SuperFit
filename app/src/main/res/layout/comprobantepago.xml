@@ -9,6 +9,18 @@ android:orientation="vertical">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/Labelactualizafoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="5sp"
+            android:gravity="center"
+            android:background="@null"
+            android:text="Pago Mensualidad"
+            android:textColor="#007bff"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
 
         <ImageView
             android:id="@+id/ImagenPagomodal"
@@ -30,7 +42,7 @@ android:orientation="vertical">
             android:drawablePadding="12dp"
             android:ems="10"
             android:hint="Monto pagado"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textColorHighlight="#2271b3"
             android:textColorHint="@android:color/darker_gray"
@@ -47,7 +59,7 @@ android:orientation="vertical">
             android:drawableLeft="@drawable/ic_bitacora"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="Monto pagado"
+            android:hint="Descripcion o motivo"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textColorHighlight="#2271b3"

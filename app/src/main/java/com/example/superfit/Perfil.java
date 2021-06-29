@@ -76,6 +76,7 @@ public class Perfil extends AppCompatActivity {
     public AlertDialog.Builder dialogbuilderpago;
     public AlertDialog dialogpago;
     int cfotoperfil=0,cfotopago=0;
+    int estatuspago=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,15 +116,7 @@ public class Perfil extends AppCompatActivity {
         fotopago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-                int Id_pago =preferences.getInt("Id_pago",0);
-                if (Id_pago != 0) {
-                    fotopago.setText("Su pago esta en revison");
-                }
-                else{
                     ModalPago();
-                }
-
             }
         });
 
@@ -188,16 +181,14 @@ public class Perfil extends AppCompatActivity {
         rutinasrapidasbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Perfil.this,Cuestionario.class);
-                startActivity(intent);
+                Toast.makeText(Perfil.this,"Proximamente...",Toast.LENGTH_SHORT).show();
             }
         });
 
         alimentacionbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Perfil.this,Cuestionario.class);
-                startActivity(intent);
+                Toast.makeText(Perfil.this,"Proximamente...",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -235,7 +226,7 @@ public class Perfil extends AppCompatActivity {
     }
 
     public void MostrarDatos(MensualidadModel  mensualidad){
-        Nombresclientet.setText(mensualidad.Cliente.Nombres);
+        Nombresclientet.setText(mensualidad.Cliente.Nombres.toUpperCase());
         tiporutinat.setText(mensualidad.Tiporutina.Tipo);
         Tipo_entrenamientot.setText(mensualidad.TipoEntrenamiento.Tipo_entrenamiento);
         fechait.setText(mensualidad.Fechainicio);
@@ -249,14 +240,16 @@ public class Perfil extends AppCompatActivity {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("IdMensualidad",mensualidad.Id_mensualidad);
             editor.putInt("IdEstatus",mensualidad.Estatus.Id_estatus);
-            editor.putInt("Id_pago",mensualidad.pagomes.Id_pago);
+            estatuspago = mensualidad.PagoMes.Id_pago;
             editor.commit();
-            if(mensualidad.Id_mensualidad==1) {
-                if (mensualidad.pagomes.Id_pago != 0) {
-                    actualizarpago.setText("Su pago esta en revison");
+            if ((mensualidad.Estatus.Id_estatus == 2 || mensualidad.Estatus.Id_estatus == 3) && mensualidad.PagoMes.Id_pago != 0){
+                fotopago.setText("Mensualidad "+mensualidad.Estatus.Descripcion);
+            }
+            if(mensualidad.Estatus.Id_estatus==1) {
+                if (mensualidad.PagoMes.Id_pago != 0) {
+                    fotopago.setText("Su pago esta en revison");
                 }
             }
-
         }
 
     }
@@ -286,28 +279,32 @@ public class Perfil extends AppCompatActivity {
                             Toast.makeText(Perfil.this,"Foto actualizada",Toast.LENGTH_SHORT).show();
                             cargando.ocultar();
                             dialog.dismiss();
-
                             GetCliente();
                         }
                         else{
+                            cargando.cargardialogo();
                             Toast.makeText(Perfil.this,"Ocurrio un error al actualizar la foto intente mas tarde",Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
+                        cargando.cargardialogo();
                         Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
                     }
 
                 }
                 catch (Exception ex){
+                    cargando.cargardialogo();
                     Toast.makeText(Perfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                cargando.cargardialogo();
                 Toast.makeText(Perfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
             }
         });
+        dialog.dismiss();
     }
 
     //Cargar imagen de perfil
@@ -345,38 +342,51 @@ public class Perfil extends AppCompatActivity {
     }
 
     public void ModalPago(){
-        dialogbuilderpago = new AlertDialog.Builder(this);
-        final View conetent = getLayoutInflater().inflate(R.layout.comprobantepago,null);
-        Imagenpago = (ImageView) conetent.findViewById(R.id.ImagenPagomodal);
-        monto =(EditText) conetent.findViewById(R.id.MontoTxt);
-        descripcion =(EditText) conetent.findViewById(R.id.DescricionTxt);
-        actualizarpago =(Button)conetent.findViewById(R.id.AceptarpagoBtn);
-        cancelarpago=(Button)conetent.findViewById(R.id.Cancelarpagobtn);
-        dialogbuilderpago.setView(conetent);
-        dialogpago = dialogbuilderpago.create();
-        dialogpago.show();
-        cfotopago=1;
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,img_requetspago);
-        actualizarpago.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cargando.cargardialogo();
-                String dinero = monto.getText().toString().trim();
-                double money = Double.parseDouble(dinero);
-                String concepto= descripcion.getText().toString().trim();
-                UpdateImagenPago(money,concepto);
-            }
-        });
+        if (estatuspago == 0) {
+            dialogbuilderpago = new AlertDialog.Builder(this);
+            final View conetent = getLayoutInflater().inflate(R.layout.comprobantepago, null);
+            Imagenpago = (ImageView) conetent.findViewById(R.id.ImagenPagomodal);
+            monto = (EditText) conetent.findViewById(R.id.MontoTxt);
+            descripcion = (EditText) conetent.findViewById(R.id.DescricionTxt);
+            actualizarpago = (Button) conetent.findViewById(R.id.AceptarpagoBtn);
+            cancelarpago = (Button) conetent.findViewById(R.id.Cancelarpagobtn);
+            dialogbuilderpago.setView(conetent);
+            dialogpago = dialogbuilderpago.create();
+            dialogpago.show();
+            cfotopago = 1;
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, img_requetspago);
+            actualizarpago.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String dinero = monto.getText().toString().trim();
+                    String concepto = descripcion.getText().toString().trim();
+                    if(!dinero.isEmpty()){
+                        if(!concepto.isEmpty()){
+                            cargando.cargardialogo();
+                            double money = Double.parseDouble(dinero);
+                            UpdateImagenPago(money, concepto);
+                        }
+                        else{
+                            Toast.makeText(Perfil.this,"Completa todos los campos",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(Perfil.this,"Completa todos los campos",Toast.LENGTH_SHORT).show();
+                    }
 
-        cancelarpago.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+                }
+            });
+
+            cancelarpago.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogpago.dismiss();
+                }
+            });
+        }
     }
 
     public void UpdateImagenPago(double Mont,String Desc){
@@ -387,10 +397,15 @@ public class Perfil extends AppCompatActivity {
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         int Idcliente =preferences.getInt("Idcliente",0);
         int Idmes =preferences.getInt("IdMensualidad",0);
+        Imagenes imag = new Imagenes();
+        imag.ImagenPerfilCuenta = "";
+        imag.ImagenPerfil=base64cuenta;
+        imag.ImagenFrontal="";
+        imag.ImagenPosterior="";
         Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         ClienteApi clienteApi = retrofit.create(ClienteApi.class);
-        Call<AlertasModel> call = clienteApi.PagoMes( base64cuenta, Idcliente,  Idmes,  Mont,  Desc);
+        Call<AlertasModel> call = clienteApi.PagoMes(imag, Idcliente,  Idmes,  Mont,  Desc);
         call.enqueue(new Callback<AlertasModel>() {
             @Override
             public void onResponse(Call<AlertasModel> call, Response<AlertasModel> response) {
@@ -400,25 +415,28 @@ public class Perfil extends AppCompatActivity {
                         if(c.Result==true){
                             Toast.makeText(Perfil.this,c.Mensaje,Toast.LENGTH_SHORT).show();
                             cargando.ocultar();
-                            dialog.dismiss();
+                            dialogpago.dismiss();
                             GetCliente();
                         }
                         else{
-                            Toast.makeText(Perfil.this,"Ocurrio un error al actualizar la foto intente mas tarde",Toast.LENGTH_SHORT).show();
+                            dialogpago.dismiss();
+                            Toast.makeText(Perfil.this,c.Mensaje + "\nOcurrio un error al actualizar el pago intente mas tarde",Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
+                        dialogpago.dismiss();
                         Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
                     }
-
                 }
                 catch (Exception ex){
+                    dialogpago.dismiss();
                     Toast.makeText(Perfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AlertasModel> call, Throwable t) {
+                dialogpago.dismiss();
                 Toast.makeText(Perfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
             }
         });

@@ -4,7 +4,7 @@ import android.renderscript.ScriptIntrinsicYuvToRGB;
 
 public class PagosmensualModel {
     public int Id_pago;
-    public MensualidadModel mensualidad ;
+    public MensualidadModel mensualidad;
     public double Monto ;
     public String Fechapago;
     public String Descripcion ;

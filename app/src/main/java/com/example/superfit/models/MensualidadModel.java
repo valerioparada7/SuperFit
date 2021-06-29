@@ -17,7 +17,7 @@ public class MensualidadModel {
     public String Fechainicio;
     public String SinfechaAsignadaI ;
     public String SinfechaAsignadaF;
-    public PagosmensualModel pagomes;
+    public PagosmensualModel PagoMes;
 
 
 
@@ -118,10 +118,10 @@ public class MensualidadModel {
     }
 
     public PagosmensualModel getPagomes() {
-        return pagomes;
+        return PagoMes;
     }
 
     public void setPagomes(PagosmensualModel pagomes) {
-        this.pagomes = pagomes;
+        this.PagoMes = pagomes;
     }
 }
