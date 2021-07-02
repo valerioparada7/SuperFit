@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.superfit.interfaces.ClienteApi;
 import com.example.superfit.models.AlertasModel;
 import com.example.superfit.models.Imagenes;
@@ -77,8 +78,11 @@ public class Perfil extends AppCompatActivity {
     public AlertDialog dialogpago;
     int cfotoperfil=0,cfotopago=0;
     int estatuspago=0;
+    String Url_Imagen ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
@@ -233,8 +237,9 @@ public class Perfil extends AppCompatActivity {
         fechaft.setText(mensualidad.Fechafin);
         estatusDescripciont.setText(mensualidad.Estatus.Descripcion);
         mes.setText(mensualidad.Mes.Mes);
-        String Url_Imagen=PaginaWeb+mensualidad.Cliente.Foto_perfil;
-        Glide.with(getApplication()).load(Url_Imagen).into(FotoPerfil);
+
+        Url_Imagen=PaginaWeb+mensualidad.Cliente.Foto_perfil;
+        Glide.with(getApplication()).load(Url_Imagen).diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache (true).into(FotoPerfil);
         if(mensualidad.Id_mensualidad!=0){
             SharedPreferences preferences = getSharedPreferences("Sesion", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
@@ -251,7 +256,6 @@ public class Perfil extends AppCompatActivity {
                 }
             }
         }
-
     }
     //Actualizar Imagen
     public void UpdateImagen(){
@@ -327,7 +331,6 @@ public class Perfil extends AppCompatActivity {
             public void onClick(View v) {
                 cargando.cargardialogo();
                 UpdateImagen();
-
             }
         });
 

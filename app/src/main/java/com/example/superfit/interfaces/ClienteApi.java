@@ -40,7 +40,7 @@ public interface ClienteApi {
 
     //Recuperar contraseña
     @POST("api/Login/Recuperarcuenta")
-    public Call<AlertasModel> Recuperarcuenta(@Body String User);
+    public Call<AlertasModel> Recuperarcuenta(@Query("User") String User);
 
     //Obtener las mensualidaddes
     @GET("api/Clientes/GetMensualidad")

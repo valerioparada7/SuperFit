@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:paddingLeft="10sp"
-            android:paddingRight="10sp"
             android:text="Ingresa tu correo electrónico,teléfono y te enviaremos un enlace para que recuperes el acceso a tu cuenta."
             android:textColor="#007bff"
             android:textSize="20sp" />
