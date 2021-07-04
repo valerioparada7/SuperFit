@@ -12,452 +12,494 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!--Todo el diseo que esta adentro-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--Datos del perfil-->
+            <!--Datos del perfil Encabezado-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/Nombrecliente"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nombre"
+                                android:layout_marginLeft="20sp"
+                                android:textColor="@color/black"
+                                android:textAllCaps="false"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <Button
+                                android:id="@+id/salirbtn"
+                                android:layout_width="50sp"
+                                android:layout_height="30sp"
+                                android:background="@null"
+                                android:drawableTop="@drawable/ic_3_puntos"
+                                android:textAllCaps="false"
+                                android:textColor="#007bff"
+                                android:gravity="right"
+                                android:layout_gravity="right"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <ImageView
+                                android:id="@+id/ImagenPerfil"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_gravity="left"
+                                android:layout_marginLeft="5sp"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginLeft="10sp"
+                            android:layout_marginRight="10sp"
+                            android:orientation="vertical"
+                            android:background="@drawable/backgroundlayout">
+                            <!--<TextView
+                                android:id="@+id/Pendiente"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nombre"
+                                android:layout_marginLeft="20sp"
+                                android:textColor="@color/black"
+                                android:textAllCaps="false"
+                                android:textSize="20sp" />-->
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <Button
+                                android:id="@+id/ActualizarfotoBtn"
+                                style="@style/Widget.AppCompat.Button"
+                                android:layout_width="150dp"
+                                android:layout_height="20sp"
+                                android:layout_marginTop="5sp"
+                                android:layout_marginBottom="10sp"
+                                android:layout_marginLeft="5sp"
+                                android:background="@null"
+                                android:drawableTop="@drawable/ic_camera"
+                                android:textColor="#007bff"
+                                android:textSize="8sp"
+                                android:layout_gravity="left"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Botones de editar perfil y cuestionario-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
+                android:layout_marginTop="1sp"
                 android:orientation="vertical">
 
-                <!--Encabezado-->
+                <Button
+                    android:id="@+id/EditarPerfilBtn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_redondo"
+                    android:text="Editar perfil"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/VerCuestionarioBtn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_redondo"
+                    android:text="Ver mi cuestionario"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:id="@+id/ActualizarPagobtn"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_height="30sp"
+                    android:background="@null"
+                    android:text=" Subir comprobante de pago"
+                    android:textAllCaps="false"
+                    android:textColor="#007bff"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <!--Datos de la mensualidad-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:layout_marginLeft="5sp"
+                android:layout_marginRight="5sp"
+                android:orientation="vertical"
+                android:background="@drawable/backgroundlayout">
+
+                <!--Linear Horizontales para cada texto-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:background="@drawable/texto_fondoblanco"
                     android:orientation="horizontal">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="150sp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ImagenPerfil"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_gravity="left"
-                            android:layout_marginLeft="5sp"/>
-                        <Button
-                            android:id="@+id/ActualizarfotoBtn"
-                            style="@style/Widget.AppCompat.Button"
+                        <TextView
+                            android:id="@+id/textView15"
                             android:layout_width="match_parent"
-                            android:layout_height="20sp"
-                            android:layout_marginTop="5sp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
                             android:layout_marginBottom="5sp"
-                            android:background="@null"
-                            android:drawableTop="@drawable/ic_camera"
-                            android:textColor="#007bff"
-                            android:textSize="8sp"
-                            android:layout_gravity="center"/>
-
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Tipo rutina"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/Nombrecliente"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tiporutina"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
-                            android:layout_marginLeft="10sp"
-                            android:text="Nombre"
-                            android:textColor="@color/black"
-                            android:textSize="30sp" />
-                    </LinearLayout>
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Ejercicios aeróbicos y acondicionamiento físico"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:background="@drawable/texto_fondoblanco">
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="150sp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <Button
-                            android:id="@+id/salirbtn"
-                            style="@style/Widget.AppCompat.Button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="30sp"
-                            android:background="@null"
-                            android:text="Salir"
-                            android:textColor="#007bff"
-                            android:layout_gravity="right"/>
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Tipo entrenamiento"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
-
-
-                </LinearLayout>
-
-                <!--Botones de editar perfil y cuestionaroi-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1sp"
-                    android:orientation="vertical">
-
-                    <Button
-                        android:id="@+id/EditarPerfilBtn"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30sp"
-                        android:layout_marginLeft="5sp"
-                        android:layout_marginRight="5sp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_redondo"
-                        android:text="Editar perfil"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <Button
-                        android:id="@+id/VerCuestionarioBtn"
-                        style="@style/Widget.AppCompat.Button"
-                        android:layout_width="match_parent"
-                        android:layout_height="30sp"
-                        android:layout_marginTop="5sp"
-                        android:layout_marginLeft="5sp"
-                        android:layout_marginRight="5sp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_redondo"
-                        android:text="Ver mi cuestionario"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-
-                    <Button
-                        android:id="@+id/ActualizarPagobtn"
-                        style="@style/Widget.AppCompat.Button"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_marginTop="10sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_height="30sp"
-                        android:background="@null"
-                        android:text=" Subir comoprobante de pago"
-                        android:textColor="#007bff"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tipoentrenamiento"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
-                <!--Datos de la mensualidad-->
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Pesas en gimnacio"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
-                    android:layout_marginLeft="5sp"
-                    android:layout_marginRight="5sp"
-                    android:orientation="vertical"
-                    android:background="@drawable/backgroundlayout">
-
-                    <!--Linear Horizontales para cada texto-->
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:background="@drawable/texto_fondoblanco">
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:background="@drawable/texto_fondoblanco"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_width="150sp"
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView15"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Tipo rutina"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/tiporutina"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
-
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Ejercicios aeróbicos y acondicionamiento físico"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Mes"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:orientation="horizontal"
-                        android:background="@drawable/texto_fondoblanco">
-                        <LinearLayout
-                            android:layout_width="150sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/NombreMeslb"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView16"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Tipo entrenamiento"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/tipoentrenamiento"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Pesas en gimnacio"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Pesas en gimnacio"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:background="@drawable/texto_fondoblanco">
+                    <LinearLayout
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Mensualidad"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:orientation="horizontal"
-                        android:background="@drawable/texto_fondoblanco">
-                        <LinearLayout
-                            android:layout_width="150sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/estatusmesi"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView17"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Mes"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/NombreMeslb"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Pesas en gimnacio"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Mes prueba"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:background="@drawable/texto_fondoblanco">
+                    <LinearLayout
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Fecha inicio"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:orientation="horizontal"
-                        android:background="@drawable/texto_fondoblanco">
-                        <LinearLayout
-                            android:layout_width="150sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/fechai"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView18"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Mensualidad"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/estatusmesi"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Mes prueba"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Mes prueba"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:background="@drawable/texto_fondoblanco">
+                    <LinearLayout
+                        android:layout_width="150sp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="5sp"
+                            android:layout_marginRight="5sp"
+                            android:layout_marginLeft="5sp"
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="left"
+                            android:text="Fecha fin"
+                            android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:orientation="horizontal"
-                        android:background="@drawable/texto_fondoblanco">
-                        <LinearLayout
-                            android:layout_width="150sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/fechaf"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView19"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Fecha Inicio"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/fechai"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
+                            android:layout_marginTop="10sp"
+                            android:layout_marginBottom="10sp"
+                            android:layout_marginRight="10sp"
+                            android:layout_marginLeft="2sp"
 
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Mes prueba"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="1sp"
-                        android:layout_marginBottom="10sp"
-                        android:layout_marginLeft="10sp"
-                        android:layout_marginRight="10sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="left"
-                        android:orientation="horizontal"
-                        android:background="@drawable/texto_fondoblanco">
-                        <LinearLayout
-                            android:layout_width="150sp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView20"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="5sp"
-                                android:layout_marginRight="5sp"
-                                android:layout_marginLeft="5sp"
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="left"
-                                android:text="Fecha fin"
-                                android:textColor="#007bff"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/fechaf"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10sp"
-                                android:layout_marginBottom="10sp"
-                                android:layout_marginRight="10sp"
-                                android:layout_marginLeft="2sp"
-
-                                android:paddingLeft="5sp"
-                                android:paddingRight="5sp"
-                                android:paddingTop="2sp"
-                                android:layout_gravity="right"
-                                android:text="Mes prueba"
-                                android:textColor="@color/black"/>
-                        </LinearLayout>
+                            android:paddingLeft="5sp"
+                            android:paddingRight="5sp"
+                            android:paddingTop="2sp"
+                            android:layout_gravity="right"
+                            android:text="Mes prueba"
+                            android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <!--Datos del menu-->
+            <!--Botones del menu-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -466,20 +508,22 @@
                 android:layout_marginRight="5sp"
                 android:background="@drawable/backgroundlayout"
                 android:orientation="vertical">
+
                 <Button
                     android:id="@+id/MisrutinasBtn"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_width="match_parent"
                     android:layout_height="90sp"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginLeft="5sp"
-                    android:layout_marginRight="5sp"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="2sp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="5sp"
                     android:background="@drawable/texto_fondoblanco"
                     android:drawableLeft="@drawable/ic_dumbbells_gym_fitness_sport_icon_187014"
+                    android:paddingLeft="5sp"
+                    android:paddingRight="2sp"
                     android:text="Mis rutinas"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
@@ -495,6 +539,7 @@
                     android:background="@drawable/texto_fondoblanco"
                     android:drawableLeft="@drawable/ic__775748_check_date_list_planner_time_108972"
                     android:text="Mis Mensualidades"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
@@ -510,7 +555,8 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/texto_fondoblanco"
                     android:drawableLeft="@drawable/ic_dumbbell_gym_icon_124413"
-                    android:text="Rutinas rapidas"
+                    android:text="Rutinas rápidas"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
@@ -527,12 +573,13 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/texto_fondoblanco"
                     android:drawableLeft="@drawable/ic__053442_bowl_food_health_healthy_salad_vegetable_113463"
-                    android:text="Alimentacion"
+                    android:text="Nutrición y alimentación"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
             </LinearLayout>
-
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

@@ -248,11 +248,11 @@ public class Perfil extends AppCompatActivity {
             estatuspago = mensualidad.PagoMes.Id_pago;
             editor.commit();
             if ((mensualidad.Estatus.Id_estatus == 2 || mensualidad.Estatus.Id_estatus == 3) && mensualidad.PagoMes.Id_pago != 0){
-                fotopago.setText("Mensualidad "+mensualidad.Estatus.Descripcion);
+                fotopago.setText("Mes "+mensualidad.Estatus.Descripcion);
             }
             if(mensualidad.Estatus.Id_estatus==1) {
                 if (mensualidad.PagoMes.Id_pago != 0) {
-                    fotopago.setText("Su pago esta en revison");
+                    fotopago.setText("Su pago esta en revisión");
                 }
             }
         }

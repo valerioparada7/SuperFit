@@ -40,8 +40,9 @@
             android:layout_marginBottom="5sp"
             android:background="@null"
             android:text="Aceptar"
+            android:textAllCaps="false"
             android:textColor="#007bff"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_gravity="center"/>
         <Button
             android:id="@+id/Cancelarbtn"
@@ -52,8 +53,9 @@
             android:layout_marginBottom="5sp"
             android:background="@null"
             android:text="Cancelar"
+            android:textAllCaps="false"
             android:textColor="#FF0000"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_gravity="center"/>
     </LinearLayout>
 

@@ -61,7 +61,6 @@ public class Rutinas extends AppCompatActivity {
         lvitems=(ListView)findViewById(R.id.lisviewejercicios);
         ObtenerDias();
         ObtenerSets();
-
         listDias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -90,7 +89,7 @@ public class Rutinas extends AppCompatActivity {
 
     public void ObtenerDias(){
 
-        String[] dias = { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+        String[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" };
         for (int i = 0; i < dias.length; i++)
         {
             Diasarray.add(dias[i]);
@@ -163,7 +162,6 @@ public class Rutinas extends AppCompatActivity {
     // Home http://192.168.100.11:8081/
     // web superfit.somee.com
     public void GetDetalleRutinaEjercicios(){
-        cargando.cargardialogo();
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         int IdMensualidad =preferences.getInt("IdMensualidad",0);
         int IdEstatus =preferences.getInt("IdEstatus",0);
@@ -211,7 +209,6 @@ public class Rutinas extends AppCompatActivity {
         else{
             Toast.makeText(Rutinas.this,"No hay ejercicios para este set",Toast.LENGTH_SHORT).show();
         }
-        cargando.ocultar();
     }
 
     public void Exercicies(ArrayList<Ejercicios> Lista){

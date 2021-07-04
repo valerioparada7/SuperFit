@@ -237,8 +237,9 @@
                 android:layout_marginBottom="20sp"
                 android:background="@drawable/button_redondoborder"
                 android:text="Guardar"
+                android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
 

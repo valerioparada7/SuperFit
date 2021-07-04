@@ -251,25 +251,15 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginTop="20sp">
-
-                    <TextView
-                        android:id="@+id/textfoto"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50sp"
-                        android:text="Seleccione foto de perifl"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="#2271b3"
-                        android:textColorHint="@color/black"
-                        android:textColorLink="@color/black"
-                        android:textSize="15sp" />
-
                     <Button
                         android:id="@+id/FotoperfilBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="30sp"
+                        android:layout_height="50sp"
                         android:layout_marginLeft="20sp"
                         android:background="@null"
-                        android:drawableLeft="@drawable/ic_camera"
+                        android:text="Seleccione foto de perifl"
+                        android:textAllCaps="false"
+                        android:drawableBottom="@drawable/ic_camera"
                         android:textColor="@color/black" />
                 </LinearLayout>
                 <LinearLayout
@@ -1139,6 +1129,7 @@
                             android:background="@null"
                             android:drawableBottom="@drawable/ic_camera"
                             android:text="Foto frontal"
+                            android:textAllCaps="false"
                             android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
@@ -1157,6 +1148,7 @@
                             android:background="@null"
                             android:drawableBottom="@drawable/ic_camera"
                             android:text="Foto perfil"
+                            android:textAllCaps="false"
                             android:textColor="#007bff"/>
                     </LinearLayout>
                     <LinearLayout
@@ -1175,6 +1167,7 @@
                             android:background="@null"
                             android:drawableBottom="@drawable/ic_camera"
                             android:text="Foto posterior"
+                            android:textAllCaps="false"
                             android:textColor="#007bff"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -1261,6 +1254,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_redondo"
                     android:text="Anterior"
+                    android:textAllCaps="false"
                     android:visibility="invisible"
                     android:textColor="@color/white" />
 
@@ -1275,6 +1269,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_redondo"
                     android:text="Siguiente"
+                    android:textAllCaps="false"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -1294,6 +1289,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_redondo"
                     android:text="Registrar"
+                    android:textAllCaps="false"
                     android:visibility="invisible"
                     android:textColor="@color/white" />
             </LinearLayout>

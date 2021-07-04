@@ -248,7 +248,7 @@
                     android:paddingRight="5sp"
                     android:paddingTop="2sp"
                     android:layout_gravity="left"
-                    android:text="Fecha Inicio"
+                    android:text="Fecha inicio"
                     android:textColor="#007bff"/>
             </LinearLayout>
             <LinearLayout
@@ -342,7 +342,7 @@
                 android:drawableBottom="@drawable/ic_camera"
                 android:text="Ver mis medidas y fotos"
                 android:textColor="#007bff"
-                android:textSize="12sp" />
+                android:textSize="15sp" />
             <TextView
                 android:id="@+id/Idmensualidadlabelm"
                 android:layout_width="wrap_content"

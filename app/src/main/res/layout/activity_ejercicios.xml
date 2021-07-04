@@ -12,26 +12,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
-        android:layout_marginBottom="10sp"
         android:orientation="vertical"
         android:background="@drawable/texto_fondoblanco">
 
         <!--Linear Horizontales-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
             android:layout_gravity="center_horizontal"
             android:gravity="left"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="130sp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10sp"
                 android:layout_marginBottom="10sp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/Ejerciciolabel"
                     android:layout_width="match_parent"
@@ -46,8 +47,8 @@
                     android:id="@+id/Repeticioneslb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="5sp"
+                    android:layout_marginTop="10dp"
                     android:text="Repeticiones"
                     android:textColor="@color/black" />
 
@@ -55,11 +56,12 @@
                     android:id="@+id/Serieslb"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="5sp"
-                    android:text="Sereies"
+                    android:layout_marginTop="10dp"
+                    android:text="Series"
                     android:textColor="@color/black" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +80,7 @@
                     android:paddingLeft="10sp"
                     android:paddingTop="5sp"
                     android:paddingBottom="5sp"
-                    android:text="Descripcion del ejercicio"
+                    android:text="Descripción del ejercicio"
                     android:textColor="@color/black"
                     android:background="@drawable/backgroundlayout"
                     android:textStyle="normal"/>
@@ -95,7 +97,7 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
                 <ImageView
                     android:id="@+id/Imgfoto"
@@ -108,6 +110,4 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>
