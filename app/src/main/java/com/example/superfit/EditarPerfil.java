@@ -28,6 +28,7 @@ import com.example.superfit.models.ClientesModel;
 import com.example.superfit.models.Imagenes;
 import com.example.superfit.models.MensualidadModel;
 
+import kotlin.text.Regex;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,11 +50,12 @@ public class EditarPerfil extends AppCompatActivity {
     Button Registraclientebtn;
     int IdclienteUpdate=0;
     final Cargando cargando = new Cargando(EditarPerfil.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
-
+        cargando.cargardialogo();
         //Datos personales
         Nombre=(EditText)findViewById(R.id.NombreTxt);
         Ap=(EditText)findViewById(R.id.ApellidoPTxt);
@@ -71,18 +73,15 @@ public class EditarPerfil extends AppCompatActivity {
             public void onClick(View v) {
                 boolean result = ValidarCliente();
                 if(result==true){
-                    cargando.cargardialogo();
                     UpdateCliente();
                 }
             }
         });
 
         GetCliente();
-
     }
 
     public void GetCliente(){
-        cargando.cargardialogo();
         SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         int Idcliente =preferences.getInt("Idcliente",0);
         IdclienteUpdate=Idcliente;
@@ -100,20 +99,22 @@ public class EditarPerfil extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(EditarPerfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                        cargando.ocultar();
                     }
 
                 }
                 catch (Exception ex){
                     Toast.makeText(EditarPerfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                    cargando.ocultar();
                 }
             }
 
             @Override
             public void onFailure(Call<ClientesModel> call, Throwable t) {
                 Toast.makeText(EditarPerfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+                cargando.ocultar();
             }
         });
-        cargando.ocultar();
     }
     public void MostrarDatos(ClientesModel cliente){
         Nombre.setText(cliente.Nombres);
@@ -128,8 +129,11 @@ public class EditarPerfil extends AppCompatActivity {
         listsexo.setAdapter(adapter);
         int spinnerPosition = adapter.getPosition(cliente.Sexo);
         listsexo.setSelection(spinnerPosition);
+        cargando.ocultar();
     }
+
     public void UpdateCliente(){
+        cargando.cargardialogo();
     Retrofit retrofit=new Retrofit.Builder().baseUrl(PaginaWeb)
             .addConverterFactory(GsonConverterFactory.create()).build();
     ClienteApi clienteApi = retrofit.create(ClienteApi.class);
@@ -141,29 +145,33 @@ public class EditarPerfil extends AppCompatActivity {
                 if(response.isSuccessful()){
                     Boolean c = response.body();
                     if(c==true){
+                        cargando.ocultar();
                         Toast.makeText(EditarPerfil.this,"Datos Actualizados",Toast.LENGTH_SHORT).show();
                         GetCliente();
                     }
                     else{
+                        cargando.ocultar();
                         Toast.makeText(EditarPerfil.this,"Ocurrio un error al actualizar los datos intente mas tarde",Toast.LENGTH_SHORT).show();
                     }
                 }
                 else{
+                    cargando.ocultar();
                     Toast.makeText(EditarPerfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
                 }
 
             }
             catch (Exception ex){
+                cargando.ocultar();
                 Toast.makeText(EditarPerfil.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<Boolean> call, Throwable t) {
+            cargando.ocultar();
             Toast.makeText(EditarPerfil.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
         }
     });
-        cargando.ocultar();
 }
     public Boolean ValidarCliente(){
         boolean result= false;
@@ -178,24 +186,67 @@ public class EditarPerfil extends AppCompatActivity {
         String sex=listsexo.getSelectedItem().toString();
 
         if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
-            cliente.Id_cliente =IdclienteUpdate;
-            cliente.Nombres =n.toUpperCase();
-            cliente.Apellido_paterno=ap.toUpperCase();
-            cliente.Apellido_materno=am.toUpperCase();
-            cliente.Apodo=apo;
-            cliente.Telefono= Double.parseDouble(tel);
-            cliente.Edad=Integer.parseInt(ed);
-            cliente.Correo_electronico=em;
-            cliente.Contraseña=pass;
-            cliente.Sexo=sex;
-            result = true;
+            if(ValidarCelular(tel)){
+                if(ValidarCorreo(em)){
+                    String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+                    boolean valida=pass.matches(pattern);
+                    if(pass.length()>=8){
+                        if(valida==true){
+                            cliente.Nombres =n.toUpperCase();
+                            cliente.Apellido_paterno=ap.toUpperCase();
+                            cliente.Apellido_materno=am.toUpperCase();
+                            cliente.Apodo=apo;
+                            cliente.Telefono= Double.parseDouble(tel);
+                            cliente.Edad=Integer.parseInt(ed);
+                            cliente.Correo_electronico=em;
+                            cliente.Contraseña=pass;
+                            cliente.Sexo=sex;
+                            //Registrar(cliente);
+                            result = true;
+                        }
+                        else{
+                            Toast.makeText(EditarPerfil.this, "La contraseña debe tener caracteres combinados mayúsculas, minúsculas, números y caracteres especiales", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(EditarPerfil.this, "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(EditarPerfil.this, "La estructura del correo electrónico es incorrecta, debe ser (ejemplo@dominio.com)", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(EditarPerfil.this, "El numero de celular es incorrecto", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
             Toast.makeText(EditarPerfil.this, "Complete todos los datos", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
-
+    public Boolean ValidarCelular(String strNumber){
+        Regex regex = new Regex("\\A[0-9]{7,10}\\z");
+        boolean result = regex.matches(strNumber);
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public Boolean ValidarCorreo(String email){
+        String expresion;
+        expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        if (email.matches(expresion))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode==event.KEYCODE_BACK){

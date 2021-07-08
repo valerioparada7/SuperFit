@@ -210,7 +210,17 @@ public class Perfil extends AppCompatActivity {
                 try {
                     if(response.isSuccessful()){
                         MensualidadModel M = response.body();
-                        MostrarDatos(M);
+                        if(M!=null){
+                            MostrarDatos(M);
+                        }
+                        else{
+                            SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=preferences.edit();
+                            editor.putInt("Idcliente",0);
+                            editor.commit();
+                            Intent intent = new Intent(Perfil.this,MainActivity.class);
+                            startActivity(intent);
+                        }
                     }
                     else{
                         Toast.makeText(Perfil.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
@@ -248,7 +258,7 @@ public class Perfil extends AppCompatActivity {
             estatuspago = mensualidad.PagoMes.Id_pago;
             editor.commit();
             if ((mensualidad.Estatus.Id_estatus == 2 || mensualidad.Estatus.Id_estatus == 3) && mensualidad.PagoMes.Id_pago != 0){
-                fotopago.setText("Mes "+mensualidad.Estatus.Descripcion);
+                fotopago.setText("");
             }
             if(mensualidad.Estatus.Id_estatus==1) {
                 if (mensualidad.PagoMes.Id_pago != 0) {
@@ -448,7 +458,7 @@ public class Perfil extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==img_requestperfil || requestCode==img_requetspago &&resultCode==RESULT_OK && data !=null){
+        if((requestCode==img_requestperfil || requestCode==img_requetspago ) && resultCode==RESULT_OK && data !=null){
             Uri pathperfilcuenta = data.getData();
             Uri pathcuenta = data.getData();
             try {
@@ -468,7 +478,12 @@ public class Perfil extends AppCompatActivity {
             }
         }
         else{
-            dialog.dismiss();
+            if(cfotoperfil==1){
+                dialog.dismiss();
+            }
+            if(cfotopago==1){
+                dialogpago.dismiss();
+            }
         }
     }
     @Override

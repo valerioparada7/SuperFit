@@ -12,6 +12,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.service.autofill.FieldClassification;
+import android.service.autofill.RegexValidator;
 import android.text.Editable;
 import android.util.Base64;
 import android.util.Log;
@@ -45,7 +47,10 @@ import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import kotlin.text.Regex;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -330,7 +335,7 @@ public class Registro extends AppCompatActivity {
                         registro.Mensualidad = mensualidadModel;
                         registro.Imagenes = imagenes;
                         Registrar(registro);
-                        cargando.ocultar();
+
                     }
                 }
             }
@@ -565,8 +570,9 @@ public class Registro extends AppCompatActivity {
                     if(response.isSuccessful()){
                         AlertasModel result = response.body();
                         if(result.Result==true){
+                            cargando.ocultar();
                             AlertDialog.Builder builder= new AlertDialog.Builder(Registro.this);
-                            builder.setMessage("Registro exito, ingresa con tu correo o numero celular")
+                            builder.setMessage("Registro exito ingresa a tu cuenta con tu correo eléctronico o numero celular")
                                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -584,20 +590,24 @@ public class Registro extends AppCompatActivity {
                             builder.show();
                         }
                         else {
+                            cargando.ocultar();
                             Toast.makeText(Registro.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
+                        cargando.ocultar();
                         Toast.makeText(Registro.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (Exception ex){
+                    cargando.ocultar();
                     Toast.makeText(Registro.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AlertasModel> call, Throwable t) {
+                cargando.ocultar();
                 Toast.makeText(Registro.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -835,22 +845,67 @@ public class Registro extends AppCompatActivity {
         String sex=listsexo.getSelectedItem().toString();
 
         if(!n.isEmpty()&&!ap.isEmpty()&&!am.isEmpty()&&!apo.isEmpty()&&!tel.isEmpty()&&!ed.isEmpty()&&!em.isEmpty()&&!pass.isEmpty()){
-            cliente.Nombres =n.toUpperCase();
-            cliente.Apellido_paterno=ap.toUpperCase();
-            cliente.Apellido_materno=am.toUpperCase();
-            cliente.Apodo=apo;
-            cliente.Telefono= Double.parseDouble(tel);
-            cliente.Edad=Integer.parseInt(ed);
-            cliente.Correo_electronico=em;
-            cliente.Contraseña=pass;
-            cliente.Sexo=sex;
-            //Registrar(cliente);
-            result = true;
+            if(ValidarCelular(tel)){
+                if(ValidarCorreo(em)){
+                    String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+                    boolean valida=pass.matches(pattern);
+                    if(pass.length()>=8){
+                        if(valida==true){
+                            cliente.Nombres =n.toUpperCase();
+                            cliente.Apellido_paterno=ap.toUpperCase();
+                            cliente.Apellido_materno=am.toUpperCase();
+                            cliente.Apodo=apo;
+                            cliente.Telefono= Double.parseDouble(tel);
+                            cliente.Edad=Integer.parseInt(ed);
+                            cliente.Correo_electronico=em;
+                            cliente.Contraseña=pass;
+                            cliente.Sexo=sex;
+                            //Registrar(cliente);
+                            result = true;
+                        }
+                        else{
+                            Toast.makeText(Registro.this, "La contraseña debe tener caracteres combinados mayúsculas, minúsculas, números y caracteres especiales", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else{
+                        Toast.makeText(Registro.this, "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(Registro.this, "La estructura del correo electrónico es incorrecta, debe ser (ejemplo@dominio.com)", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                Toast.makeText(Registro.this, "El numero de celular es incorrecto", Toast.LENGTH_SHORT).show();
+            }
         }
         else{
             Toast.makeText(Registro.this, "Complete todos los datos", Toast.LENGTH_SHORT).show();
         }
         return result;
+    }
+
+    public Boolean ValidarCelular(String strNumber){
+        Regex regex = new Regex("\\A[0-9]{7,10}\\z");
+        boolean result = regex.matches(strNumber);
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public Boolean ValidarCorreo(String email){
+        String expresion;
+        expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        if (email.matches(expresion))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void DatosCuestioario(){

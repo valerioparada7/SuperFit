@@ -42,7 +42,7 @@
                                 android:id="@+id/Nombrecliente"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Nombre"
+                                android:text=""
                                 android:layout_marginLeft="20sp"
                                 android:textColor="@color/black"
                                 android:textAllCaps="false"
@@ -238,7 +238,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Ejercicios aeróbicos y acondicionamiento físico"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -289,7 +289,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Pesas en gimnacio"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -340,7 +340,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Pesas en gimnacio"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -391,7 +391,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Mes prueba"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -442,7 +442,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Mes prueba"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -493,7 +493,7 @@
                             android:paddingRight="5sp"
                             android:paddingTop="2sp"
                             android:layout_gravity="right"
-                            android:text="Mes prueba"
+                            android:text=""
                             android:textColor="@color/black"/>
                     </LinearLayout>
                 </LinearLayout>

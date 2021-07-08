@@ -19,8 +19,43 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5sp"
                 android:text="Rutina de la semana"
-                android:textColor="#007bff"
+                android:textColor="@color/black"
                 android:textSize="30sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/instruccionesbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginLeft="10sp"
+                        android:textAllCaps="false"
+                        android:textColor="#007bff"
+                        android:text="Instrucciones"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <Button
+                        android:id="@+id/calentamientobtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textAllCaps="false"
+                        android:textColor="#007bff"
+                        android:text="Estiramiento y calentamiento"
+                        android:layout_marginRight="10sp"
+                        android:layout_gravity="right"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

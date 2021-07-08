@@ -261,7 +261,7 @@ public class RegistroMedidas extends AppCompatActivity {
                         if(result.Result==true){
                             cargando.ocultar();
                             AlertDialog.Builder builder= new AlertDialog.Builder(RegistroMedidas.this);
-                            builder.setMessage("Registro exito")
+                            builder.setMessage("Registro exitoso")
                                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -283,20 +283,24 @@ public class RegistroMedidas extends AppCompatActivity {
                             builder.show();
                         }
                         else {
+                            cargando.ocultar();
                             Toast.makeText(RegistroMedidas.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
+                        cargando.ocultar();
                         Toast.makeText(RegistroMedidas.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (Exception ex){
+                    cargando.ocultar();
                     Toast.makeText(RegistroMedidas.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AlertasModel> call, Throwable t) {
+                cargando.ocultar();
                 Toast.makeText(RegistroMedidas.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });

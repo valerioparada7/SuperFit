@@ -82,6 +82,7 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
                 android:visibility="invisible"
+                android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                 android:textSize="15sp"/>
 
             <TextView
@@ -125,6 +126,7 @@
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
                 android:textSize="15sp"
+                android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                 android:visibility="invisible" />
 
             <TextView
@@ -250,6 +252,7 @@
                     android:layout_marginTop="10sp"
                     android:text="¿Qué tipo de ejercicio realizas y cuánto tiempo le dedicas en cada sesión que haces?"
                     android:textColor="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <EditText
@@ -281,6 +284,7 @@
                     android:layout_marginTop="10sp"
                     android:text="¿Cuánto tiempo llevas realizando dicha actividad de manera constante?"
                     android:textColor="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <EditText
@@ -303,6 +307,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <TextView
@@ -334,6 +339,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -367,6 +373,7 @@
                 android:textColorHighlight="#2271b3"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
+                android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                 android:textSize="15sp" />
 
             <TextView
@@ -398,6 +405,7 @@
                 android:textColorHighlight="#2271b3"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
+                android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                 android:textSize="15sp" />
 
             <TextView
@@ -427,6 +435,7 @@
                 android:textColorHighlight="#2271b3"
                 android:textColorHint="@android:color/darker_gray"
                 android:textColorLink="@color/black"
+                android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                 android:textSize="15sp" />
 
             <Button

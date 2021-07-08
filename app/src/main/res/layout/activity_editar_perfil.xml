@@ -50,6 +50,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -70,6 +71,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -89,6 +91,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -109,6 +112,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText

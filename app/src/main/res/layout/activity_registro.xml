@@ -69,6 +69,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -89,6 +90,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -108,6 +110,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -128,6 +131,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ"
                     android:textSize="15sp" />
 
                 <EditText
@@ -312,6 +316,7 @@
                     android:textColor="@color/black"
                     android:layout_marginTop="10sp"
                     android:layout_marginLeft="10sp"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <CheckBox
@@ -345,6 +350,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:visibility="invisible"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp"/>
 
                 <TextView
@@ -388,6 +394,7 @@
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
                     android:textSize="15sp"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:visibility="invisible" />
 
                 <TextView
@@ -513,6 +520,7 @@
                         android:layout_marginTop="10sp"
                         android:text="¿Qué tipo de ejercicio realizas y cuánto tiempo le dedicas en cada sesión que haces?"
                         android:textColor="@color/black"
+                        android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                         android:textSize="15sp" />
 
                     <EditText
@@ -544,6 +552,7 @@
                         android:layout_marginTop="10sp"
                         android:text="¿Cuánto tiempo llevas realizando dicha actividad de manera constante?"
                         android:textColor="@color/black"
+                        android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                         android:textSize="15sp" />
 
                     <EditText
@@ -566,6 +575,7 @@
                         android:textColorHighlight="#2271b3"
                         android:textColorHint="@android:color/darker_gray"
                         android:textColorLink="@color/black"
+                        android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                         android:textSize="15sp" />
 
                     <TextView
@@ -597,6 +607,7 @@
                         android:textColorHighlight="#2271b3"
                         android:textColorHint="@android:color/darker_gray"
                         android:textColorLink="@color/black"
+                        android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -630,6 +641,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <TextView
@@ -661,6 +673,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
 
                 <TextView
@@ -690,6 +703,7 @@
                     android:textColorHighlight="#2271b3"
                     android:textColorHint="@android:color/darker_gray"
                     android:textColorLink="@color/black"
+                    android:digits=" abcdefghijklñmnopqrstuvwxyzABCDEFGHIJKLÑMNOPQRSTUVWXYZ1234567890"
                     android:textSize="15sp" />
             </LinearLayout>
 
@@ -1280,14 +1294,13 @@
 
                 <Button
                     android:id="@+id/registrarcliente"
-                    android:layout_width="100sp"
+                    android:layout_width="match_parent"
                     android:layout_height="45sp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="10sp"
                     android:layout_marginBottom="10sp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="10sp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_redondo"
+                    android:background="@drawable/button_redondoborder"
                     android:text="Registrar"
                     android:textAllCaps="false"
                     android:visibility="invisible"

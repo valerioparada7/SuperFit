@@ -58,7 +58,6 @@ public class Cuestionario extends AppCompatActivity {
         //Obtnemos los datos
         cargando.cargardialogo();
         GetCuestionario();
-        cargando.ocultar();
         liner = (LinearLayout)findViewById(R.id.LinerCuestionario);
         //Checkboxs
         Padece_enfermedad =(CheckBox)findViewById(R.id.Padece_enfermedadChk);
@@ -175,17 +174,20 @@ public class Cuestionario extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(Cuestionario.this,"No se realizo correctamente la conexion",Toast.LENGTH_SHORT).show();
+                        cargando.ocultar();
                     }
 
                 }
                 catch (Exception ex){
                     Toast.makeText(Cuestionario.this,ex.getMessage(),Toast.LENGTH_SHORT).show();
+                    cargando.ocultar();
                 }
             }
 
             @Override
             public void onFailure(Call<CuestionarioModel> call, Throwable t) {
-            Toast.makeText(Cuestionario.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
+                cargando.ocultar();
+                Toast.makeText(Cuestionario.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getCause().toString(),Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -224,9 +226,11 @@ public class Cuestionario extends AppCompatActivity {
         MetasObjetivos.setText(cuestionario.MetasObjetivos);
         Compromisos.setText(cuestionario.Compromisos);
         Comentarios.setText(cuestionario.Comentarios);
+        cargando.ocultar();
     }
 
     public void RegistroCuestionario(){
+        cargando.cargardialogo();
         // Job http://192.168.56.1:8081/
         // Home http://192.168.100.11:8081/
         // web superfit.somee.com
@@ -241,24 +245,29 @@ public class Cuestionario extends AppCompatActivity {
                     if(response.isSuccessful()){
                         AlertasModel result = response.body();
                         if(result.Result==true){
+                            cargando.ocultar();
                             Toast.makeText(Cuestionario.this,"Se actualizaron tus datos con exito",Toast.LENGTH_SHORT).show();
                             GetCuestionario();
                         }
                         else {
+                            cargando.ocultar();
                             Toast.makeText(Cuestionario.this,result.Mensaje,Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
+                        cargando.ocultar();
                         Toast.makeText(Cuestionario.this,"No se realizo la conexion "+response.message(),Toast.LENGTH_SHORT).show();
                     }
                 }
                 catch (Exception ex){
+                    cargando.ocultar();
                     Toast.makeText(Cuestionario.this,"Ocurrio un error: \r\n" +ex.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AlertasModel> call, Throwable t) {
+                cargando.ocultar();
                 Toast.makeText(Cuestionario.this,"No se conecto al servidor verifique su conexion \r\nintente mas tarde \r\n Error:"+t.getMessage().toString(),Toast.LENGTH_SHORT).show();
             }
         });
