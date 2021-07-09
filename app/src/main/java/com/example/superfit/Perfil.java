@@ -52,7 +52,7 @@ public class Perfil extends AppCompatActivity {
     //Pagina Actual nueva https://www.bsite.net/valerioparada/
     String PaginaWeb ="https://www.bsite.net/valerioparada/";
     TextView Nombresclientet,tiporutinat,estatusDescripciont,Tipo_entrenamientot,fechait,fechaft,mes;
-    Button salirtbtn1,cuestionariobtn,misrutinasbtn,mismensaulidadesbtn,rutinasrapidasbtn,alimentacionbtn,editarperfilbtn;
+    Button menubtn1,cuestionariobtn,misrutinasbtn,mismensaulidadesbtn,rutinasrapidasbtn,alimentacionbtn,editarperfilbtn;
     ImageView FotoPerfil;
     Imagenes imagenes = new Imagenes();
     final Cargando cargando = new Cargando(Perfil.this);
@@ -79,6 +79,14 @@ public class Perfil extends AppCompatActivity {
     int cfotoperfil=0,cfotopago=0;
     int estatuspago=0;
     String Url_Imagen ="";
+
+    public AlertDialog.Builder dialogbuildermenu;
+    public AlertDialog dialogmenu;
+    Button salirmodalseccionbtn,modalguiapagobtn,whatsappbtn1;
+
+    public AlertDialog.Builder dialogbuilderguiapago;
+    public AlertDialog dialogguiapago;
+    TextView parrafoguia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -94,7 +102,7 @@ public class Perfil extends AppCompatActivity {
         fechaft=(TextView)findViewById(R.id.fechaf);
         mes=(TextView)findViewById(R.id.NombreMeslb);
         estatusDescripciont=(TextView)findViewById(R.id.estatusmesi);
-        salirtbtn1=(Button)findViewById(R.id.salirbtn);
+        menubtn1=(Button)findViewById(R.id.menubtn);
         cuestionariobtn=(Button)findViewById(R.id.VerCuestionarioBtn);
         misrutinasbtn=(Button)findViewById(R.id.MisrutinasBtn);
         mismensaulidadesbtn=(Button)findViewById(R.id.MensualidadesBtn);
@@ -132,29 +140,10 @@ public class Perfil extends AppCompatActivity {
             }
         });
 
-        salirtbtn1.setOnClickListener(new View.OnClickListener() {
+        menubtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder= new AlertDialog.Builder(Perfil.this);
-                builder.setMessage("¿Desea cerrar sesión?")
-                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor=preferences.edit();
-                                editor.putInt("Idcliente",0);
-                                editor.commit();
-                                Intent intent = new Intent(Perfil.this,MainActivity.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                builder.show();
+                OpenMenu();
             }
         });
 
@@ -455,6 +444,83 @@ public class Perfil extends AppCompatActivity {
         });
     }
 
+    public void OpenMenu(){
+        dialogbuildermenu = new AlertDialog.Builder(this);
+        final View conetent = getLayoutInflater().inflate(R.layout.modalmenu,null);
+        salirmodalseccionbtn = (Button) conetent.findViewById(R.id.salirbtn);
+        modalguiapagobtn = (Button) conetent.findViewById(R.id.guiapagobtn);
+        dialogbuildermenu.setView(conetent);
+        dialogmenu = dialogbuildermenu.create();
+        dialogmenu.show();
+        salirmodalseccionbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(Perfil.this);
+                builder.setMessage("¿Desea cerrar sesión?")
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                SharedPreferences preferences =getSharedPreferences("Sesion", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=preferences.edit();
+                                editor.putInt("Idcliente",0);
+                                editor.commit();
+                                Intent intent = new Intent(Perfil.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.show();
+            }
+        });
+        modalguiapagobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogmenu.dismiss();
+                ModalGuiaPago();
+            }
+        });
+    }
+
+    public void ModalGuiaPago(){
+        dialogbuilderguiapago = new AlertDialog.Builder(this);
+        final View conetent = getLayoutInflater().inflate(R.layout.modelmeotdopago,null);
+        parrafoguia = (TextView)conetent.findViewById(R.id.parrafomodalpago);
+        whatsappbtn1 = (Button)conetent.findViewById(R.id.whatsappbtn);
+        String linkwhatsapp = "https://api.whatsapp.com/send?phone=+524428802842&message=Hola";
+        String linkfacebook = "https://www.facebook.com/";
+        String narracion = "- Una vez que hayas creado tu cuenta y asigando tus datos, tu entrenador recibe los datos y comienza con el desarrollo de la rutina.\n" +
+                "\n- Después de tu parte queda realizar el pago de la mensualidad que te corresponde al mes.\n" +
+                "\n- Los metodos pueden ser depositos, transferencias a un numero de cuenta que se te proporcionara via whatsapp.\n" +
+                "\n- Puedes enviar mensaje via whatsapp a travez del boton que esta a lo ultimo.\n" +
+                "\n- Una vez realizado el pago tendras un comprobante de ese pago haciendo referencia a la mensualidad la cual tendras que subir por la plataforma ya siendo enviado atravez via whatsapp o en el apartado de mensualidades | subir comprobante.\n" +
+                "\n- Subiras la foto y anotar una descripcion y el monto que pagaste.\n" +
+                "\n- Ya por finalizar se corroboraran los datos para hacer su valides y en 1 dia a 3 habiles se te hara llegar tu rutina lo mas antes posible dependiendo la demanda de rutinas que esten entramite.\n" +
+                "\n- Nota: cada mes sera realizado asi hasta que la plataforma tenga la automatizacion de pagos con tarjeta, contamos con tu comprension.\n" +
+                "\n- Si tienes mas dudas contacta al soprte tecnico via correo o whatsapp y te atenderemos lo antes posible.\n" +
+                "\n Correo eléctronico: soportebysuperfitvalerio@gmail.com";
+        parrafoguia.setText(narracion);
+        dialogbuilderguiapago.setView(conetent);
+        dialogguiapago = dialogbuilderguiapago.create();
+        dialogguiapago.show();
+        whatsappbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Uri uri = Uri.parse("smsto:"+"4428802842");
+                Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
+                intent.setPackage("com.whatsapp");
+                startActivity(intent);*/
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(linkwhatsapp));
+                startActivity(intent);
+
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

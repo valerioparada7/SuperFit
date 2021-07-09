@@ -9,15 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10sp"
-            android:text="Instrucciones"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:layout_marginTop="10sp"
+            android:text="Guia y metodos de pago"
             android:textAllCaps="false"
+            android:textColor="@color/black"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -31,18 +32,40 @@
             android:layout_marginBottom="10sp"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/parrafomodal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10sp"
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10sp"
+                android:text="Aqui te explicare en que consiste la guia de pago y como hacer el pago de mensualidad."
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/parrafomodalpago"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:layout_marginTop="10sp"
                 android:layout_marginBottom="10sp"
                 android:text=""
                 android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textAllCaps="false"
                 android:textSize="15sp" />
+            <Button
+                android:id="@+id/whatsappbtn"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:gravity="center"
+                android:background="@null"
+                android:drawableTop="@drawable/whatsapp"
+                android:text="Whatsapp"
+                android:textAllCaps="false"
+                android:textColor="@color/black"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

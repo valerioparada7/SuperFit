@@ -53,7 +53,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <Button
-                                android:id="@+id/salirbtn"
+                                android:id="@+id/menubtn"
                                 android:layout_width="50sp"
                                 android:layout_height="30sp"
                                 android:background="@null"
